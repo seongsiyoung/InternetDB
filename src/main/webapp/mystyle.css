@@ -12,6 +12,7 @@ background-color:#DBEAFF;
     background-color:#DBEAFF;
     outline:none;
     padding:15px;
+    float:left;
 }
 
 #searchIcon {
