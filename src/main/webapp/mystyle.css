@@ -1,0 +1,21 @@
+.search {
+width:600px;
+height:50px;
+border-radius:40px;
+background-color:#DBEAFF;
+}
+
+#searchbar {
+    font-size: 16px;
+    width: 325px;
+    border:0px;
+    background-color:#DBEAFF;
+    outline:none;
+    padding:15px;
+}
+
+#searchIcon {
+    float:right;
+    padding:10px;
+
+}
