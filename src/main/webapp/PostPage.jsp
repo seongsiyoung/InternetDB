@@ -17,7 +17,7 @@
            </div>
            </td>
            </tr>
-      <table>
+      </table>
       </div>
 </body>
 </html>

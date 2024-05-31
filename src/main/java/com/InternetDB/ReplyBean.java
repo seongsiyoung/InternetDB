@@ -1,26 +1,42 @@
 package com.InternetDB;
 
-public class ReplyBean {
-    private String id;
-    private String content;
-    private String createdAt;
+import java.time.LocalDateTime;
 
-    public String getId(){
-        return id;
+public class ReplyBean {
+    private Long replyId;
+    private String content;
+    private LocalDateTime createdAt;
+    private Long lostId;
+    private String userId;
+
+    public Long getReplyId() {
+        return replyId;
     }
-    public void setId(String id){
-        this.id = id;
+    public void setReplyId(Long replyId) {
+        this.replyId = replyId;
     }
-    public String getContent(){
+    public String getContent() {
         return content;
     }
-    public void setContent(String content){
+    public void setContent(String content) {
         this.content = content;
     }
-    public String getCreatedAt(){
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(String createdAt){
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+    public Long getLostId() {
+        return lostId;
+    }
+    public void setLostId(Long lostId) {
+        this.lostId = lostId;
+    }
+    public String getUserId() {
+        return userId;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

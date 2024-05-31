@@ -1,18 +1,21 @@
 package com.InternetDB;
 
+import java.time.LocalDateTime;
+
 public class LostItemBean {
-    private String path;
-    private String image;
-    private String id;
+    private Long id;
     private String type;
     private String category;
-    private String time;
+    private LocalDateTime time;
     private String location;
-    private String title;
     private String content;
+    private String title;
     private String status;
-    private String createdAt;
-    private String currentloc;
+    private String currentLoc;
+    private LocalDateTime createdAt;
+    private String image;
+    private String path;
+    private String userId;
 
     public String getPath() {
         return path;
@@ -26,10 +29,10 @@ public class LostItemBean {
     public void setImage(String image) {
         this.image = image;
     }
-    public String getId(){
+    public Long getId(){
         return id;
     }
-    public void setId(String id){
+    public void setId(Long id){
         this.id = id;
     }
     public String getType(){
@@ -44,10 +47,10 @@ public class LostItemBean {
     public void setCategory(String category){
         this.category = category;
     }
-    public String getTime(){
+    public LocalDateTime getTime(){
         return time;
     }
-    public void setTime(String time){
+    public void setTime(LocalDateTime time){
         this.time = time;
     }
     public String getLocation(){
@@ -74,16 +77,22 @@ public class LostItemBean {
     public void setStatus(String status){
         this.status = status;
     }
-    public String getCreatedAt(){
+    public LocalDateTime getCreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(String createdAt){
+    public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt = createdAt;
     }
-    public String getCurrentloc(){
-        return currentloc;
+    public String getCurrentLoc(){
+        return currentLoc;
     }
-    public void setCurrentloc(String currentloc){
-        this.currentloc = currentloc;
+    public void setCurrentLoc(String currentLoc){
+        this.currentLoc = currentLoc;
+    }
+    public String getUserId(){
+        return userId;
+    }
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 }
