@@ -58,7 +58,9 @@ public class test {
             connection.close();
 
         } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
     }
