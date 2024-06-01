@@ -1,25 +1,21 @@
 package com.InternetDB;
 
-public class UserBean {
-    private String id;
-    private String salt;
-    private String password;
-    private String name;
-    private String nickName;
-    private String phone;
-    private String createAt;
+import java.time.LocalDateTime;
 
-    public String getId() {
-        return id;
+public class UserBean {
+    private String userId;
+    private String password;
+    private String salt;
+    private String name;
+    private String nickname;
+    private String phone;
+    private LocalDateTime createdAt;
+
+    public String getUserId() {
+        return userId;
     }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getSalt() {
-        return salt;
-    }
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
     public String getPassword() {
         return password;
@@ -27,17 +23,23 @@ public class UserBean {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getSalt() {
+        return salt;
+    }
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
     }
-    public String getNickName(){
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
     public String getPhone() {
         return phone;
@@ -45,10 +47,10 @@ public class UserBean {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
