@@ -1,20 +1,22 @@
 .search {
 width:600px;
 height:50px;
-border-radius:40px;
-background-color:#DBEAFF;
+background-color:#FFFFFF;
+border-radius: 40px;
+border-style: dashed;
+border-width: 1.5px;
+border-color:black;
 }
 
 #searchbar {
     font-size: 16px;
     width: 425px;
     border:0px;
-    background-color:#DBEAFF;
+
     outline:none;
     margin:10px;
     padding:5px;
     float:left;
-
 }
 
 #searchIcon {
@@ -23,3 +25,17 @@ background-color:#DBEAFF;
     padding:10px;
 
 }
+
+.my {
+    width:200px;
+    height:70px;
+}
+
+#alarm {
+margin:15px;
+}
+
+#mypageIcon {
+margin:15px;
+}
+
