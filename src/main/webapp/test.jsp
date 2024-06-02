@@ -1,3 +1,4 @@
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <html>
 <body>
@@ -31,7 +32,7 @@
         e.printStackTrace();
     }
 %>
-MODIFY
+MODIFY 테스트
 <%= test%>
 </body>
 </html>
