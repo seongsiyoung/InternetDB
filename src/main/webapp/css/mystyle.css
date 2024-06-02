@@ -6,17 +6,18 @@ border-radius: 40px;
 border-style: dashed;
 border-width: 1.5px;
 border-color:black;
+box-shadow: 4px 4px 3px #ccc;
 }
 
 #searchbar {
     font-size: 16px;
     width: 425px;
     border:0px;
-
     outline:none;
     margin:10px;
     padding:5px;
     float:left;
+
 }
 
 #searchIcon {
@@ -27,15 +28,73 @@ border-color:black;
 }
 
 .my {
-    width:200px;
-    height:70px;
+    width:150px;
 }
 
-#alarm {
-margin:15px;
+.postSection {
 }
 
-#mypageIcon {
-margin:15px;
+#uploadBtn {
+    margin:10px;
+    background-color:#0a0a23;
+    border-radius:15px;
+    width:120px;
+    border:none;
+    color:#fff;
+    height:30px;
+    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+}
+
+#lostInfo {
+    border:none;
+    margin:5px;
+    width:105px;
+}
+
+.lostInfoSec {
+    padding:25px;
+    width:300px;
+    font-size:16px;
+}
+
+.lostForm {
+    border-width: 1.5px;
+    border-color:#A8A8A8;
+    border-style: dashed;
+    width: 800px;
+    border-radius:10px;
+    padding:20px;
+    margin:20px;
+}
+
+textarea {
+    border:none;
+    resize:none;
+}
+
+.imgSec {
+    background-color:#D8D8D8;
+    border-radius:10px;
+    padding:15px;
+}
+
+#commentBtn {
+    border:none;
+    background-color:#FFFFFF;
+    font-size:18px;
+    width:60px;
+    height:40px;
+    display:inline-block;
+}
+
+#commentIcon {
+    background-color:#FFFFFF;
+    width:45px;
+    height:40px;
+    display:inline-block;
+}
+.commentBtnSec {
+    display:flex;
+    background-color:pink;
 }
 
