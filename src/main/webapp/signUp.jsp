@@ -46,7 +46,7 @@
             border-radius: 5px;
             box-sizing: border-box;
             font-size: 14px;
-            height: 100%;
+            height: 3.5rem;
         }
 
 
@@ -58,15 +58,15 @@
             box-sizing: border-box;
             padding: 10px;
             appearance: none;
-            text-align: left;
-            height: 100%;
-
+            text-align: center;
+            height: 3.5rem;
         }
 
 
         /* 가입하기 버튼의 스타일 */
         input[type="submit"] {
             width: 50%;
+            height: 3rem;
             padding: 10px;
             margin-top: 10px;
             background-color: #4cbdea;
@@ -86,9 +86,10 @@
         h2 {
             margin-top: 0;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 2.7rem;
             color: #333;
             text-align: center;
+
         }
 
     </style>
