@@ -92,41 +92,93 @@
 
         }
 
+
     </style>
 </head>
 <body class = "parent">
 <form action="login.jsp">
-    <table class="signup">
-        <tr>
-            <td colspan="2"><h2>회원가입</h2></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" placeholder="이메일">
-            </td>
-            <td>
-                <button>temp</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="password" placeholder="비밀번호"></td>
-        </tr>
-        <tr>
-            <td><input type="password" placeholder="닉네임"></td>
-            <td>
-                <button>temp</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="text" placeholder="이름"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="tel" placeholder="연락처"></td>
-        </tr>
-    </table>
+    <div class="signup">
+        <div>
+            <h2>회원가입</h2>
+        </div>
+        <div>
+            <input type="text" placeholder="이메일" class = "userId">
+        </div>
+        <div>
+            <span id= "checkId"> </span>
+        </div>
+        <div>
+            <input type="password" placeholder="비밀번호">
+        </div>
+        <div>
+            <input type="text" placeholder="닉네임" class="nickname">
+        </div>
+        <div>
+            <span id= "checknickname"> </span>
+        </div>
+        <div>
+            <input type="text" placeholder="이름">
+        </div>
+        <divr>
+           <input type="tel" placeholder="연락처">
+        </divr>
+    </div>
     <input type="submit" value="가입하기">
 
 </form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('.userId').focusout(function(){
+        let userId = $('.userId').val(); // input_id에 입력되는 값
+
+        $.ajax({
+            url : "/member/idCheck",
+            type : "post",
+            data : {userId: userId},
+            dataType : 'json',
+            success : function(result){
+                var $checkId = $("#checkId");
+                if(result === 0){
+                    $checkId.html('사용할 수 없는 아이디입니다.');
+                    $checkId.css('color','red');
+                } else{
+                    $checkId.html('사용할 수 있는 아이디입니다.');
+                    $checkId.css('color','green');
+                }
+            },
+            error : function(){
+                alert("서버 요청 실패");
+            }
+        })
+
+    })
+
+    $('.nickname').focusout(function(){
+        let nickname = $('.nickname').val(); // input_id에 입력되는 값
+
+        $.ajax({
+            url : "/member/nicknameCheck",
+            type : "post",
+            data : {nickname: nickname},
+            dataType : 'json',
+            success : function(result){
+                var $checknickname = $("#checknickname");
+                if(result === 0){
+                    $checknickname.html('사용할 수 없는 닉네임입니다.');
+                    $checknickname.css('color','red');
+                } else{
+                    $checknickname.html('사용할 수 있는 닉네임입니다.');
+                    $checknickname.css('color','green');
+                }
+            },
+            error : function(){
+                alert("서버 요청 실패");
+            }
+        })
+
+    })
+</script>
 </body>
 </html>
 

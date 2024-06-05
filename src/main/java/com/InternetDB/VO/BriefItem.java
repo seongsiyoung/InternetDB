@@ -1,4 +1,4 @@
-package com.InternetDB.DAO;
+package com.InternetDB.VO;
 
 public class BriefItem {
 
