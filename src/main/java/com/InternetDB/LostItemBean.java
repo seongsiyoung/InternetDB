@@ -3,7 +3,7 @@ package com.InternetDB;
 import java.time.LocalDateTime;
 
 public class LostItemBean {
-    private Long id;
+    private Long lostId;
     private String type;
     private String category;
     private LocalDateTime time;
@@ -29,11 +29,11 @@ public class LostItemBean {
     public void setImage(String image) {
         this.image = image;
     }
-    public Long getId(){
-        return id;
+    public Long getLostId(){
+        return lostId;
     }
-    public void setId(Long id){
-        this.id = id;
+    public void setId(Long lostId){
+        this.lostId = lostId;
     }
     public String getType(){
         return type;
