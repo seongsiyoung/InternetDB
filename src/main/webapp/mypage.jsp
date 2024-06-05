@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.IOException" %>
 <%@ page import="com.InternetDB.uitl.Alert" %>
 
 
 <%
     if(session.getAttribute("id") == null){
-        Alert.alertAndMove(response, "testMSG", "login.jsp");
+        Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
 %>
 

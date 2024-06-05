@@ -23,16 +23,16 @@
 
             rs = statement.executeQuery();
             if(!rs.next())
-                response.sendRedirect("temploginfail.jsp");
+                response.sendRedirect("/temp/temploginfail.jsp");
             else {
                 request.getSession().setAttribute("id", id);
 
-                response.sendRedirect("temploginsuccess.jsp");
+                response.sendRedirect("/temp/temploginsuccess.jsp");
             }
 
         } catch (SQLException e){
             e.printStackTrace();
-            request.getRequestDispatcher("temperror.jsp").forward(request, response);
+            request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
         } finally {
 
             if(statement != null)
