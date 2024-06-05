@@ -24,9 +24,8 @@
     String askedPage = request.getParameter("page");
     String askedSize = request.getParameter("size");
 
-    if ( askedPage == null || askedPage.isEmpty())
-        currentPage -= 1;
-    else { currentPage = Integer.parseInt(askedPage) - 1; }
+    if ( !(askedPage == null) && !askedPage.isEmpty())
+        currentPage = Integer.parseInt(askedPage);
 
     if ( !(askedSize == null) && !askedSize.isEmpty())
         currentSize = Integer.parseInt(askedSize);
@@ -212,7 +211,7 @@
         sql = "select lost_id, title, path from LOSTITEM where user_id = ? limit ?, ?";
         statement2 = connection.prepareStatement(sql);
         statement2.setString(1, id);
-        int offset = currentPage * currentSize;
+        int offset = (currentPage-1) * currentSize;
         statement2.setInt(2, offset);
         statement2.setInt(3, currentSize);
 
@@ -234,7 +233,7 @@
         rs.next();
         int total = rs.getInt(1);
 
-        pageResultDTO = new PageResultDTO(currentPage+1, currentSize, total);
+        pageResultDTO = new PageResultDTO(currentPage, currentSize, total);
 
     } catch (SQLException e){
         e.printStackTrace();
@@ -311,7 +310,7 @@
                             out.println("<li> <a href=\"mypage.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
 
                         for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
-                            if(i == currentPage+1){
+                            if(i == currentPage){
                                 out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                                 continue;
                             }
