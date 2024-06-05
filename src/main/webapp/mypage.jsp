@@ -188,7 +188,7 @@
     PreparedStatement statement2 = null;
     PreparedStatement statement3 = null;
     ResultSet rs = null;
-    PageResultDTO<BriefItem> pageResultDTO;
+    PageResultDTO pageResultDTO = null;
 
     try {
         statement = connection.prepareStatement(sql);
@@ -235,7 +235,7 @@
         rs.next();
         int total = rs.getInt(1);
 
-        pageResultDTO = new PageResultDTO<>(currentPage, currentSize, total);
+        pageResultDTO = new PageResultDTO(currentPage+1, currentSize, total);
 
     } catch (SQLException e){
         e.printStackTrace();
@@ -306,17 +306,24 @@
         <div class="pageBox">
             <div class="page">
                 <ul class="pagination modal">
-                    <li> <a href="#" class="arrow left"><<</a></li>
-                    <li> <a href="#" class="active num">1</a></li>
-                    <li> <a href="#" class="num">2</a></li>
-                    <li> <a href="#" class="num">3</a></li>
-                    <li> <a href="#" class="num">4</a></li>
-                    <li> <a href="#" class="num">5</a></li>
-                    <li> <a href="#" class="num">6</a></li>
-                    <li> <a href="#" class="num">7</a></li>
-                    <li> <a href="#" class="num">8</a></li>
-                    <li> <a href="#" class="num">9</a></li>
-                    <li> <a href="#" class="arrow right">>></a></li>
+                    <%
+
+                        if(pageResultDTO.isPrev())
+                            out.println("<li> <a href=\"#\" class=\"arrow left\"><<</a></li>\n");
+
+                        for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
+                            if(i == currentPage+1){
+                                out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"active num\">"+ i +"</a></li>");
+                                continue;
+                            }
+                            out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
+
+                        }
+
+                        if(pageResultDTO.isNext())
+                            out.println("<li> <a href=\"#\" class=\"arrow right\">>></a></li>\n");
+
+                    %>
                 </ul>
             </div>
         </div>
