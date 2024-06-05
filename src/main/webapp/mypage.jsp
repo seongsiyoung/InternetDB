@@ -1,4 +1,15 @@
 <%@ page contentType="text/html;charset=utf-8" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="com.InternetDB.uitl.Alert" %>
+
+
+<%
+    if(session.getAttribute("id") == null){
+        Alert.alertAndMove(response, "testMSG", "login.jsp");
+    }
+%>
+
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
@@ -76,10 +87,6 @@
             align-items: center;
             overflow: hidden;
         }
-
-
-
-
 
         .page{
             text-align: center;

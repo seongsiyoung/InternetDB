@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Login</title>
@@ -128,11 +129,10 @@
 
     <img src="Icon/pagelogo.png">
 
-    <form action="index.jsp" method="POST" class="form login">
+    <form action= loginProcessing.jsp method="POST" class="form login">
 
         <div class="form__field">
-
-            <label for="login__username"></label><input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+            <label for="login__username"></label><input autocomplete="username" id="login__username" type="text" name="id" class="form__input" placeholder="Username" required>
         </div>
 
         <div class="form__field">
@@ -147,7 +147,6 @@
 
     <p class="text--center">아직 회원이 아니신가요?<br>
         <a href="signUp.jsp">회원 가입 하기</a></p>
-
 </div>
 </body>
 </html>
