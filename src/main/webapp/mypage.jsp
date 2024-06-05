@@ -11,8 +11,6 @@
 
 <%
     UserBean user = new UserBean();
-    BriefItem briefItem = new BriefItem();
-
     int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
     int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
     List<BriefItem> items = new ArrayList<>();
@@ -221,6 +219,7 @@
         rs = statement2.executeQuery();
 
         while (rs.next()){
+            BriefItem briefItem = new BriefItem();
             briefItem.setLostId(rs.getLong(1));
             briefItem.setTitle(rs.getString(2));
             briefItem.setPath(rs.getString(3));
@@ -309,11 +308,11 @@
                     <%
 
                         if(pageResultDTO.isPrev())
-                            out.println("<li> <a href=\"#\" class=\"arrow left\"><<</a></li>\n");
+                            out.println("<li> <a href=\"mypage.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
 
                         for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
                             if(i == currentPage+1){
-                                out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"active num\">"+ i +"</a></li>");
+                                out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                                 continue;
                             }
                             out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
@@ -321,7 +320,7 @@
                         }
 
                         if(pageResultDTO.isNext())
-                            out.println("<li> <a href=\"#\" class=\"arrow right\">>></a></li>\n");
+                            out.println("<li> <a href=\"mypage.jsp?page=" + (pageResultDTO.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
 
                     %>
                 </ul>
