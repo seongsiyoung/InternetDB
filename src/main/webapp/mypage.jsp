@@ -6,11 +6,13 @@
 <%@ page import="com.InternetDB.DAO.BriefItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.InternetDB.page.PageResultDTO" %>
 
 
 <%
     UserBean user = new UserBean();
     BriefItem briefItem = new BriefItem();
+
     int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
     int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
     List<BriefItem> items = new ArrayList<>();
@@ -184,7 +186,9 @@
     String sql = "SELECT * from User where user_id = ?";
     PreparedStatement statement = null;
     PreparedStatement statement2 = null;
+    PreparedStatement statement3 = null;
     ResultSet rs = null;
+    PageResultDTO<BriefItem> pageResultDTO;
 
     try {
         statement = connection.prepareStatement(sql);
@@ -222,6 +226,16 @@
             briefItem.setPath(rs.getString(3));
             items.add(briefItem);
         }
+
+        sql = "select count(*) from LOSTITEM where user_id = ?";
+        statement3 = connection.prepareStatement(sql);
+        statement3.setString(1, id);
+
+        rs = statement3.executeQuery();
+        rs.next();
+        int total = rs.getInt(1);
+
+        pageResultDTO = new PageResultDTO<>(currentPage, currentSize, total);
 
     } catch (SQLException e){
         e.printStackTrace();
