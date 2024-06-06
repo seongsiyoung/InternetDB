@@ -1,6 +1,6 @@
 <html>
 <body>
 <h2>Hello World!</h2>
-test
+<jsp:forward page="login.jsp"/>
 </body>
 </html>

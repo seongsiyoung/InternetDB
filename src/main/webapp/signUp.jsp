@@ -3,8 +3,6 @@
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.LocalTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%!
     public String salt() {
@@ -41,11 +39,11 @@
         .parent{
             display: flex;
             justify-content: center;
-;
-
+            align-items: center;
         }
+
         form{
-            width: 40rem;
+            width: 50rem;
             align-content: center;
             text-align: center;
         }
@@ -54,6 +52,9 @@
             width: 100%;
             border-collapse: separate;
             border-spacing: 1rem;
+        }
+        div{
+            margin: 1rem;
         }
 
 
@@ -112,10 +113,7 @@
             font-size: 2.7rem;
             color: #333;
             text-align: center;
-
         }
-
-
     </style>
 </head>
 <body class = "parent">
@@ -128,7 +126,7 @@
             <input type="text" placeholder="이메일" class = "userId" name="userId">
         </div>
         <div>
-            <span id= "checkId"> </span>
+            <div id= "checkId"> </div>
         </div>
         <div>
             <input type="password" placeholder="비밀번호" name="password">
@@ -153,7 +151,7 @@
         %>
         <input type="hidden" name="createdAt" value="<%=formattedDateTime%>">
     </div>
-    <input type="submit" value="가입하기">
+    <input class="submitBtn" type="submit" value="가입하기">
 
 </form>
 

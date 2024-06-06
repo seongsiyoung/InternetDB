@@ -1,24 +1,23 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ page import="com.InternetDB.util.Alert" %>
-<%@ page import="java.time.LocalDateTime" %>
 <%@ page import="com.InternetDB.UserBean" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="com.InternetDB.VO.BriefItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.InternetDB.page.PageResultDTO" %>
 
-
 <%
-    UserBean user = new UserBean();
-    int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
-    int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
-    List<BriefItem> items = new ArrayList<>();
+
 
     String id = (String) session.getAttribute("id");
     if(id == null){
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
+
+    UserBean user = new UserBean();
+    int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
+    int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
+    List<BriefItem> items = new ArrayList<>();
 
     //query String 파라미터 가져오기
     String askedPage = request.getParameter("page");
@@ -36,6 +35,11 @@
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 
     <style>
+
+        body {
+            background-color: #ffffff;
+            font-family: "Open Sans", sans-serif;
+        }
         .memberBox{
             display:flex;
             justify-content:center;
@@ -44,10 +48,11 @@
 
         .memberInfo{
             padding-bottom: 0.5rem;
+            border-bottom: 1px solid black;
         }
 
         fieldset{
-            width:40rem;
+            width:55rem;
             height: 20rem;
             margin-top: 3rem;
             margin-bottom: 3rem;
@@ -272,12 +277,12 @@
     </div>
     <div class="memberBox">
         <fieldset>
-            <legend>사용자 정보</legend>
+            <legend style="width: fit-content; font-size: 1.5rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
             <div class="memberInfo">아이디 : <%= user.getUserId()%> </div>
             <div class="memberInfo">이름 :  <%= user.getName()%></div>
             <div class="memberInfo">닉네임 :  <%= user.getNickname()%></div>
             <div class="memberInfo">연락처 :  <%= user.getPhone()%></div>
-            <button class="modifyBtn">수정하기</button>
+            <button class="modifyBtn" type = "button" onclick= "location.href='modifyMember.jsp'">수정하기</button>
             </fieldset>
     </div>
 
