@@ -1,4 +1,4 @@
-package com.InternetDB.uitl;
+package com.InternetDB.util;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

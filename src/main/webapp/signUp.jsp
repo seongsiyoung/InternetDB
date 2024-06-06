@@ -1,4 +1,27 @@
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.security.NoSuchAlgorithmException" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    public String salt() {
+
+        String salt="";
+        try {
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            byte[] bytes = new byte[16];
+            random.nextBytes(bytes);
+            salt = new String(Base64.getEncoder().encode(bytes));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return salt;
+    }
+%>
 <html>
 <head>
     <title>Sign Up</title>
@@ -96,32 +119,39 @@
     </style>
 </head>
 <body class = "parent">
-<form action="login.jsp">
+<form action="signUpProcessiong.jsp" method="post">
     <div class="signup">
         <div>
             <h2>회원가입</h2>
         </div>
         <div>
-            <input type="text" placeholder="이메일" class = "userId">
+            <input type="text" placeholder="이메일" class = "userId" name="userId">
         </div>
         <div>
             <span id= "checkId"> </span>
         </div>
         <div>
-            <input type="password" placeholder="비밀번호">
+            <input type="password" placeholder="비밀번호" name="password">
         </div>
         <div>
-            <input type="text" placeholder="닉네임" class="nickname">
+            <input type="text" placeholder="닉네임" class="nickname" name="nickname">
         </div>
         <div>
             <span id= "checknickname"> </span>
         </div>
         <div>
-            <input type="text" placeholder="이름">
+            <input type="text" placeholder="이름" name="name">
         </div>
-        <divr>
-           <input type="tel" placeholder="연락처">
-        </divr>
+        <div>
+           <input type="tel" placeholder="연락처" name="phone">
+        </div>
+        <input type="hidden" name="salt" value=<%=salt()%>>
+        <%
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = LocalDateTime.now().format(formatter);
+        %>
+        <input type="hidden" name="createdAt" value="<%=formattedDateTime%>">
     </div>
     <input type="submit" value="가입하기">
 

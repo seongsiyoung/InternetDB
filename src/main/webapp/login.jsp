@@ -1,4 +1,4 @@
-<%@ page import="com.InternetDB.uitl.Alert" %>
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%

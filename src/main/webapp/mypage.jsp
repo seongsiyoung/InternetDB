@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@ page import="com.InternetDB.uitl.Alert" %>
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="com.InternetDB.UserBean" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>

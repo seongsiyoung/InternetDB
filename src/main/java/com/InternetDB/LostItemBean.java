@@ -12,7 +12,7 @@ public class LostItemBean {
     private String title;
     private String status;
     private String currentLoc;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String image;
     private String path;
     private String userId;
@@ -72,10 +72,10 @@ public class LostItemBean {
     public void setStatus(String status){
         this.status = status;
     }
-    public LocalDateTime getCreatedAt(){
+    public String getCreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt){
+    public void setCreatedAt(String createdAt){
         this.createdAt = createdAt;
     }
     public String getCurrentLoc(){
