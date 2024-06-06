@@ -200,15 +200,12 @@
         user.setName(rs.getString(4));
         user.setNickname(rs.getString(5));
         user.setPhone(rs.getString(6));
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime createdAt = LocalDateTime.parse(rs.getString(7),formatter);
-        user.setCreatedAt(createdAt);
+        user.setCreatedAt(rs.getString(7));
 
         /**
          * 여기 수정 게시물 조회시 찾은 거랑 잃어버린 거 둘 다 조회????????????
          */
-        sql = "select lost_id, title, path from LOSTITEM where user_id = ? limit ?, ?";
+        sql = "select lost_id, title, path from LOSTITEM where user_id = ? order by createdAt desc limit ?, ?";
         statement2 = connection.prepareStatement(sql);
         statement2.setString(1, id);
         int offset = (currentPage-1) * currentSize;
@@ -244,6 +241,8 @@
             statement.close();
         if(statement2 != null)
             statement2.close();
+        if(statement3 != null)
+            statement3.close();
         if(rs != null)
             rs.close();
         if(connection != null)
@@ -308,7 +307,6 @@
 
                         if(pageResultDTO.isPrev())
                             out.println("<li> <a href=\"mypage.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
-
                         for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
                             if(i == currentPage){
                                 out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
@@ -317,10 +315,8 @@
                             out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
 
                         }
-
                         if(pageResultDTO.isNext())
                             out.println("<li> <a href=\"mypage.jsp?page=" + (pageResultDTO.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
-
                     %>
                 </ul>
             </div>
