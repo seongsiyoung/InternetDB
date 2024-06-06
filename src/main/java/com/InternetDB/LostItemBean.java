@@ -1,12 +1,11 @@
 package com.InternetDB;
 
-import java.time.LocalDateTime;
 
 public class LostItemBean {
     private Long lostId;
     private String type;
     private String category;
-    private LocalDateTime time;
+    private String time;
     private String location;
     private String content;
     private String title;
@@ -42,10 +41,10 @@ public class LostItemBean {
     public void setCategory(String category){
         this.category = category;
     }
-    public LocalDateTime getTime(){
+    public String getTime(){
         return time;
     }
-    public void setTime(LocalDateTime time){
+    public void setTime(String time){
         this.time = time;
     }
     public String getLocation(){
