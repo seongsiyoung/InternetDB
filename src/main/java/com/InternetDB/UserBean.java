@@ -9,7 +9,7 @@ public class UserBean {
     private String name;
     private String nickname;
     private String phone;
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     public String getUserId() {
         return userId;
@@ -47,10 +47,10 @@ public class UserBean {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

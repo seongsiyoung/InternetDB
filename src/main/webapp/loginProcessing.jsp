@@ -1,4 +1,3 @@
-<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,12 +21,13 @@
             statement.setString(2, password);
 
             rs = statement.executeQuery();
+
             if(!rs.next())
                 response.sendRedirect("/temp/temploginfail.jsp");
             else {
                 request.getSession().setAttribute("id", id);
 
-                response.sendRedirect("/temp/temploginsuccess.jsp");
+                response.sendRedirect("mypage.jsp");
             }
 
         } catch (SQLException e){

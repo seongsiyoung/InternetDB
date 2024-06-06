@@ -1,4 +1,11 @@
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    if(session.getAttribute("id") != null){
+        Alert.alertAndBack(response, "이미 로그인 중입니다. 로그아웃 후 다시 시도해주십시오.");
+    }
+%>
 
 <html>
 <head>

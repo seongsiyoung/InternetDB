@@ -20,7 +20,7 @@
         }
 
         .menu li {
-            flex-grow: 1; /* 각 항목이 유효한 공간을 균등하게 차지하도록 함 */
+            flex: 1 1 0px; /* 각 항목이 유효한 공간을 균등하게 차지하도록 함 */
             text-align: center; /* 항목의 텍스트를 중앙 정렬 */
             padding: 10px 20px; /* 패딩을 조정하여 내용에 여유 공간 제공 */
             margin: 0 5px; /* 양 옆 마진을 조금 주어 간격을 미세 조정 */
@@ -45,12 +45,34 @@
             box-shadow: none; /* 그림자 제거 */
             text-decoration: none; /* 텍스트 밑줄 제거 */
         }
-        }
+
 
         .menu-bar .menu input[type="submit"]:hover,
         .menu-bar .menu input[type="submit"]:focus {
             background-color: #f0f0f0; /* 호버 및 포커스 시 배경색 변경 */
             outline: none; /* 포커스 아웃라인 제거 */
+        }
+        .lost-item-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3개의 열을 동일한 크기로 설정 */
+            grid-template-rows: auto auto; /* 행의 크기는 내용에 따라 자동 조정 */
+            gap: 20px; /* 그리드 항목 사이의 간격 */
+            max-width: 600px; /* 갤러리의 최대 너비 설정, 필요에 따라 조정 */
+            margin: auto; /* 중앙 정렬 */
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column; /* 요소를 수직 방향으로 정렬 */
+            align-items: center; /* 가로축 중앙 정렬 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .item img {
+            width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
+            height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
+        }
+        h3 {
+            text-align: center;
         }
     </style>
 </head>
@@ -58,12 +80,12 @@
     <div align="center">
         <table>
             <tr>
-                <td>로고</td>
+                <td><img src="./Icon/pagelogo.png" width="260" height="70"></td>
                 <td>&emsp;&emsp;&emsp;</td>
                 <td>
                     <div class="search">
-                        <input type="text" placeholder="분실물 검색">
-                        <input type="image" alt="검색 버튼" width="30" height="30">
+                        <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
+                        <input type="image" id="searchIcon" alt="검색 버튼" src="./Icon/search.png" width="30" height="30">
                     </div>
                 </td>
                 <td>&emsp;&emsp;&emsp;</td>
@@ -99,7 +121,7 @@
             </div>
         </form>
 
-        <h3>최근에 이런 분실물들이 등록됐어요!</h3>
+        <h3>최근 등록된 분실물</h3>
         <hr>
         <!--여기에 분실물 이미지 표시를 위한 HTML-->
         <div class="lost-item-gallery">
