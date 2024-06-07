@@ -1,28 +1,22 @@
-<%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %>
-<%@ page import="java.util.Base64" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%!
-    public String salt() {
+<%@ page import="com.InternetDB.util.Alert" %>
+<%@ page import="com.InternetDB.UserBean" %>
 
-        String salt="";
-        try {
-            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            byte[] bytes = new byte[16];
-            random.nextBytes(bytes);
-            salt = new String(Base64.getEncoder().encode(bytes));
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return salt;
+
+<%
+
+    String id = (String) session.getAttribute("id");
+    if(id == null){
+        Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
+
+    UserBean user = new UserBean();
+
 %>
+
 <html>
 <head>
-    <title>Sign Up</title>
     <style>
         html {
             box-sizing: border-box;
@@ -36,23 +30,26 @@
             font-size: 0.875rem;
 
         }
+
         .parent{
             display: flex;
             justify-content: center;
             align-items: center;
+
         }
 
         form{
             width: 50rem;
             align-content: center;
             text-align: center;
+
         }
 
         .signup{
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 1rem;
+            height: inherit;
         }
+
         div{
             margin: 1rem;
         }
@@ -88,17 +85,17 @@
 
 
         /* 가입하기 버튼의 스타일 */
-        input[type="submit"] {
-            width: 50%;
+        input[type="submit"], button {
+            width: 30%;
             height: 3rem;
             padding: 10px;
-            margin-top: 10px;
             background-color: #4cbdea;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin: 0 3rem;
         }
 
         /* 가입하기 버튼 클릭 시의 스타일 */
@@ -114,81 +111,104 @@
             color: #333;
             text-align: center;
         }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
     </style>
+    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+
+    <title>분실물 신고</title>
 </head>
+<body>
+<%@ include file="connection.jsp" %>
+<%
+
+    String sql = "SELECT * from User where user_id = ?";
+    PreparedStatement statement = null;
+    ResultSet rs = null;
+
+    try {
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
+
+        rs = statement.executeQuery();
+        rs.next();
+
+        user.setUserId(rs.getString(1));
+        user.setPassword(rs.getString(2));
+        user.setSalt(rs.getString(3));
+        user.setName(rs.getString(4));
+        user.setNickname(rs.getString(5));
+        user.setPhone(rs.getString(6));
+        user.setCreatedAt(rs.getString(7));
+
+    } catch (SQLException e){
+        e.printStackTrace();
+        request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
+    } finally {
+
+        if(statement != null)
+            statement.close();
+        if(rs != null)
+            rs.close();
+        if(connection != null)
+            connection.close();
+    }
+%>
 <body class = "parent">
-<form action="signUpProcessiong.jsp" method="post">
+<form action="modifyMemberProcessing.jsp" method="post" accept-charset="utf-8">
     <div class="signup">
         <div>
-            <h2>회원가입</h2>
+            <h2>회원 정보 수정</h2>
         </div>
         <div>
-            <input type="text" placeholder="이메일" class = "userId" name="userId">
+            <input type="password" placeholder="기존 비밀번호" name="oldPassword" class="oldPassword">
         </div>
         <div>
-            <div id= "checkId"> </div>
+            <div id= "checkPassword"> </div>
         </div>
         <div>
-            <input type="password" placeholder="비밀번호" class="password" name="password">
+            <input type="password" placeholder="새로운 비밀번호" name="password" class="password">
         </div>
         <div>
-            <input type="text" placeholder="닉네임" class="nickname" name="nickname">
+            <div id= "newPassword"> </div>
         </div>
         <div>
-            <span id= "checknickname"> </span>
+            <input type="text" value= <%=user.getNickname()%> class="nickname" name="nickname">
         </div>
         <div>
-            <input type="text" placeholder="이름" class="name" name="name">
+            <div id= "checknickname"> </div>
         </div>
         <div>
-           <input type="tel" placeholder="연락처" class="phone" name="phone">
+            <input type="text" value= <%= user.getName()%> class="name" name="name">
         </div>
-        <input type="hidden" name="salt" value=<%=salt()%>>
-        <%
+        <div>
+            <div id= "checkname"> </div>
+        </div>
+        <div>
+            <input type="tel" value= <%=user.getPhone()%> class="phone" name="phone">
+        </div>
+        <div>
+            <div id= "checkphone"> </div>
+        </div>
+        <div>
+            <input type="hidden" value= <%=user.getUserId()%> name="userId">
+        </div>
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = LocalDateTime.now().format(formatter);
-        %>
-        <input type="hidden" name="createdAt" value="<%=formattedDateTime%>">
+        <span class="buttons">
+            <input type="submit" value="수정하기" formaction="/modifyMemberProcessing.jsp">
+            <input type="submit" value="회원 탈퇴" formaction="/deleteMemberProcessing.jsp">
+        </span>
     </div>
-    <input class="submitBtn" type="submit" value="가입하기">
+
 
 </form>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $('.userId').focusout(function(){
-        let userId = $('.userId').val();
-
-        $.ajax({
-            url : "/member/idCheck",
-            type : "post",
-            data : {userId: userId},
-            dataType : 'json',
-            success : function(result){
-                var $checkId = $("#checkId");
-                if(result === 0){
-                    $checkId.html('사용 불가능한 이메일입니다.');
-                    $checkId.css('color','red');
-                } else{
-                    let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-
-                    if(regex.test(userId)){
-                        $checkId.html('사용 가능한 이메일 입니다.')
-                        $checkId.css('color','green');
-                    } else {
-                        $checkId.html('사용 불가능한 이메일입니다.')
-                        $checkId.css('color','red');
-                    }
-                }
-            },
-            error : function(){
-                alert("서버 요청 실패");
-            }
-        })
-
-    })
-
     $('.nickname').focusout(function(){
         let nickname = $('.nickname').val(); // input_id에 입력되는 값
 
@@ -200,7 +220,7 @@
             success : function(result){
                 var $checknickname = $("#checknickname");
                 if(result === 0){
-                    $checknickname.html('중복된 닉네임입니다.');
+                    $checknickname.html('사용할 수 없는 닉네임입니다.');
                     $checknickname.css('color','red');
                 } else{
                     let regex = /^(?=.*[a-zA-Z가-힣])[a-zA-Z가-힣\d]{4,14}$/;
@@ -221,6 +241,30 @@
 
     })
 
+    $('.oldPassword').focusout(function(){
+        let oldPassword = $('.oldPassword').val();
+
+        $.ajax({
+            url : "/member/password",
+            type : "post",
+            data : {oldPassword : oldPassword},
+            dataType : 'json',
+            success : function(result){
+                var $checkPassword = $("#checkPassword");
+
+                if(result === 0){
+                    $checkPassword.html('비밀번호가 일치하지 않습니다..');
+                    $checkPassword.css('color','red');
+                } else{
+                    $checkPassword.html('비밀번호가 일치합니다.');
+                    $checkPassword.css('color','green');
+                }
+            },
+            error : function(){
+                alert("서버 요청 실패");
+            }
+        })
+    })
 
     $('.password').focusout(function() {
         let password = $('.password').val();
@@ -266,7 +310,7 @@
             $checkphone.css('color','red');
         }
     })
+
 </script>
 </body>
 </html>
-

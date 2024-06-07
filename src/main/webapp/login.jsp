@@ -1,5 +1,5 @@
 <%@ page import="com.InternetDB.util.Alert" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
     if(session.getAttribute("id") != null){
@@ -20,7 +20,7 @@
         .grid {
             inline-size: 90%;
             margin-inline: auto;
-            max-inline-size: 20rem;
+            max-inline-size: 25rem;
         }
 
         html {
@@ -37,6 +37,7 @@
             line-height: 1.5;
             margin: 0;
             min-block-size: 100vh;
+            transform: scale(1.2);
         }
 
         img {
