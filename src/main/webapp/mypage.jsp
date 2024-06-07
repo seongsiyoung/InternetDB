@@ -7,7 +7,7 @@
 <%@ page import="com.InternetDB.page.PageResultDTO" %>
 
 <%
-
+    request.setCharacterEncoding("UTF-8");
 
     String id = (String) session.getAttribute("id");
     if(id == null){
