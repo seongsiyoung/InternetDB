@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>loginProcess</title>
@@ -25,7 +25,8 @@
             if(!rs.next())
                 response.sendRedirect("/temp/temploginfail.jsp");
             else {
-                request.getSession().setAttribute("id", id);
+                request.getSession().setAttribute("id", rs.getString(1));
+                request.getSession().setAttribute("password", rs.getString(2));
 
                 response.sendRedirect("mypage.jsp");
             }

@@ -3,7 +3,7 @@
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%!
     public String salt() {
 
@@ -129,7 +129,7 @@
             <div id= "checkId"> </div>
         </div>
         <div>
-            <input type="password" placeholder="비밀번호" name="password">
+            <input type="password" placeholder="비밀번호" class="password" name="password">
         </div>
         <div>
             <input type="text" placeholder="닉네임" class="nickname" name="nickname">
@@ -138,10 +138,10 @@
             <span id= "checknickname"> </span>
         </div>
         <div>
-            <input type="text" placeholder="이름" name="name">
+            <input type="text" placeholder="이름" class="name" name="name">
         </div>
         <div>
-           <input type="tel" placeholder="연락처" name="phone">
+           <input type="tel" placeholder="연락처" class="phone" name="phone">
         </div>
         <input type="hidden" name="salt" value=<%=salt()%>>
         <%
@@ -158,7 +158,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('.userId').focusout(function(){
-        let userId = $('.userId').val(); // input_id에 입력되는 값
+        let userId = $('.userId').val();
 
         $.ajax({
             url : "/member/idCheck",
@@ -168,11 +168,18 @@
             success : function(result){
                 var $checkId = $("#checkId");
                 if(result === 0){
-                    $checkId.html('사용할 수 없는 아이디입니다.');
+                    $checkId.html('사용 불가능한 이메일입니다.');
                     $checkId.css('color','red');
                 } else{
-                    $checkId.html('사용할 수 있는 아이디입니다.');
-                    $checkId.css('color','green');
+                    let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+
+                    if(regex.test(userId)){
+                        $checkId.html('사용 가능한 이메일 입니다.')
+                        $checkId.css('color','green');
+                    } else {
+                        $checkId.html('사용 불가능한 이메일입니다.')
+                        $checkId.css('color','red');
+                    }
                 }
             },
             error : function(){
@@ -193,11 +200,18 @@
             success : function(result){
                 var $checknickname = $("#checknickname");
                 if(result === 0){
-                    $checknickname.html('사용할 수 없는 닉네임입니다.');
+                    $checknickname.html('중복된 닉네임입니다.');
                     $checknickname.css('color','red');
                 } else{
-                    $checknickname.html('사용할 수 있는 닉네임입니다.');
-                    $checknickname.css('color','green');
+                    let regex = /^(?=.*[a-zA-Z가-힣])[a-zA-Z가-힣\d]{4,14}$/;
+
+                    if(regex.test(nickname)){
+                        $checknickname.html('사용 가능한 닉네임 입니다.')
+                        $checknickname.css('color','green');
+                    } else {
+                        $checknickname.html('4~14자 사이의 한글, 영어, 숫자가 혼합된 닉네임으로 설정해주십시오.(숫자만 입력할 수 없습니다.)')
+                        $checknickname.css('color','red');
+                    }
                 }
             },
             error : function(){
@@ -205,6 +219,52 @@
             }
         })
 
+    })
+
+
+    $('.password').focusout(function() {
+        let password = $('.password').val();
+
+        var $newPassword = $("#newPassword");
+        let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,14}$/;
+
+        if(regex.test(password)){
+            $newPassword.html('사용 가능한 비밀번호입니다.')
+            $newPassword.css('color','green');
+        } else {
+            $newPassword.html('4~14자 사이의 영어와 숫자 혼합된 비밀번호로 설정해주십시오.')
+            $newPassword.css('color','red');
+        }
+    })
+
+    $('.name').focusout(function() {
+        let name = $('.name').val();
+
+        var $checkname = $("#checkname");
+        let regex = /^[가-힣]{2,5}$/;
+
+        if(regex.test(name)){
+            $checkname.html('올바른 이름입니다.')
+            $checkname.css('color','green');
+        } else {
+            $checkname.html('2~5자 사이의 한글을 입력해주십시오.')
+            $checkname.css('color','red');
+        }
+    })
+
+    $('.phone').focusout(function() {
+        let phone = $('.phone').val();
+
+        var $checkphone = $("#checkphone");
+        let regex = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+
+        if(regex.test(phone)){
+            $checkphone.html('올바른 핸드폰 번호 형식입니다.')
+            $checkphone.css('color','green');
+        } else {
+            $checkphone.html('올바른 핸드폰 형식이 아닙니다.')
+            $checkphone.css('color','red');
+        }
     })
 </script>
 </body>

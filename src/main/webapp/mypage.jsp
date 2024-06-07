@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.InternetDB.util.Alert" %>
 <%@ page import="com.InternetDB.UserBean" %>
 <%@ page import="com.InternetDB.VO.BriefItem" %>

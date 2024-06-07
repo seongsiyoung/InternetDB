@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 <jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>
 <jsp:setProperty name="user" property="*"/>
 <html>
@@ -9,8 +12,6 @@
 <%@ include file="connection.jsp" %>
 
 <%
-    request.setCharacterEncoding("UTF-8");
-
     String sql = "INSERT INTO User (user_id, password, salt, name, nickname, phone, createdAt) VALUES (?,?,?,?,?,?,?)";
     PreparedStatement statement = null;
 
