@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
-<title>분실물 신고</title>
+<link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+<title>분실물 등록 상세</title>
 </head>
 <body>
       <div align="center">
@@ -27,8 +27,9 @@
       </table>
       </div>
       <br>
-      <h2>&emsp;분실물 신고</h2>
+      <h2>&emsp;분실물 등록 상세</h2>
       <hr></hr>
+      <br>
       <div class="postSection" align="center">
       <form method="post" action="" enctype="multipart/form-data" class="lostForm">
         <table>
@@ -36,8 +37,8 @@
                    <td><div class="imgSec"><img id="lostImage" src="./Icon/upload.png" width="350px" height="300px" /></div></td>
 
                    <td><div class="lostInfoSec">분실물명 : <input type="text" id="lostInfo"><br>
-                       습득일 : <input type="date" id="lostInfo" name="FoundDate"><br>
-                       보관장소 : <input type="text" id="lostInfo"><br>
+                       분실일 : <input type="date" id="lostInfo" name="FoundDate"><br>
+                       분실예상장소 : <input type="text" id="lostInfo"><br>
                        물품분류 : <select name="category" id="lostInfo">
                                 <option value="none">===선택===</option>
                                 <option value="accessory">악세사리</option>
@@ -65,24 +66,35 @@
                    </tr>
               </table>
         </form>
-        <hr>
       </div>
-      <div class="commentSec">
-        <form method="post" action="" class="commentForm">
-        <table>
-            <tr>
-                <td>&emsp;&emsp;</td>
-                <td>
+      <br>
+      <hr>
+      <div class="commentSec" align="center">
+
                 <div class="commentBtnSec" align="center">
                 <img id="commentIcon" src="./Icon/comment.png">
                 <button id ="commentBtn">댓글 </button>
                 </div>
-                </td>
-            </tr>
+
+        <br>
+       <div class="commentWrite" align="center">
+
+        <form method="post" action="" class="commentForm">
+        <table class="commentTable" style="text-align: center;" borer="1">
+                <tr>
+                    <td align="left">userID</td>
+                </tr>
+                <tr>
+                    <td><textarea id="commentWriteSec" style="border:none;"
+                        placeholder="댓글 쓰기"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="commentWriteBtn" value="등록"></td>
+                </tr>
 
         </table>
-        </form>
 
+        </form>
       </div>
 </body>
 </html>
