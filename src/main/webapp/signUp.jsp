@@ -132,6 +132,9 @@
             <input type="password" placeholder="비밀번호" class="password" name="password">
         </div>
         <div>
+            <span id= "newPassword"> </span>
+        </div>
+        <div>
             <input type="text" placeholder="닉네임" class="nickname" name="nickname">
         </div>
         <div>
@@ -141,7 +144,13 @@
             <input type="text" placeholder="이름" class="name" name="name">
         </div>
         <div>
+            <span id= "checkname"> </span>
+        </div>
+        <div>
            <input type="tel" placeholder="연락처" class="phone" name="phone">
+        </div>
+        <div>
+            <span id= "checkphone"> </span>
         </div>
         <input type="hidden" name="salt" value=<%=salt()%>>
         <%
