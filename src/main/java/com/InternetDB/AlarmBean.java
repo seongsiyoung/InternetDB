@@ -6,7 +6,7 @@ public class AlarmBean {
     private Long alarmId;
     private String status;
     private String content;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private Long replyId;
     private String userId;
 
@@ -28,10 +28,10 @@ public class AlarmBean {
     public void setContent(String content) {
         this.content = content;
     }
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
     public Long getReplyId() {

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class ReplyBean {
     private Long replyId;
     private String content;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private Long lostId;
     private String userId;
 
@@ -21,10 +21,10 @@ public class ReplyBean {
     public void setContent(String content) {
         this.content = content;
     }
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
     public Long getLostId() {

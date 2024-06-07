@@ -1,18 +1,17 @@
 package com.InternetDB;
 
-import java.time.LocalDateTime;
 
 public class LostItemBean {
-    private Long id;
+    private Long lostId;
     private String type;
     private String category;
-    private LocalDateTime time;
+    private String time;
     private String location;
     private String content;
     private String title;
     private String status;
     private String currentLoc;
-    private LocalDateTime createdAt;
+    private String createdAt;
     private String image;
     private String path;
     private String userId;
@@ -29,12 +28,7 @@ public class LostItemBean {
     public void setImage(String image) {
         this.image = image;
     }
-    public Long getId(){
-        return id;
-    }
-    public void setId(Long id){
-        this.id = id;
-    }
+
     public String getType(){
         return type;
     }
@@ -47,10 +41,10 @@ public class LostItemBean {
     public void setCategory(String category){
         this.category = category;
     }
-    public LocalDateTime getTime(){
+    public String getTime(){
         return time;
     }
-    public void setTime(LocalDateTime time){
+    public void setTime(String time){
         this.time = time;
     }
     public String getLocation(){
@@ -77,10 +71,10 @@ public class LostItemBean {
     public void setStatus(String status){
         this.status = status;
     }
-    public LocalDateTime getCreatedAt(){
+    public String getCreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt){
+    public void setCreatedAt(String createdAt){
         this.createdAt = createdAt;
     }
     public String getCurrentLoc(){
@@ -94,5 +88,13 @@ public class LostItemBean {
     }
     public void setUserId(String userId){
         this.userId = userId;
+    }
+
+    public Long getLostId() {
+        return lostId;
+    }
+
+    public void setLostId(Long lostId) {
+        this.lostId = lostId;
     }
 }
