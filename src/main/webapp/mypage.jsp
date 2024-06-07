@@ -74,10 +74,9 @@
             border-radius: 5px;
             color: white;
         }
-        .pageBox{
-            display:flex;
-            justify-content:center;
-        }
+
+
+
         .myPost{
             min-width: 80rem;
         }
