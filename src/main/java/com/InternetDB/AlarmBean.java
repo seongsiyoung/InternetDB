@@ -1,7 +1,5 @@
 package com.InternetDB;
 
-import java.time.LocalDateTime;
-
 public class AlarmBean {
     private Long alarmId;
     private String status;
