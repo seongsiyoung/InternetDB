@@ -32,32 +32,30 @@
             margin: 0; /* form의 마진 제거 */
         }
 
-        .menu-bar .menu input[type="submit"] {
-            width: 100%; /* 버튼을 form의 전체 너비로 확장 */
-            padding: 10px 0; /* 수직 패딩만 조정 */
-            background: none; /* 배경 제거 */
-            border: none; /* 테두리 제거 */
-            color: inherit; /* 상속받은 색상 사용 */
-            font: inherit; /* 상속받은 폰트 스타일 사용 */
-            font-weight: bold; /* 폰트 굵기를 볼드로 설정 */
-            cursor: pointer; /* 커서를 포인터로 표시 */
-            margin: 0; /* 마진 제거 */
-            box-shadow: none; /* 그림자 제거 */
-            text-decoration: none; /* 텍스트 밑줄 제거 */
+        .menu-link {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
-
-        .menu-bar .menu input[type="submit"]:hover,
-        .menu-bar .menu input[type="submit"]:focus {
-            background-color: #f0f0f0; /* 호버 및 포커스 시 배경색 변경 */
-            outline: none; /* 포커스 아웃라인 제거 */
+        .menu-link:hover, .menu-link:focus {
+            background-color: #f0f0f0;
         }
+
         .lost-item-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3개의 열을 동일한 크기로 설정 */
+            grid-template-columns: repeat(3, 1fr); /* 5개의 열을 동일한 크기로 설정 */
+            place-items: center;
             grid-template-rows: auto auto; /* 행의 크기는 내용에 따라 자동 조정 */
             gap: 20px; /* 그리드 항목 사이의 간격 */
-            max-width: 600px; /* 갤러리의 최대 너비 설정, 필요에 따라 조정 */
+            max-width: 70%; /* 갤러리의 최대 너비 설정, 필요에 따라 조정 */
             margin: auto; /* 중앙 정렬 */
         }
 
@@ -68,7 +66,6 @@
             text-align: center; /* 텍스트 중앙 정렬 */
         }
         .item img {
-            width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
             height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
         }
         h3 {
@@ -78,6 +75,7 @@
 </head>
 <body>
     <div align="center">
+        <!--로고 검색창 마이페이지 알림-->
         <table>
             <tr>
                 <td><img src="./Icon/pagelogo.png" width="260" height="70"></td>
@@ -92,11 +90,13 @@
                 <td>
                     <div class="my">
                         <%
+                            System.out.println("test for session");
                             session = request.getSession(false); // 세션 존재 확인
+
                             if (session.getAttribute("id") != null) {
                                 // 로그인 상태: 마이페이지와 알림 버튼 표시
-                                out.println("<input type='image' src='./images/mypage_icon.png' alt='마이페이지'>");
-                                out.println("<input type='image' src='./images/alarm_icon.png' alt='알림'>");
+                                out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\">&nbsp;");
+                                out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"마이페이지\" width=\"45\" height=\"40\">");
                             } else {
                                 // 비로그인 상태: 로그인 버튼 표시
                                 out.println("<form action='login.jsp' method='post'>");
@@ -109,17 +109,13 @@
             </tr>
         </table>
         <br>
-        <form method="get">
-            <div class="menu-bar">
-                <ul class="menu">
-                    <li>&emsp;&emsp;</li>
-                    <li><form action="information.jsp" method="post"><input type="submit" value="종합 안내"></form></li>
-                    <li><form action="reportedLostItem.jsp" method="post"><input type="submit" value="신고된 분실물"></form></li>
-                    <li><form action="registeredLostItem.jsp" method="post"><input type="submit" value="등록된 분실물"></form></li>
-                    <li>&emsp;&emsp;</li>
-                </ul>
-            </div>
-        </form>
+        <div class="menu-bar">
+            <ul class="menu">
+                <li><a href="information.jsp" class="menu-link">종합 안내</a></li>
+                <li><a href="reportedLostItem.jsp" class="menu-link">신고된 분실물</a></li>
+                <li><a href="registeredLostItem.jsp" class="menu-link">등록된 분실물</a></li>
+            </ul>
+        </div>
 
         <h3>최근 등록된 분실물</h3>
         <hr>
@@ -133,7 +129,7 @@
                     // 데이터베이스 접속을 위한 코드
                     // LostItem 테이블에서 path, image, title을 선택
                     // createdat 기준으로 내림차순 정렬하여 최신 항목을 보여줌, LIMIT 6은 6개로 제한하여 최근 등록된 분실물 6개만 표시
-                    String sql = "SELECT image, path, title FROM LostItem ORDER BY createdat DESC LIMIT 6";
+                    String sql = "SELECT image, path, title FROM LostItem ORDER BY createdat DESC LIMIT 8";
                     pstmt = connection.prepareStatement(sql); // 쿼리 준비
                     rs = pstmt.executeQuery(); // 쿼리 실행
 
