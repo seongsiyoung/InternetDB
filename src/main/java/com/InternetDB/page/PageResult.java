@@ -2,14 +2,13 @@ package com.InternetDB.page;
 
 
 public class PageResult {
-    private int page;
-    private int size;
-    private int total;
-    private int start;
-    private int end;
-
-    private boolean prev;
-    private boolean next;
+    private int page; //현재 페이지
+    private int size; //불러온 컨텐츠의 개수
+    private int total;// 조회되는 총 컨텐츠의 수
+    private int start;//시작 페이지
+    private int end;//마지막 페이지
+    private boolean prev;//이전 페이지 유무
+    private boolean next;//다음 페이지 유무
 
 
     public PageResult(int page, int size, int total){
