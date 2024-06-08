@@ -166,7 +166,7 @@
             <h2>회원 정보 수정</h2>
         </div>
         <div>
-            <input type="password" placeholder="기존 비밀번호" name="oldPassword" class="oldPassword">
+            <input type="password" placeholder="기존 비밀번호" name="oldPassword" class="oldPassword"  required>
         </div>
         <div>
             <div id= "checkPassword"> </div>
@@ -178,19 +178,19 @@
             <div id= "newPassword"> </div>
         </div>
         <div>
-            <input type="text" value= <%=user.getNickname()%> class="nickname" name="nickname">
+            <input type="text" value= <%=user.getNickname()%> class="nickname" name="nickname"  required>
         </div>
         <div>
             <div id= "checknickname"> </div>
         </div>
         <div>
-            <input type="text" value= <%= user.getName()%> class="name" name="name">
+            <input type="text" value= <%= user.getName()%> class="name" name="name"  required>
         </div>
         <div>
             <div id= "checkname"> </div>
         </div>
         <div>
-            <input type="tel" value= <%=user.getPhone()%> class="phone" name="phone">
+            <input type="tel" value= <%=user.getPhone()%> class="phone" name="phone"  required>
         </div>
         <div>
             <div id= "checkphone"> </div>

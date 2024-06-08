@@ -123,31 +123,31 @@
             <h2>회원가입</h2>
         </div>
         <div>
-            <input type="text" placeholder="이메일" class = "userId" name="userId">
+            <input type="text" placeholder="이메일" class = "userId" name="userId" required>
         </div>
         <div>
             <div id= "checkId"> </div>
         </div>
         <div>
-            <input type="password" placeholder="비밀번호" class="password" name="password">
+            <input type="password" placeholder="비밀번호" class="password" name="password" required>
         </div>
         <div>
             <span id= "newPassword"> </span>
         </div>
         <div>
-            <input type="text" placeholder="닉네임" class="nickname" name="nickname">
+            <input type="text" placeholder="닉네임" class="nickname" name="nickname" required>
         </div>
         <div>
             <span id= "checknickname"> </span>
         </div>
         <div>
-            <input type="text" placeholder="이름" class="name" name="name">
+            <input type="text" placeholder="이름" class="name" name="name" required>
         </div>
         <div>
             <span id= "checkname"> </span>
         </div>
         <div>
-           <input type="tel" placeholder="연락처" class="phone" name="phone">
+           <input type="tel" placeholder="연락처" class="phone" name="phone" required>
         </div>
         <div>
             <span id= "checkphone"> </span>
