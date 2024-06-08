@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8" %>
+<%@ include file="connection.jsp" %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <title>분실물 신고 상세</title>
 </head>
 <body>
@@ -20,7 +21,8 @@
            <td>
               <div class="my">
                 <input type="image" id="mypageIcon" src="./Icon/mypage.png" alt="마이페이지" width="40" height="40">&nbsp;
-                <input type="image" id="alarm" src="./Icon/alarm.png" alt="마이페이지" width="45" height="40">
+                <input type="image" id="alarm" src="./Icon/alarm.png" alt="알림" width="45" height="40">
+                <input type="image" id="logout" src="./Icon/logout.png" alt="로그아웃" width="45" height="40">
               </div>
            </td>
            </tr>
@@ -62,7 +64,7 @@
                    <td colspan="2"> <br> &emsp;내용 </td>
                    </tr>
                    <tr>
-                   <td colspan="2"> <br><textarea rows="10" cols="100" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
+                   <td colspan="2"> <br><textarea rows="10" cols="105" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
                    </tr>
               </table>
         </form>

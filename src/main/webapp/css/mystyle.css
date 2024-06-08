@@ -69,8 +69,11 @@ box-shadow: 4px 4px 3px #ccc;
 }
 
 textarea {
-    border:none;
     resize:vertical;
+    border-color:#A8A8A8;
+    border-style:solid;
+    padding:5px;
+    border-radius:5px;
 }
 
 .imgSec {
@@ -143,4 +146,15 @@ textarea {
     color:#fff;
     box-shadow: 2px 2px 3px #ccc;
     border-radius:5px;
+}
+
+#UploadWriting {
+    float:right;
+    background-color:#0a0a23;
+    color:#fff;
+    width:75px;
+    height:23px;
+    box-shadow: 2px 2px 3px #ccc;
+    border-radius:5px;
+    border:none;
 }

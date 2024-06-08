@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <title>마이페이지-분실물등록상세</title>
 </head>
 <body>
@@ -20,7 +20,8 @@
            <td>
               <div class="my">
                 <input type="image" id="mypageIcon" src="./Icon/mypage.png" alt="마이페이지" width="40" height="40">&nbsp;
-                <input type="image" id="alarm" src="./Icon/alarm.png" alt="마이페이지" width="45" height="40">
+                <input type="image" id="alarm" src="./Icon/alarm.png" alt="알림" width="45" height="40">
+                <input type="image" id="logout" src="./Icon/logout.png" alt="로그아웃" width="45" height="40">
               </div>
            </td>
            </tr>
@@ -51,9 +52,6 @@
                                 <option value="keep">보관중</option>
                                 <option value="end">소유자 수령</option></select><br>
                        연락처 : <input type="tel" id="lostInfo" name="phoneNumber"></div>
-                       <div class="ModifyAndDelete">
-                       <button id="mdBtn">수정</button><button id="mdBtn">삭제</button></td></div>
-
                    </tr>
                    <tr>
                    <td><div align="center">&emsp;&emsp;<input type="file"></div></td>
@@ -65,8 +63,11 @@
                    <td colspan="2"> <br> &emsp;내용 </td>
                    </tr>
                    <tr>
-                   <td colspan="2"> <br><textarea rows="10" cols="100" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
+                   <td colspan="2"> <br><textarea rows="10" cols="105" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
                    </tr>
+                    <tr>
+                           <td colspan="2"><br><div class="ModifyAndDelete">
+                           <button id="mdBtn">수정</button> <button id="mdBtn">삭제</button></div></td></tr>
               </table>
         </form>
       </div>
@@ -94,7 +95,6 @@
                 <tr>
                     <td><input type="submit" id="commentWriteBtn" value="등록"></td>
                 </tr>
-
         </table>
 
         </form>
