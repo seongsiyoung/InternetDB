@@ -1,4 +1,4 @@
-<%@ page import="com.InternetDB.page.PageResultDTO" %>
+<%@ page import="com.InternetDB.page.PageResult" %>
 <%@ page import="com.InternetDB.VO.BriefItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %><%--
@@ -119,7 +119,7 @@
     PreparedStatement pstmt = null;
     PreparedStatement pstmt2 = null;
     ResultSet rs = null;
-    PageResultDTO pageResultDTO = null;
+    PageResult pageResult = null;
 
     try {
         pstmt = connection.prepareStatement(sql);
@@ -143,7 +143,7 @@
         rs.next();
         int total = rs.getInt(1);
 
-        pageResultDTO = new PageResultDTO(currentPage, currentSize, total);
+        pageResult = new PageResult(currentPage, currentSize, total);
     } catch (SQLException e){
         e.printStackTrace();
         request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
@@ -227,9 +227,9 @@
             <ul class="pagination_modal">
                 <%
 
-                    if(pageResultDTO.isPrev())
-                        out.println("<li> <a href=\"registeredLostItem.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
-                    for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
+                    if(pageResult.isPrev())
+                        out.println("<li> <a href=\"registeredLostItem.jsp?page="+ (pageResult.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
+                    for(int i = pageResult.getStart(); i <= pageResult.getEnd(); i++){
                         if(i == currentPage){
                             out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                             continue;
@@ -237,8 +237,8 @@
                         out.println("<li> <a href=\"registeredLostItem.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
 
                     }
-                    if(pageResultDTO.isNext())
-                        out.println("<li> <a href=\"registeredLostItem.jsp?page=" + (pageResultDTO.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
+                    if(pageResult.isNext())
+                        out.println("<li> <a href=\"registeredLostItem.jsp?page=" + (pageResult.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
                 %>
             </ul>
         </div>

@@ -1,7 +1,7 @@
 package com.InternetDB.page;
 
 
-public class PageResultDTO {
+public class PageResult {
     private int page;
     private int size;
     private int total;
@@ -12,7 +12,7 @@ public class PageResultDTO {
     private boolean next;
 
 
-    public PageResultDTO(int page, int size, int total){
+    public PageResult(int page, int size, int total){
         this.page = page;
         this.size = size;
         this.total = total;
