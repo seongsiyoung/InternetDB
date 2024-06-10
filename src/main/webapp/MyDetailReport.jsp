@@ -38,36 +38,30 @@
                    <td><div class="imgSec"><img id="lostImage" src="./Icon/upload.png" width="350px" height="300px" /></div></td>
 
                    <td><div class="lostInfoSec">
-                       분실물명 : <input type="text" id="lostInfo"><br>
-                       습득일 : <input type="date" id="lostInfo" name="FoundDate"><br>
-                       보관장소 : <input type="text" id="lostInfo"><br>
-                       물품분류 : <select name="category" id="lostInfo">
-                                <option value="none">===선택===</option>
-                                <option value="accessory">악세사리</option>
-                                <option value="wallet">지갑</option>
-                                <option value="card">신용/체크카드</option>
-                                <option value="others">기타</option></select><br>
-                       분실상태 : <select name="status" id="lostInfo">
-                                <option value="none">===선택===</option>
-                                <option value="keep">보관중</option>
-                                <option value="end">소유자 수령</option></select><br>
-                       연락처 : <input type="tel" id="lostInfo" name="phoneNumber"></div>
-                       <div class="ModifyAndDelete">
-                       <button id="mdBtn">수정</button><button id="mdBtn">삭제</button></td></div>
+                                              분실물명 : 애플워치<br>
+                                              습득일 : 2024-06-07 <br>
+                                              보관장소 : 학과사무실 <br>
+                                              물품분류 : 전자제품 <br>
+                                              분실상태 : 보관중 <br>
+                                              연락처 : 010-1234-5858 </div></div>
+
 
                    </tr>
                    <tr>
-                   <td><div align="center">&emsp;&emsp;<input type="file"></div></td>
+                   <td></td>
                    </tr>
                    <tr>
-                   <td><div align="center"><button id="uploadBtn">Upload Photo</button></td></div>
+                   <td></td></div>
                    </tr>
                    <tr>
                    <td colspan="2"> <br> &emsp;내용 </td>
                    </tr>
                    <tr>
-                   <td colspan="2"> <br><textarea rows="10" cols="105" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
+                   <td colspan="2"> <br><div class ="contentSec"> 컴퓨터공학과 건물 2층 학과사무실에 맡겨뒀어요. </div> </td>
                    </tr>
+                   <tr><td colspan="2">
+                   <div class="ModifyAndDelete">
+                                          <button id="mdBtn">수정</button><button id="mdBtn">삭제</button></td></div>
               </table>
         </form>
       </div>

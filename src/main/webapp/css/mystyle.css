@@ -54,6 +54,7 @@ box-shadow: 4px 4px 3px #ccc;
 
 .lostInfoSec {
     padding:25px;
+    line-height:2;
     width:300px;
     font-size:16px;
 }
@@ -68,6 +69,9 @@ box-shadow: 4px 4px 3px #ccc;
     margin:20px;
 }
 
+.contentSec {
+    height:150px;
+}
 textarea {
     resize:vertical;
     border-color:#A8A8A8;
@@ -158,3 +162,4 @@ textarea {
     border-radius:5px;
     border:none;
 }
+
