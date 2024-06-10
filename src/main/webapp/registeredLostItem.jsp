@@ -28,7 +28,9 @@
 %>
 <html>
 <head>
+    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
     <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
     <style>
         .menu-bar {
             width: 100%;
@@ -95,21 +97,6 @@
             width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
             height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
         }
-
-        .page {
-            text-align: center;
-        }
-
-        .pagination_modal {
-            text-align: center;
-        }
-
-        .pagination_modal li {
-            text-align: center;
-            display: inline;
-            float : left;
-            list-style: none;
-        }
     </style>
     <title>등록된 분실물</title>
 </head>
@@ -161,37 +148,7 @@
 %>
 <div align="center">
     <!--로고 검색창 마이페이지 알림-->
-    <table>
-        <tr>
-            <td><a href="index.jsp"><img src="./Icon/pagelogo.png" width="260" height="70"></a></td>
-            <td>&emsp;&emsp;&emsp;</td>
-            <td>
-                <div class="search">
-                    <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                    <input type="image" id="searchIcon" alt="검색 버튼" src="./Icon/search.png" width="30" height="30">
-                </div>
-            </td>
-            <td>&emsp;&emsp;&emsp;</td>
-            <td>
-                <div class="my">
-                    <%
-                        session = request.getSession(false); // 세션 존재 확인
-                        if (session.getAttribute("id") != null) {
-                            // 로그인 상태: 마이페이지와 알림 버튼 표시
-                            out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\">&nbsp;");
-                            out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\">");
-                            out.println("<input type=\"image\" id=\"logout\" src=\"./Icon/logout.png\" alt=\"로그아웃\" width=\"45\" height=\"40\">");
-                        } else {
-                            // 비로그인 상태: 로그인 버튼 표시
-                            out.println("<form action='login.jsp' method='post'>");
-                            out.println("<input type='submit' value='로그인'>");
-                            out.println("</form>");
-                        }
-                    %>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <%@ include file="headLine.jsp" %>
     <br>
     <div class="menu-bar">
         <ul class="menu">
@@ -201,15 +158,8 @@
         </ul>
     </div>
     <div class="gallery-title">
-        <table>
-            <tr>
-                <td>
-
-                </td>
-            </tr>
-        </table>
         <h3>등록된 분실물</h3>
-        <button onclick="location.href='UploadLost.jsp'">분실물 등록하기</button>
+        <button class="register-button" onclick="location.href='UploadLost.jsp'">분실물 등록하기</button>
     </div>
 
     <hr>
@@ -224,7 +174,7 @@
     </div>
     <div class="pageBox">
         <div class="page">
-            <ul class="pagination_modal">
+            <ul class="pagination modal">
                 <%
 
                     if(pageResult.isPrev())
@@ -235,7 +185,6 @@
                             continue;
                         }
                         out.println("<li> <a href=\"registeredLostItem.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
-
                     }
                     if(pageResult.isNext())
                         out.println("<li> <a href=\"registeredLostItem.jsp?page=" + (pageResult.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");

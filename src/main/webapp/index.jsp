@@ -76,39 +76,7 @@
 <body>
     <div align="center">
         <!--로고 검색창 마이페이지 알림-->
-        <table>
-            <tr>
-                <td><img src="./Icon/pagelogo.png" width="260" height="70"></td>
-                <td>&emsp;&emsp;&emsp;</td>
-                <td>
-                    <div class="search">
-                        <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                        <input type="image" id="searchIcon" alt="검색 버튼" src="./Icon/search.png" width="30" height="30">
-                    </div>
-                </td>
-                <td>&emsp;&emsp;&emsp;</td>
-                <td>
-                    <div class="my">
-                        <%
-                            System.out.println("test for session");
-                            session = request.getSession(false); // 세션 존재 확인
-
-                            if (session.getAttribute("id") != null) {
-                                // 로그인 상태: 마이페이지와 알림 버튼 표시
-                                out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\">&nbsp;");
-                                out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\">");
-                                out.println("<input type=\"image\" id=\"logout\" src=\"./Icon/logout.png\" alt=\"로그아웃\" width=\"45\" height=\"40\">");
-                            } else {
-                                // 비로그인 상태: 로그인 버튼 표시
-                                out.println("<form action='login.jsp' method='post'>");
-                                out.println("<input type='submit' value='로그인'>");
-                                out.println("</form>");
-                            }
-                        %>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <%@ include file="headLine.jsp" %>
         <br>
         <div class="menu-bar">
             <ul class="menu">

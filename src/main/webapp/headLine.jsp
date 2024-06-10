@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
-
+<link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
 
 <div align="center">
     <table>
@@ -39,7 +39,7 @@
                             } else {
                                 // 비로그인 상태: 로그인 버튼 표시
                                 out.println("<form action='login.jsp' method='post'>");
-                                out.println("<input type='submit' value='로그인'>");
+                                out.println("<input class='register-button' type='submit' value='로그인' style=\"margin-bottom: -16px\">");
                                 out.println("</form>");
                             }
                         %>
