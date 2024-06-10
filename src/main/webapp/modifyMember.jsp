@@ -17,109 +17,9 @@
 
 <html>
 <head>
-    <style>
-        html {
-            box-sizing: border-box;
-            font-size:  100%;
-        }
 
-        body {
-            background-color: #ffffff;
-            color: #4b4b4b;
-            font-family: "Open Sans", sans-serif;
-            font-size: 0.875rem;
-
-        }
-
-        .parent{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        form{
-            width: 50rem;
-            align-content: center;
-            text-align: center;
-
-        }
-
-        .signup{
-            width: 100%;
-            height: inherit;
-        }
-
-        div{
-            margin: 1rem;
-        }
-
-
-        /* 각 input과 select 요소의 스타일 */
-        input[type="text"],
-        input[type="password"],
-        input[type="tel"]
-        {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
-            height: 3.5rem;
-        }
-
-
-        button{
-            width: 100%;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            padding: 10px;
-            appearance: none;
-            text-align: center;
-            height: 3.5rem;
-        }
-
-
-        /* 가입하기 버튼의 스타일 */
-        input[type="submit"], button {
-            width: 30%;
-            height: 3rem;
-            padding: 10px;
-            background-color: #4cbdea;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 0 3rem;
-        }
-
-        /* 가입하기 버튼 클릭 시의 스타일 */
-        input[type="submit"]:hover {
-            background-color: #3aa9e0;
-        }
-
-        /* 제목의 스타일 */
-        h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 2.7rem;
-            color: #333;
-            text-align: center;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-    </style>
     <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/modifyMember.css">
 
     <title>분실물 신고</title>
 </head>
@@ -166,7 +66,7 @@
             <h2>회원 정보 수정</h2>
         </div>
         <div>
-            <input type="password" placeholder="기존 비밀번호" name="oldPassword" class="oldPassword">
+            <input type="password" placeholder="기존 비밀번호" name="oldPassword" class="oldPassword"  required>
         </div>
         <div>
             <div id= "checkPassword"> </div>
@@ -178,19 +78,19 @@
             <div id= "newPassword"> </div>
         </div>
         <div>
-            <input type="text" value= <%=user.getNickname()%> class="nickname" name="nickname">
+            <input type="text" value= <%=user.getNickname()%> class="nickname" name="nickname"  required>
         </div>
         <div>
             <div id= "checknickname"> </div>
         </div>
         <div>
-            <input type="text" value= <%= user.getName()%> class="name" name="name">
+            <input type="text" value= <%= user.getName()%> class="name" name="name"  required>
         </div>
         <div>
             <div id= "checkname"> </div>
         </div>
         <div>
-            <input type="tel" value= <%=user.getPhone()%> class="phone" name="phone">
+            <input type="tel" value= <%=user.getPhone()%> class="phone" name="phone"  required>
         </div>
         <div>
             <div id= "checkphone"> </div>

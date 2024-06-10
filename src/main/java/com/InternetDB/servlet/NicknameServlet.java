@@ -25,17 +25,12 @@ public class NicknameServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         MemberDAO dao = MemberDAO.getInstance();
+
         int nicknameCheck = 0;
         try {
             nicknameCheck = dao.checkNickname(nickname);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-
-        if (nicknameCheck == 0) {
-            System.out.println("이미 존재하는 닉네임입니다.");
-        } else if (nicknameCheck == 1) {
-            System.out.println("사용 가능한 닉네임입니다.");
         }
 
         out.write(nicknameCheck + "");

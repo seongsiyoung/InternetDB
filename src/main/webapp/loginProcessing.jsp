@@ -1,3 +1,4 @@
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -23,7 +24,7 @@
             rs = statement.executeQuery();
 
             if(!rs.next())
-                response.sendRedirect("/temp/temploginfail.jsp");
+                Alert.alertAndMove(response, "회원 정보가 올바르지 않습니다.", "login.jsp");
             else {
                 request.getSession().setAttribute("id", rs.getString(1));
                 request.getSession().setAttribute("password", rs.getString(2));

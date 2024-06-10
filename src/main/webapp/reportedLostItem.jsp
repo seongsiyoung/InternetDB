@@ -1,7 +1,8 @@
-<%@ page import="com.InternetDB.page.PageResultDTO" %>
+<%@ page import="com.InternetDB.page.PageResult" %>
 <%@ page import="com.InternetDB.VO.BriefItem" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.InternetDB.page.PageResult" %><%--
   Created by IntelliJ IDEA.
   User: ljm20
   Date: 2024-06-05
@@ -29,6 +30,8 @@
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
+    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
     <style>
         .menu-bar {
             width: 100%;
@@ -96,20 +99,6 @@
             height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
         }
 
-        .page {
-            text-align: center;
-        }
-
-        .pagination_modal {
-            text-align: center;
-        }
-
-        .pagination_modal li {
-            text-align: center;
-            display: inline;
-            float : left;
-            list-style: none;
-        }
     </style>
     <title>신고된 분실물</title>
 </head>
@@ -119,7 +108,7 @@
     PreparedStatement pstmt = null;
     PreparedStatement pstmt2 = null;
     ResultSet rs = null;
-    PageResultDTO pageResultDTO = null;
+    PageResult pageResult = null;
 
     try {
         pstmt = connection.prepareStatement(sql);
@@ -143,7 +132,7 @@
         rs.next();
         int total = rs.getInt(1);
 
-        pageResultDTO = new PageResultDTO(currentPage, currentSize, total);
+        pageResult = new PageResult(currentPage, currentSize, total);
     } catch (SQLException e){
         e.printStackTrace();
         request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
@@ -161,37 +150,7 @@
 %>
 <div align="center">
     <!--로고 검색창 마이페이지 알림-->
-    <table>
-        <tr>
-            <td><a href="index.jsp"><img src="./Icon/pagelogo.png" width="260" height="70"></a></td>
-            <td>&emsp;&emsp;&emsp;</td>
-            <td>
-                <div class="search">
-                    <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                    <input type="image" id="searchIcon" alt="검색 버튼" src="./Icon/search.png" width="30" height="30">
-                </div>
-            </td>
-            <td>&emsp;&emsp;&emsp;</td>
-            <td>
-                <div class="my">
-                    <%
-                        session = request.getSession(false); // 세션 존재 확인
-                        if (session.getAttribute("id") != null) {
-                            // 로그인 상태: 마이페이지와 알림 버튼 표시
-                            out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\">&nbsp;");
-                            out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\">");
-                            out.println("<input type=\"image\" id=\"logout\" src=\"./Icon/logout.png\" alt=\"로그아웃\" width=\"45\" height=\"40\">");
-                        } else {
-                            // 비로그인 상태: 로그인 버튼 표시
-                            out.println("<form action='login.jsp' method='post'>");
-                            out.println("<input type='submit' value='로그인'>");
-                            out.println("</form>");
-                        }
-                    %>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <%@ include file="headLine.jsp" %>
     <br>
     <div class="menu-bar">
         <ul class="menu">
@@ -201,17 +160,9 @@
         </ul>
     </div>
     <div class="gallery-title">
-        <table>
-            <tr>
-                <td>
-
-                </td>
-            </tr>
-        </table>
         <h3>신고된 분실물</h3>
-        <button onclick="location.href='ReportLost.jsp'">분실물 신고하기</button>
+        <button class="register-button" onclick="location.href='ReportLost.jsp'">분실물 신고하기</button>
     </div>
-
     <hr>
     <div class="lost-item-gallery">
 
@@ -224,21 +175,20 @@
     </div>
     <div class="pageBox">
         <div class="page">
-            <ul class="pagination_modal">
+            <ul class="pagination modal">
                 <%
 
-                    if(pageResultDTO.isPrev())
-                        out.println("<li> <a href=\"reportedLostItem.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
-                    for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
+                    if(pageResult.isPrev())
+                        out.println("<li> <a href=\"reportedLostItem.jsp?page="+ (pageResult.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
+                    for(int i = pageResult.getStart(); i <= pageResult.getEnd(); i++){
                         if(i == currentPage){
                             out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                             continue;
                         }
                         out.println("<li> <a href=\"reportedLostItem.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
-
                     }
-                    if(pageResultDTO.isNext())
-                        out.println("<li> <a href=\"reportedLostItem.jsp?page=" + (pageResultDTO.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
+                    if(pageResult.isNext())
+                        out.println("<li> <a href=\"reportedLostItem.jsp?page=" + (pageResult.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
                 %>
             </ul>
         </div>

@@ -1,0 +1,44 @@
+.gallery-title {
+    padding-right: 100px;
+    padding-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-bottom: 20px; /* 하단 여백 */
+}
+
+.gallery-title h3 {
+    margin: 0; /* 기본 마진 제거 */
+    padding: 10px; /* 패딩 설정 */
+}
+
+.register-button {
+    padding: 10px 20px; /* 버튼 패딩 */
+    background-color: #3aa9e0;
+    color: white; /* 텍스트 색상 */
+    text-align: center;
+    text-decoration: none; /* 링크 밑줄 제거 */
+    display: inline-block;
+    font-size: 16px;
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 마우스 커서 */
+}
+
+.register-button:hover {
+    background-color: #2e9cdf;
+}
+
+.search-radio {
+    float: left;
+}
+
+.search-radio p {
+    font-size: 10px;
+}
+
+.search-radio input[type="radio"] {
+    width:10px;
+    height:10px;
+}
+
+
