@@ -30,14 +30,6 @@ public class PasswordServlet extends HttpServlet {
         if(oldPassword.equals(password))
             result = 1;
 
-
-
-        if (result == 0) {
-            System.out.println("비밀번호가 일치하지 않습니다.");
-        } else if (result == 1) {
-            System.out.println("비밀번호가 일치합니다.");
-        }
-
         out.write(result + "");
 
     }

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <title>분실물 등록 상세</title>
 </head>
 <body>
@@ -20,7 +20,8 @@
            <td>
               <div class="my">
                 <input type="image" id="mypageIcon" src="./Icon/mypage.png" alt="마이페이지" width="40" height="40">&nbsp;
-                <input type="image" id="alarm" src="./Icon/alarm.png" alt="마이페이지" width="45" height="40">
+                <input type="image" id="alarm" src="./Icon/alarm.png" alt="알림" width="45" height="40">
+                <input type="image" id="logout" src="./Icon/logout.png" alt="로그아웃" width="45" height="40">
               </div>
            </td>
            </tr>

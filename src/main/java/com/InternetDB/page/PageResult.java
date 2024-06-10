@@ -1,18 +1,17 @@
 package com.InternetDB.page;
 
 
-public class PageResultDTO {
-    private int page;
-    private int size;
-    private int total;
-    private int start;
-    private int end;
+public class PageResult {
+    private int page; //현재 페이지
+    private int size; //불러온 컨텐츠의 개수
+    private int total;// 조회되는 총 컨텐츠의 수
+    private int start;//시작 페이지
+    private int end;//마지막 페이지
+    private boolean prev;//이전 페이지 유무
+    private boolean next;//다음 페이지 유무
 
-    private boolean prev;
-    private boolean next;
 
-
-    public PageResultDTO(int page, int size, int total){
+    public PageResult(int page, int size, int total){
         this.page = page;
         this.size = size;
         this.total = total;

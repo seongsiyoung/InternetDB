@@ -4,7 +4,8 @@
 <%@ page import="com.InternetDB.VO.BriefItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.InternetDB.page.PageResultDTO" %>
+<%@ page import="com.InternetDB.page.PageResult" %>
+<%@ page import="com.InternetDB.page.PageResult" %>
 
 <%
     request.setCharacterEncoding("UTF-8");
@@ -32,157 +33,15 @@
 
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
-
-    <style>
-
-        body {
-            background-color: #ffffff;
-            font-family: "Open Sans", sans-serif;
-        }
-        .memberBox{
-            display:flex;
-            justify-content:center;
-            min-width: 80rem;
-        }
-
-        .memberInfo{
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid black;
-        }
-
-        fieldset{
-            width:55rem;
-            height: 20rem;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            min-width: 40rem;
-            font-size: 1.5rem;
-            line-height: normal;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .modifyBtn{
-            font-size: 1.3rem;
-            width: 6rem;
-            height: 2.5rem;
-            margin-left: auto;
-            background-color: #3aa9e0;
-            border: none;
-            border-radius: 5px;
-            color: white;
-        }
-        .pageBox{
-            display:flex;
-            justify-content:center;
-        }
-        .myPost{
-            min-width: 80rem;
-        }
-        .postTitle{
-            font-size: 2rem;
-        }
-        .postBox{
-            display: flex;
-            justify-content: center;
-            min-height: 20rem;
-            padding: 2rem;
-        }
-        .post{
-            height: 20rem;
-            width: 20rem;
-        }
-        .postImageButton{
-            border: none;
-            background-color: white;
-            width: 100%;
-            height: 80%;
-            min-height: 16rem;
-            min-width: 20rem;
-        }
-
-        .postImage{
-            width: inherit;
-            height: inherit;
-            object-fit: contain;
-            min-height: 16rem;
-            min-width: 20rem;
-        }
-
-        .postName{
-            width: 100%;
-            height: 20%;
-            font-size: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .page{
-            text-align: center;
-            width: 50%;
-        }
-
-        .pagination {
-            list-style: none;
-            display: inline-block;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .pagination li {
-            display: inline;
-            text-align: center;
-        }
-
-        .pagination a {
-               float: left;
-               display: block;
-               font-size: 14px;
-               text-decoration: none;
-               padding: 5px 12px;
-               color: #96a0ad;
-               line-height: 1.5;
-        }
-
-        .pagination a.active {
-            cursor: default;
-            color: #ffffff;
-        }
-
-        .pagination a:active {
-            outline: none;
-        }
-
-        .modal .num {
-            margin-left: 3px;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            -moz-border-radius: 100%;
-            -webkit-border-radius: 100%;
-            border-radius: 100%;
-        }
-
-        .modal .num:hover {
-            background-color: #2e9cdf;
-            color: #ffffff;
-        }
-
-        .modal .num.active, .modal .num:active {
-            background-color: #2e9cdf;
-            cursor: pointer;
-        }
-
-    </style>
-<title>분실물 신고</title>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
+    <title>분실물 신고</title>
 </head>
 <body>
 <%@ include file="connection.jsp" %>
+<%@ include file="headLine.jsp" %>
+
 <%
 
     String sql = "SELECT * from User where user_id = ?";
@@ -190,7 +49,7 @@
     PreparedStatement statement2 = null;
     PreparedStatement statement3 = null;
     ResultSet rs = null;
-    PageResultDTO pageResultDTO = null;
+    PageResult pageResult = null;
 
     try {
         statement = connection.prepareStatement(sql);
@@ -235,7 +94,7 @@
         rs.next();
         int total = rs.getInt(1);
 
-        pageResultDTO = new PageResultDTO(currentPage, currentSize, total);
+        pageResult = new PageResult(currentPage, currentSize, total);
 
     } catch (SQLException e){
         e.printStackTrace();
@@ -254,27 +113,6 @@
             connection.close();
     }
 %>
-    <div align="center">
-        <table>
-            <tr>
-            <td><img src="./Icon/pagelogo.png" width="260" height="70"></td>
-            <td>&emsp;&emsp;&emsp;</td>
-            <td>
-                <div class="search">
-                    <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                    <input type="image" id="searchIcon" src="./Icon/search.png" alt="검색 버튼" width="30" height="30">
-                </div>
-             </td>
-                <td>&emsp;&emsp;&emsp;&emsp;</td>
-                <td>
-                    <div class="my">
-                        <input type="image" id="mypageIcon" src="./Icon/mypage.png" alt="마이페이지" width="40" height="40">&nbsp;
-                        <input type="image" id="alarm" src="./Icon/alarm.png" alt="마이페이지" width="45" height="40">
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
     <div class="memberBox">
         <fieldset>
             <legend style="width: fit-content; font-size: 1.5rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
@@ -310,18 +148,17 @@
                 <ul class="pagination modal">
                     <%
 
-                        if(pageResultDTO.isPrev())
-                            out.println("<li> <a href=\"mypage.jsp?page="+ (pageResultDTO.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
-                        for(int i = pageResultDTO.getStart(); i <= pageResultDTO.getEnd(); i++){
+                        if(pageResult.isPrev())
+                            out.println("<li> <a href=\"mypage.jsp?page="+ (pageResult.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
+                        for(int i = pageResult.getStart(); i <= pageResult.getEnd(); i++){
                             if(i == currentPage){
                                 out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                                 continue;
                             }
                             out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
-
                         }
-                        if(pageResultDTO.isNext())
-                            out.println("<li> <a href=\"mypage.jsp?page=" + (pageResultDTO.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
+                        if(pageResult.isNext())
+                            out.println("<li> <a href=\"mypage.jsp?page=" + (pageResult.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
                     %>
                 </ul>
             </div>

@@ -96,7 +96,8 @@
                             if (session.getAttribute("id") != null) {
                                 // 로그인 상태: 마이페이지와 알림 버튼 표시
                                 out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\">&nbsp;");
-                                out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"마이페이지\" width=\"45\" height=\"40\">");
+                                out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\">");
+                                out.println("<input type=\"image\" id=\"logout\" src=\"./Icon/logout.png\" alt=\"로그아웃\" width=\"45\" height=\"40\">");
                             } else {
                                 // 비로그인 상태: 로그인 버튼 표시
                                 out.println("<form action='login.jsp' method='post'>");

@@ -1,25 +1,20 @@
 package com.InternetDB.DAO;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class MemberDAO {
 
     private static MemberDAO instance;
     MemberDAO(){}
-
-    private Connection connection;
-    private PreparedStatement statement;
-    private ResultSet rs;
-
-
     public static MemberDAO getInstance() {
         if (instance == null) {
             instance = new MemberDAO();
         }
         return instance;
     }
+    private Connection connection;
+    private PreparedStatement statement;
+    private ResultSet rs;
 
 
     public int checkId(String id) throws SQLException {
