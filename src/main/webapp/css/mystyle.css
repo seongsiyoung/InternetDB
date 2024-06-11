@@ -7,6 +7,7 @@ border-style: dashed;
 border-width: 1.5px;
 border-color:black;
 box-shadow: 4px 4px 3px #ccc;
+    text-align: center;
 }
 
 #searchbar {
