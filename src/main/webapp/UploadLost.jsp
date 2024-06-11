@@ -8,29 +8,7 @@
 <title>분실물 등록</title>
 </head>
 <body>
-      <div align="center">
-      <table>
-           <tr>
-           <td><img onclick="index.jsp" src="./Icon/pagelogo.png" width="260" height="70">
-           </td>
-           <td>&emsp;&emsp;&emsp;</td>
-           <td>
-           <div class="search">
-                <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                <input type="image" id="searchIcon" src="./Icon/search.png" alt="검색 버튼" width="30" height="30">
-           </div>
-           </td>
-           <td>&emsp;&emsp;&emsp;&emsp;</td>
-           <td>
-              <div class="my">
-                <input type="image" id="mypageIcon" src="./Icon/mypage.png" alt="마이페이지" width="40" height="40">&nbsp;
-                <input type="image" id="alarm" src="./Icon/alarm.png" alt="알림" width="45" height="40">
-                <input type="image" id="logout" src="./Icon/logout.png" alt="로그아웃" width="45" height="40">
-              </div>
-           </td>
-           </tr>
-      </table>
-      </div>
+      <%@ include file="headLine.jsp" %>
       <br>
       <h2>&emsp;분실물 등록</h2>
       <hr></hr>
