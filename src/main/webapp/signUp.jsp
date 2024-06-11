@@ -3,21 +3,26 @@
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.security.MessageDigest" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%!
-    public String salt() {
 
-        String salt="";
+
+    public String encryptPassword(String password, String salt) {
+        String saltedPassword = salt + password;
+        String result = null;
         try {
-            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-            byte[] bytes = new byte[16];
-            random.nextBytes(bytes);
-            salt = new String(Base64.getEncoder().encode(bytes));
+            MessageDigest msg = MessageDigest.getInstance("SHA-512");
+            msg.update(saltedPassword.getBytes());
+
+            result = String.format("%128x", new BigInteger(1, msg.digest()));
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return salt;
+        return result;
     }
 %>
 <html>
@@ -61,7 +66,7 @@
         <div>
             <span id= "checkphone"> </span>
         </div>
-        <input type="hidden" name="salt" value=<%=salt()%>>
+        <input type="hidden" name="salt" value=<%=Encrytor.salt()%>>
         <%
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

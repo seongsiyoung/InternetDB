@@ -1,4 +1,5 @@
 <%@ page import="com.InternetDB.util.Alert" %>
+<%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -54,12 +55,11 @@
 
     } else {
 
+        user.setPassword(Encrytor.encryptPassword(user.getPassword(),user.getSalt()));
+
         String sql2 = "SELECT user_id FROM User WHERE user_id = ?";
 
         String sql3 = "SELECT nickname FROM User WHERE nickname = ?";
-
-
-
 
         String sql = "INSERT INTO User (user_id, password, salt, name, nickname, phone, createdAt) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement statement = null;

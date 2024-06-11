@@ -1,4 +1,5 @@
 <%@ page import="com.InternetDB.util.Alert" %>
+<%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -12,16 +13,25 @@
         String id = request.getParameter("id");
         String password = request.getParameter("password");
 
-        String sql = "SELECT user_id, password FROM User where user_id = ? and password = ?";
+        String sql = "SELECT salt FROM User where user_id = ?";
         PreparedStatement statement = null;
+        PreparedStatement statement2 = null;
         ResultSet rs = null;
 
         try {
             statement = connection.prepareStatement(sql);
             statement.setString(1, id);
-            statement.setString(2, password);
 
             rs = statement.executeQuery();
+
+            if(rs.next())
+                password = Encrytor.encryptPassword(password, rs.getString(1));
+
+            String sql2 = "SELECT user_id, password FROM User where user_id = ? and password = ?";
+            statement2 = connection.prepareStatement(sql2);
+            statement2.setString(1, id);
+            statement2.setString(2, password);
+            rs = statement2.executeQuery();
 
             if(!rs.next())
                 Alert.alertAndMove(response, "회원 정보가 올바르지 않습니다.", "login.jsp");

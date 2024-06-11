@@ -1,4 +1,5 @@
 <%@ page import="com.InternetDB.util.Alert" %>
+<%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -8,6 +9,7 @@
     String password = request.getParameter("oldPassword");
 
 %>
+
 <jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>
 <jsp:setProperty name="user" property="*"/>
 
@@ -38,10 +40,8 @@
 <%@ include file="connection.jsp" %>
 
 <%
-    if(!password.equals(sessionPassword)) {
-        Alert.alertAndBack(response, "비밀번호가 달라 수정할 수 없습니다.");
-        
-    } else if (user.getPassword() != null && !user.getPassword().isEmpty() && !validatePassword(user.getPassword())) {
+
+    if (user.getPassword() != null && !user.getPassword().isEmpty() && !validatePassword(user.getPassword())) {
         Alert.alertAndBack(response, "비밀번호 형식 올바르지 않습니다.");
 
     } else if (!validateNickname(user.getNickname())) {
@@ -55,12 +55,15 @@
 
     } else {
 
-        if(user.getPassword() == null || user.getPassword().isEmpty())
-            user.setPassword(sessionPassword);
+        String sql3 = "SELECT salt FROM User WHERE user_id = ?";
+
+
 
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
+        PreparedStatement statement3 = null;
         ResultSet rs = null;
+        String salt = null;
 
 
         String sql2 = "SELECT user_id FROM User WHERE nickname = ?";
@@ -69,6 +72,22 @@
         String sql = "UPDATE  User SET password = ?, name = ?, nickname = ?, phone = ? WHERE user_id = ?";
 
         try {
+
+            statement3 = connection.prepareStatement(sql3);
+
+            statement3.setString(1, user.getUserId());
+
+            rs = statement3.executeQuery();
+
+            if(rs.next()){
+                salt = rs.getString(1);
+                password = Encrytor.encryptPassword(password, salt);
+
+                if ( !password.equals(sessionPassword)) {
+                    Alert.alertAndBack(response, "비밀번호가 달라 수정할 수 없습니다.");
+                    return;
+                }
+            }
 
             statement2 = connection.prepareStatement(sql2);
 
@@ -83,7 +102,7 @@
             }
 
             statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getPassword());
+            statement.setString(1, Encrytor.encryptPassword(user.getPassword(),salt));
             statement.setString(2, user.getName());
             statement.setString(3, user.getNickname());
             statement.setString(4, user.getPhone());
@@ -102,7 +121,7 @@
             if (connection != null)
                 connection.close();
         }
-        session.setAttribute("password", user.getPassword());
+        session.setAttribute("password", Encrytor.encryptPassword( user.getPassword(),salt));
         Alert.alertAndMove(response, "회원 정보 수정이 완료되었습니다.", "mypage.jsp");
     }
 
