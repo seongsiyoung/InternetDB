@@ -92,6 +92,8 @@
             flex-direction: column; /* 요소를 수직 방향으로 정렬 */
             align-items: center; /* 가로축 중앙 정렬 */
             text-align: center; /* 텍스트 중앙 정렬 */
+            width: 100%;
+            height: 100%;
         }
         .item img {
             width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
@@ -153,7 +155,7 @@
     <div class="menu-bar">
         <ul class="menu">
             <li><a href="information.jsp" class="menu-link">종합 안내</a></li>
-            <li><a href="registeredLostItem.jsp" class="menu-link">신고된 분실물</a></li>
+            <li><a href="reportedLostItem.jsp" class="menu-link">신고된 분실물</a></li>
             <li><a href="registeredLostItem.jsp" class="menu-link">등록된 분실물</a></li>
         </ul>
     </div>
@@ -167,7 +169,7 @@
 
         <%
             for (BriefItem item : items){
-                out.println("<div class='item'><img src='" + item.getPath() + "' alt='Lost Item' width='200' height='150'><p>" + item.getTitle() + "</p></div>");
+                out.println("<div class='item'><img src='" + item.getPath() + "' alt='Lost Item'><p>" + item.getTitle() + "</p></div>");
 
             }
         %>
