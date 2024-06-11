@@ -12,12 +12,18 @@
             <td>&emsp;&emsp;&emsp;</td>
 
             <td>
+                <form method="post" action="" style="margin-bottom: -16px">
                 <div class="search">
-                    <input type="text" id="searchbar" name="selectLost" placeholder="분실물 검색">
-                    <button type="button" onclick="alert('클릭!')" style="border: 0; background-color: transparent;float: right;">
+                    <select name="type" id="lang" style="float: left; display: inline-block; margin-top: 15px; margin-left: 5px; border: none; border-radius: 0px">
+                        <option value="found">신고된</option>
+                        <option value="lost">등록된</option>
+                    </select>
+                    <input type="text" id="searchbar" name="search" placeholder="분실물 검색">
+                    <button type="submit" onclick="alert('클릭!')" style="border: 0; background-color: transparent;float: right;">
                         <input type="image" id="searchIcon" src="./Icon/search.png" alt="검색 버튼" width="30" height="30">
                     </button>
                 </div>
+                </form>
             </td>
             <td>&emsp;&emsp;&emsp;&emsp;</td>
             <div class="my">
