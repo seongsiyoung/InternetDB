@@ -98,15 +98,21 @@
                     // 데이터베이스 접속을 위한 코드
                     // LostItem 테이블에서 path, image, title을 선택
                     // createdat 기준으로 내림차순 정렬하여 최신 항목을 보여줌, LIMIT 6은 6개로 제한하여 최근 등록된 분실물 6개만 표시
-                    String sql = "SELECT image, path, title FROM LostItem ORDER BY createdat DESC LIMIT 8";
+                    String sql = "SELECT image, path, title, type FROM LostItem ORDER BY createdat DESC LIMIT 8";
                     pstmt = connection.prepareStatement(sql); // 쿼리 준비
                     rs = pstmt.executeQuery(); // 쿼리 실행
 
                     while (rs.next()) {
-                        String imagePath = rs.getString("path") + rs.getString("image"); // 이미지 경로 조합
+                        String image = rs.getString("image");
+                        String imagePath = rs.getString("path") + image; // 이미지 경로 조합
                         String title = rs.getString("title"); // 제목 불러오기
+
                         // HTML 출력
-                        out.println("<div class='item'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'><p>" + title + "</p></div>");
+                        if (rs.getString("type").equals("lost")) {
+                        out.println("<div class='item'><a href='DetailLost.jsp?image="+ image +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
+                        } else {
+                        out.println("<div class='item'><a href='DetailReport.jsp?image="+ image +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
+                        }
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

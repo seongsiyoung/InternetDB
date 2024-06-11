@@ -8,7 +8,7 @@
       <div align="center">
       <table>
            <tr>
-           <td><img src="./Icon/pagelogo.png" width="260" height="70"></td>
+           <td><a href="index.jsp"><img src="./Icon/pagelogo.png" width="260" height="70"></td>
            <td>&emsp;&emsp;&emsp;</td>
            <td>
            <div class="search">
@@ -32,17 +32,20 @@
       <hr></hr>
       <br>
       <div class="postSection" align="center">
-      <form method="post" action="" enctype="multipart/form-data" class="lostForm">
+      <form method="post" action="saveReportData.jsp" enctype="multipart/form-data" class="lostForm">
         <table>
                    <tr>
                    <td><div class="imgSec"><img id="lostImage" src="./Icon/upload.png" width="350px" height="300px" /></div></td>
 
-                   <td><div class="lostInfoSec">분실물명 : <input type="text" id="lostInfo"><br>
-                       습득일 : <input type="date" id="lostInfo" name="FoundDate"><br>
-                       보관장소 : <input type="text" id="lostInfo"><br>
+                   <td><div class="lostInfoSec">
+                       분실물명 : <input type="text" name="title"id="lostInfo"><br>
+                       습득장소 : <input type="text" id="lostInfo" name="location"><br>
+                       습득일 : <input type="date" id="lostInfo" name="time"><br>
+                       보관장소 : <input type="text" name="currentloc" id="lostInfo"><br>
                        물품분류 : <select name="category" id="lostInfo">
                                 <option value="none">===선택===</option>
                                 <option value="accessory">악세사리</option>
+                                <option value="electronics">전자제품</option>
                                 <option value="wallet">지갑</option>
                                 <option value="card">신용/체크카드</option>
                                 <option value="others">기타</option></select><br>
@@ -50,14 +53,14 @@
                                 <option value="none">===선택===</option>
                                 <option value="keep">보관중</option>
                                 <option value="end">소유자 수령</option></select><br>
-                       연락처 : <input type="tel" id="lostInfo" name="phoneNumber"></div></td>
+                       연락처 : <input type="tel" id="lostInfo" name="phone"></div></td>
 
                    </tr>
                    <tr>
-                   <td><div align="center">&emsp;&emsp;<input type="file"></div></td>
+                   <td><div align="center">&emsp;&emsp;<input type="file" name="lostImg"></div></td>
                    </tr>
                    <tr>
-                   <td><div align="center"><button id="uploadBtn">Upload Photo</button></td></div>
+                   <td></td>
                    </tr>
                    <tr>
                    <td colspan="2"> <br> &emsp;내용 </td>
