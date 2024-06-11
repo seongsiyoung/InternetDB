@@ -92,8 +92,6 @@
             flex-direction: column; /* 요소를 수직 방향으로 정렬 */
             align-items: center; /* 가로축 중앙 정렬 */
             text-align: center; /* 텍스트 중앙 정렬 */
-            width: 100%;
-            height: 100%;
         }
         .item img {
             width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
@@ -104,7 +102,7 @@
 </head>
 <body>
 <%
-    String sql = "SELECT path, title FROM LostItem WHERE type = 'lost' ORDER BY createdat desc limit ?, ?";
+    String sql = "SELECT path, title, lost_id FROM LostItem WHERE type = 'lost' ORDER BY createdat desc limit ?, ?";
     PreparedStatement pstmt = null;
     PreparedStatement pstmt2 = null;
     ResultSet rs = null;
@@ -120,6 +118,7 @@
 
         while (rs.next()){
             BriefItem briefItem = new BriefItem();
+            briefItem.setLostId(rs.getLong(3));
             briefItem.setTitle(rs.getString(2));
             briefItem.setPath(rs.getString(1));
             items.add(briefItem);
@@ -165,15 +164,25 @@
     </div>
 
     <hr>
+    <form method="post" action="MyDetailLost.jsp" id="myForm">
     <div class="lost-item-gallery">
 
-        <%
-            for (BriefItem item : items){
-                out.println("<div class='item'><img src='" + item.getPath() + "' alt='Lost Item'><p>" + item.getTitle() + "</p></div>");
-
-            }
-        %>
+            <input type="hidden" name="lost_id" id="lostIdInput"> <!-- 숨겨진 필드로 lost_id 값을 전송 -->
+            <%
+                for (BriefItem item : items) {
+                    out.println("<div class='item' onclick='submitForm(" + item.getLostId() + ")'><img src='" + item.getPath() + "' alt='Lost Item'><p>" + item.getTitle() + "</p></div>");
+                }
+            %>
     </div>
+    </form>
+    <script>
+        function submitForm(lostId) {
+            var form = document.getElementById('myForm');
+            var lostIdInput = document.getElementById('lostIdInput');
+            lostIdInput.value = lostId; // 클릭된 아이템의 lost_id 값을 hidden input에 설정
+            form.submit(); // 폼 제출
+        }
+    </script>
     <div class="pageBox">
         <div class="page">
             <ul class="pagination modal">
