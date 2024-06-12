@@ -1,6 +1,7 @@
 package com.InternetDB.servlet;
 
 import com.InternetDB.DAO.MemberDAO;
+import com.InternetDB.util.Encrytor;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +23,10 @@ public class PasswordServlet extends HttpServlet {
 
         String oldPassword = request.getParameter("oldPassword");
         String password = (String)request.getSession().getAttribute("password");
+        oldPassword = Encrytor.encryptPassword(oldPassword, (String)request.getSession().getAttribute("salt"));
         int result = 0;
 
         PrintWriter out = response.getWriter();
-
 
         if(oldPassword.equals(password))
             result = 1;

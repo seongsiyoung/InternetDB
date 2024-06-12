@@ -1,12 +1,14 @@
 <%@ page import="com.InternetDB.util.Alert" %>
 <%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
     request.setCharacterEncoding("UTF-8");
     String sessionPassword = (String) session.getAttribute("password");
 
-    String password = request.getParameter("oldPassword");
+
+    String password = Encrytor.encryptPassword(request.getParameter("oldPassword"), (String) session.getAttribute("salt"));
 %>
 
 <jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>

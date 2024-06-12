@@ -3,6 +3,8 @@
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
+
     <title>분실물 센터</title>
     <style>
         .menu-bar {
@@ -49,25 +51,6 @@
             background-color: #f0f0f0;
         }
 
-        .lost-item-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 5개의 열을 동일한 크기로 설정 */
-            place-items: center;
-            grid-template-rows: auto auto; /* 행의 크기는 내용에 따라 자동 조정 */
-            gap: 20px; /* 그리드 항목 사이의 간격 */
-            max-width: 70%; /* 갤러리의 최대 너비 설정, 필요에 따라 조정 */
-            margin: auto; /* 중앙 정렬 */
-        }
-
-        .item {
-            display: flex;
-            flex-direction: column; /* 요소를 수직 방향으로 정렬 */
-            align-items: center; /* 가로축 중앙 정렬 */
-            text-align: center; /* 텍스트 중앙 정렬 */
-        }
-        .item img {
-            height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
-        }
         h3 {
             text-align: center;
         }
@@ -99,7 +82,11 @@
                     // LostItem 테이블에서 path, image, title을 선택
                     // createdat 기준으로 내림차순 정렬하여 최신 항목을 보여줌, LIMIT 6은 6개로 제한하여 최근 등록된 분실물 6개만 표시
 
+<<<<<<< HEAD
                     String sql = "SELECT lost_id, image, path, title, type FROM LostItem ORDER BY createdat DESC LIMIT 8";
+=======
+                    String sql = "SELECT lost_id, image, path, title, type FROM LostItem ORDER BY createdat DESC LIMIT 9";
+>>>>>>> 626f5ea62de80bcd4f00e5950180ded95743d797
 
                     pstmt = connection.prepareStatement(sql); // 쿼리 준비
                     rs = pstmt.executeQuery(); // 쿼리 실행
@@ -114,7 +101,13 @@
                         if (rs.getString("type").equals("lost")) {
                         out.println("<div class='item'><a href='DetailLost.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
                         } else {
+<<<<<<< HEAD
                         out.println("<div class='item'><a href='DetailReport.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
+=======
+
+                        out.println("<div class='item'><a href='DetailReport.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
+
+>>>>>>> 626f5ea62de80bcd4f00e5950180ded95743d797
                         }
                     }
                 } catch (SQLException e) {

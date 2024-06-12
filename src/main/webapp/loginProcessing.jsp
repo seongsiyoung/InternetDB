@@ -27,7 +27,7 @@
             if(rs.next())
                 password = Encrytor.encryptPassword(password, rs.getString(1));
 
-            String sql2 = "SELECT user_id, password FROM User where user_id = ? and password = ?";
+            String sql2 = "SELECT user_id, password, salt FROM User where user_id = ? and password = ?";
             statement2 = connection.prepareStatement(sql2);
             statement2.setString(1, id);
             statement2.setString(2, password);
@@ -38,6 +38,8 @@
             else {
                 request.getSession().setAttribute("id", rs.getString(1));
                 request.getSession().setAttribute("password", rs.getString(2));
+                request.getSession().setAttribute("salt", rs.getString(3));
+
 
                 response.sendRedirect("mypage.jsp");
             }
