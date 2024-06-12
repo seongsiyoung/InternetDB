@@ -78,27 +78,6 @@
             background-color: #f0f0f0;
         }
 
-        .lost-item-gallery {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5개의 열을 동일한 크기로 설정 */
-            place-items: center;
-            grid-template-rows: auto auto; /* 행의 크기는 내용에 따라 자동 조정 */
-            gap: 20px; /* 그리드 항목 사이의 간격 */
-            max-width: 70%; /* 갤러리의 최대 너비 설정, 필요에 따라 조정 */
-            margin: auto; /* 중앙 정렬 */
-        }
-
-        .item {
-            display: flex;
-            flex-direction: column; /* 요소를 수직 방향으로 정렬 */
-            align-items: center; /* 가로축 중앙 정렬 */
-            text-align: center; /* 텍스트 중앙 정렬 */
-        }
-        .item img {
-            width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
-            height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
-        }
-
     </style>
     <title>신고된 분실물</title>
 </head>
@@ -165,7 +144,7 @@
         <button class="register-button" onclick="location.href='ReportLost.jsp'">분실물 신고하기</button>
     </div>
     <hr>
-    <form method="post" action="MyDetailReport.jsp" id="myForm">
+    <form method="post" action="DetailReport.jsp" id="myForm">
         <div class="lost-item-gallery">
 
             <input type="hidden" name="lost_id" id="lostIdInput"> <!-- 숨겨진 필드로 lost_id 값을 전송 -->
