@@ -49,10 +49,12 @@ fieldset{
     font-size: 2rem;
 }
 .postBox{
+    margin: 1rem;
     display: flex;
     justify-content: center;
     min-height: 20rem;
     padding: 2rem;
+
 }
 .post{
     height: 20rem;

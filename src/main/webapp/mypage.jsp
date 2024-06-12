@@ -69,7 +69,7 @@
         /**
          * 여기 수정 게시물 조회시 찾은 거랑 잃어버린 거 둘 다 조회????????????
          */
-        sql = "select lost_id, title, path from LOSTITEM where user_id = ? order by createdAt desc limit ?, ?";
+        sql = "select lost_id, title, type, image, path from LOSTITEM where user_id = ? order by createdAt desc limit ?, ?";
         statement2 = connection.prepareStatement(sql);
         statement2.setString(1, id);
         int offset = (currentPage-1) * currentSize;
@@ -82,7 +82,9 @@
             BriefItem briefItem = new BriefItem();
             briefItem.setLostId(rs.getLong(1));
             briefItem.setTitle(rs.getString(2));
-            briefItem.setPath(rs.getString(3));
+            briefItem.setType(rs.getString(3));
+            briefItem.setImage(rs.getString(4));
+            briefItem.setPath(rs.getString(5));
             items.add(briefItem);
         }
 
@@ -132,9 +134,9 @@
 
             <%
                 for (BriefItem item : items) {
-                    out.println("<div class=\"post\">");
+                    out.println("<div class=\"post\" style = \" margin: 0.5rem\">");
                     out.println("<button type=\"button\" class=\"postImageButton\">\n");
-                    out.println("<img src=\""+ item.getPath() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='temp/temploginsuccess.jsp'\" class=\"postImage\" >");
+                    out.println("<img src=\""+ item.getPath()+item.getImage() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='temp/temploginsuccess.jsp'\" class=\"postImage\" >");
                     out.println("</button>\n");
                     out.println("<div class=\"postName\">"+item.getTitle()+"</div>\n");
                     out.println("</div>\n");
