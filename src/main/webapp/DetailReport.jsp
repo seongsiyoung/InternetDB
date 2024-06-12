@@ -1,3 +1,5 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ include file="connection.jsp" %>
 <html>
@@ -21,6 +23,17 @@
                         PreparedStatement pstmt = null;
                         ResultSet rs = null;
 
+                        Map<String, String> categoryMap = new HashMap<>();
+                        categoryMap.put("none","===선택===");
+                        categoryMap.put("accessory","악세사리");
+                        categoryMap.put("electronics","전자제품");
+                        categoryMap.put("card","신용/체크카드");
+                        categoryMap.put("others","기타");
+
+                        Map<String, String> statusMap = new HashMap<>();
+                        statusMap.put("keep", "보관중");
+                        statusMap.put("end", "물품 주인 수령");
+
                         try {
                             pstmt = connection.prepareStatement(sql);
                             pstmt.setLong(1, lost_id);
@@ -37,6 +50,9 @@
                                 String content = rs.getString("content");
                                 String user_id = rs.getString("user_id");
                                 String phone = rs.getString("phone");
+
+                                String categoryInKorean = categoryMap.getOrDefault(category, category);
+                                String statusInKorean = statusMap.getOrDefault(status, status);
                 %>
                 <table>
                     <tr>
@@ -46,8 +62,8 @@
                             습득장소 : <%= location %><br>
                             습득일 : <%= time %><br>
                             보관장소 : <%= currentloc %><br>
-                            물품분류 : <%= category %><br>
-                            분실상태 : <%= status %><br>
+                            물품분류 : <%= categoryInKorean %><br>
+                            분실상태 : <%= statusInKorean %><br>
                             연락처 : <%= phone %></div></td>
                     </tr>
                     <tr>
@@ -59,7 +75,7 @@
                     <%
                         if(session.getAttribute("id") != null) {
                             if(session.getAttribute("id").equals(user_id)) {
-                                out.println("<td colspan='2'><br><div class='ModifyAndDelete'><button id='mdBtn' onclick=\"location.href='modifyReport.jsp?lost_id=" + lost_id + "'\">수정</button> <button id='mdBtn'>삭제</button></div></td></tr>");
+                                out.println("<td colspan='2'><br><div class='ModifyAndDelete'><button id='mdBtn' onclick=\"location.href='modifyReport.jsp?lost_id=" + lost_id + "'\">수정</button><button id='mdBtn' onclick=\"location.href='deleteLostItem.jsp?lost_id=" + lost_id + "'\">삭제</button></div></td></tr>");
                             }
                         }
                     %>

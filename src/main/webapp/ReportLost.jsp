@@ -41,8 +41,8 @@
                        분실상태 : <select name="status" id="lostInfo">
                                 <option value="none">===선택===</option>
                                 <option value="keep">보관중</option>
-                                <option value="end">소유자 수령</option></select><br>
-                       연락처 : <input type="tel" id="lostInfo" name="phone"></div></td>
+                                <option value="end">물품 주인 수령</option></select><br>
+                       </div></td>
 
                    </tr>
                    <tr>

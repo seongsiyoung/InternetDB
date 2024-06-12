@@ -82,11 +82,7 @@
                     // LostItem 테이블에서 path, image, title을 선택
                     // createdat 기준으로 내림차순 정렬하여 최신 항목을 보여줌, LIMIT 6은 6개로 제한하여 최근 등록된 분실물 6개만 표시
 
-<<<<<<< HEAD
                     String sql = "SELECT lost_id, image, path, title, type FROM LostItem ORDER BY createdat DESC LIMIT 8";
-=======
-                    String sql = "SELECT lost_id, image, path, title, type FROM LostItem ORDER BY createdat DESC LIMIT 9";
->>>>>>> 626f5ea62de80bcd4f00e5950180ded95743d797
 
                     pstmt = connection.prepareStatement(sql); // 쿼리 준비
                     rs = pstmt.executeQuery(); // 쿼리 실행
@@ -101,13 +97,7 @@
                         if (rs.getString("type").equals("lost")) {
                         out.println("<div class='item'><a href='DetailLost.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
                         } else {
-<<<<<<< HEAD
                         out.println("<div class='item'><a href='DetailReport.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
-=======
-
-                        out.println("<div class='item'><a href='DetailReport.jsp?lost_id="+ lost_id +"'><img src='" + imagePath + "' alt='Lost Item' width='200' height='150'></a><p>" + title + "</p></div>");
-
->>>>>>> 626f5ea62de80bcd4f00e5950180ded95743d797
                         }
                     }
                 } catch (SQLException e) {
