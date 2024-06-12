@@ -63,9 +63,5 @@
 .item:hover {
     background-color: #f0f0f0; /* 마우스 오버 시 배경 색상 변경 */
 }
-.item img {
-    width: 100%; /* 이미지 너비를 그리드 셀에 맞춤 */
-    height: auto; /* 이미지 높이를 자동으로 설정하여 비율 유지 */
-}
 
 

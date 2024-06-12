@@ -150,7 +150,7 @@
             <input type="hidden" name="lost_id" id="lostIdInput"> <!-- 숨겨진 필드로 lost_id 값을 전송 -->
             <%
                 for (BriefItem item : items) {
-                    out.println("<div class='item' onclick='submitForm(" + item.getLostId() + ")'><img src='" + item.getPath() + "' alt='Lost Item'><p>" + item.getTitle() + "</p></div>");
+                    out.println("<div class='item' onclick='submitForm(" + item.getLostId() + ")'><img src='" + item.getPath() + "' alt='Lost Item' width='200' height='150'><p>" + item.getTitle() + "</p></div>");
                 }
             %>
     </div>
