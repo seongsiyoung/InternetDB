@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>Save Upload Data</title>
+    <title>Save Report Data</title>
 </head>
 <body>
     <%@ include file="connection.jsp" %>
@@ -45,37 +45,49 @@
 
             String filePath = "./lostPhoto/";
 
-         String sql = "INSERT INTO LOSTITEM (type, category, time, location, content, title, status, currentloc, image, path, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
+            String sql = "INSERT INTO LOSTITEM (type, category, time, location, content, title, status, currentloc, image, path, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql2 = "select lost_id from lostitem where image = ?";
 
-        pstmt.setString(1, "found");
-        pstmt.setString(2, category);
-        pstmt.setString(3, time);
-        pstmt.setString(4, location);
-        pstmt.setString(5, content);
-        pstmt.setString(6, title);
-        pstmt.setString(7, status);
-        pstmt.setString(8, currentloc);
-        pstmt.setString(9, newFileName);
-        pstmt.setString(10, filePath);
-        pstmt.setString(11, session.getAttribute("id").toString());
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt2 = null;
+            ResultSet rs = null;
 
-        int rows = pstmt.executeUpdate();
-        if(rows > 0) {
-                    response.sendRedirect("DetailReport.jsp");
-                    out.println("Data has been inserted successfully");
-                } else {
-                    out.println("No data was inserted.");
-                }
-                pstmt.close();
-                connection.close();
-        } else {
-            out.println("File upload failed.");
-        }
+            pstmt.setString(1, "found");
+            pstmt.setString(2, category);
+            pstmt.setString(3, time);
+            pstmt.setString(4, location);
+            pstmt.setString(5, content);
+            pstmt.setString(6, title);
+            pstmt.setString(7, status);
+            pstmt.setString(8, currentloc);
+            pstmt.setString(9, newFileName);
+            pstmt.setString(10, filePath);
+            pstmt.setString(11, session.getAttribute("id").toString());
 
-        } catch(Exception e) {
-        e.printStackTrace();
-        out.println("Error: " + e.getMessage());
-        }
+            int rows = pstmt.executeUpdate();
+
+                    if(rows > 0) {
+                        pstmt2 = connection.prepareStatement(sql2);
+                        pstmt2.setString(1, newFileName);
+                        rs = pstmt2.executeQuery();
+
+                        if (rs.next()) {
+                            response.sendRedirect("DetailReport.jsp?lost_id=" + rs.getString("lost_id"));
+                        }
+
+                        out.println("Data has been inserted successfully");
+                    } else {
+                        out.println("No data was inserted.");
+                    }
+                    pstmt.close();
+                    connection.close();
+            } else {
+                out.println("File upload failed.");
+            }
+
+            } catch(Exception e) {
+            e.printStackTrace();
+            out.println("Error: " + e.getMessage());
+            }
     %>
 </body>

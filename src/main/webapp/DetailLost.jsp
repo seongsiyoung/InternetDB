@@ -14,9 +14,10 @@
           <div class="postSection" align="center">
             <%
                 String lostIdStr = request.getParameter("lost_id");
+                String userId =(String) session.getAttribute("id");
                 if (lostIdStr != null && !lostIdStr.isEmpty()) {
                     Long lost_id = Long.parseLong(lostIdStr);
-                    String sql = "select * from lostitem where lost_id = ?";
+                    String sql = "SELECT l.*, u.phone FROM lostitem l JOIN user u ON l.user_id = u.user_id WHERE l.lost_id = ?";
                     PreparedStatement pstmt = null;
                     ResultSet rs = null;
 
@@ -34,6 +35,7 @@
                             String status = rs.getString("status");
                             String content = rs.getString("content");
                             String user_id = rs.getString("user_id");
+                            String phone = rs.getString("phone");
             %>
             <table>
                        <tr>
@@ -45,7 +47,7 @@
                            분실예상장소 : <%= location %> <br>
                            물품분류 : <%= category %> <br>
                            분실상태 : <%= status %>  <br>
-                           연락처 :
+                           연락처 : <%=phone%>
                            </div></td>
 
                        </tr>
@@ -62,27 +64,14 @@
                        <td colspan="2"> <br> <div class ="contentSec"> <%= content %> </div></td>
                        </tr>
                        <%
+                           if(session.getAttribute("id") != null) {
                                    if(session.getAttribute("id").equals(user_id)) {
-                                       out.println("<td colspan='2'><br><div class='ModifyAndDelete'><button id='mdBtn'>수정</button> <button id='mdBtn'>삭제</button></div></td></tr>");
+                                       out.println("<td colspan='2'><br><div class='ModifyAndDelete'><button id='mdBtn' onclick=\"location.href='modifyLost.jsp?lost_id=" + lost_id + "'\">수정</button> <button id='mdBtn'>삭제</button></div></td></tr>");
                                    }
+                           }
                        %>
                   </table>
-                  <%
-                                } else {
-                                out.println("해당 분실물 정보를 찾을 수 없습니다.");
-                                }
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            } finally {
-                                if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
-                                if (pstmt != null) try { pstmt.close(); } catch (SQLException ignore) {}
-                                if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
-                            }
-                      } else {
-                            out.println("유효한 이미지 uuid가 전달되지 않았습니다.");
-                      }
-                  %>
-            </form>
+
           </div>
           <br>
           <hr>
@@ -94,19 +83,66 @@
                     </div>
 
             <br>
+              <div class="savedCommentSec">
+                  <%
+                      /*pstmt와 rs는 각각 SQL 쿼리 실행과 쿼리 결과를 다루는데 사용*/
+                      PreparedStatement pstmt2 = null; // pstmt 초기화
+                      ResultSet rs2 = null;
+                      try {
+
+                          String sql2 = "SELECT user_id, content FROM reply where lost_id = ?";
+
+                          pstmt2 = connection.prepareStatement(sql2); // 쿼리 준비
+                          pstmt2.setLong(1, lost_id);
+                          rs2 = pstmt2.executeQuery(); // 쿼리 실행
+
+                          while (rs2.next()) {
+                              String user_id2 = rs2.getString("user_id");
+                              String content2 = rs2.getString("content");
+
+                              // 조회된 댓글출력
+                              out.println(" <table class=\"commentTable\" style=\"text-align: center;\">\n");
+                              out.println("<tr><td align=\"left\">" +  user_id2  + "</td></tr>");
+                              out.println("<tr><td><div class=\"comment\">" + content2 +"</td></tr>");
+                              out.println("</table>");
+                              out.println("<br>");
+
+                          }
+                      } catch (SQLException e) {
+                          e.printStackTrace();
+                      } finally {
+                          // 자원 해제
+                          if (rs2 != null) try { rs2.close(); } catch (SQLException ignore) {}
+                          if (pstmt2 != null) try { pstmt2.close(); } catch (SQLException ignore) {}
+                      }
+                  %>
+              </div>
           <div class="commentWrite" align="center">
-              <form method="post" action="" class="commentForm">
-                    <table class="commentTable" style="text-align: center;" borer="1">
-                            <tr>
-                                <td align="left">userID</td>
-                            </tr>
-                            <tr>
-                                <td><textarea id="commentWriteSec" name="comment" style="border:none;"
-                                    placeholder="댓글 쓰기"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" id="commentWriteBtn" value="등록"></td>
-                            </tr>
+              <form method="post" action="saveComment.jsp" class="commentForm">
+                  <%
+                      if(session.getAttribute("id") != null) {
+                          out.println("<table class=\"commentTable\" style=\"text-align: center;\" borer=\"1\">");
+                          out.println("<tr><td align=\"left\">" + session.getAttribute("id") + "</td></tr>");
+                          out.println("<tr><td><textarea id=\"commentWriteSec\" name=\"content\" style=\"border:none;\" placeholder=\"댓글 쓰기\"></textarea></td></tr>");
+                          out.println("<tr><input type=\"hidden\" name=\"lostId\" value='" + lost_id + "'><input type=\"hidden\" name=\"userId\" value=" + userId +
+                                  "><td><input type=\"submit\" id=\"commentWriteBtn\" value=\"등록\"></td></tr>");
+                      }
+                  %>
+                            <%
+                                } else {
+                                out.println("해당 분실물 정보를 찾을 수 없습니다.");
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            } finally {
+                                if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+                                if (pstmt != null) try { pstmt.close(); } catch (SQLException ignore) {}
+                                if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+                            }
+                      } else {
+                            out.println("유효한 분실물 ID가 전달되지 않았습니다.");
+                      }
+                  %>
                     </table>
               </form>
           </div>

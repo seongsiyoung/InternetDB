@@ -44,23 +44,33 @@
 
             String filePath = "./lostPhoto/";
 
-         String sql = "INSERT INTO LOSTITEM (type, category, time, location, content, title, status, image, path, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
 
-        pstmt.setString(1, "lost");
-        pstmt.setString(2, category);
-        pstmt.setString(3, time);
-        pstmt.setString(4, location);
-        pstmt.setString(5, content);
-        pstmt.setString(6, title);
-        pstmt.setString(7, status);
-        pstmt.setString(8, newFileName);
-        pstmt.setString(9, filePath);
-        pstmt.setString(10, session.getAttribute("id").toString());
+            String sql = "INSERT INTO LOSTITEM (type, category, time, location, content, title, status, image, path, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql2 = "select lost_id from lostitem where image = ?";
 
-        int rows = pstmt.executeUpdate();
-        if(rows > 0) {
-                    response.sendRedirect("DetailLost.jsp");
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt2 = null;
+            ResultSet rs = null;
+
+            pstmt.setString(1, "lost");
+            pstmt.setString(2, category);
+            pstmt.setString(3, time);
+            pstmt.setString(4, location);
+            pstmt.setString(5, content);
+            pstmt.setString(6, title);
+            pstmt.setString(7, status);
+            pstmt.setString(8, newFileName);
+            pstmt.setString(9, filePath);
+            pstmt.setString(10, session.getAttribute("id").toString());
+
+            int rows = pstmt.executeUpdate();
+                if(rows > 0) {
+                    pstmt2 = connection.prepareStatement(sql2);
+                    pstmt2.setString(1, newFileName);
+                    rs = pstmt2.executeQuery();
+                    if (rs.next()) {
+                        response.sendRedirect("DetailLost.jsp?lost_id=" + rs.getString("lost_id"));
+                    }
                     out.println("Data has been inserted successfully");
                 } else {
                     out.println("No data was inserted.");
@@ -72,8 +82,8 @@
         }
 
         } catch(Exception e) {
-        e.printStackTrace();
-        out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            out.println("Error: " + e.getMessage());
         }
     %>
 </body>

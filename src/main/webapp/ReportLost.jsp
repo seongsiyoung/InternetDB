@@ -1,4 +1,14 @@
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    request.setCharacterEncoding("UTF-8");
+
+    String id = (String) session.getAttribute("id");
+    if(id == null){
+        Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
+    }
+%>
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">

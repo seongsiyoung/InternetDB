@@ -1,6 +1,15 @@
+<%@ page import="com.InternetDB.util.Alert" %>
 <%@ page language="java" contentType="text/html;charset=utf-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ include file="connection.jsp" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+
+    String id = (String) session.getAttribute("id");
+    if(id == null){
+        Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
+    }
+%>
 <html>
 <head>
 <meta charset="UTF-8">
