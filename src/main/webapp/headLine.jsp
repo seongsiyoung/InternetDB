@@ -1,6 +1,11 @@
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page pageEncoding="UTF-8"%>
+
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <div align="center">
     <table>
@@ -29,6 +34,13 @@
             <div class="my">
             </div>
             <td>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>내 게시물에 달린 댓글</h2>
+                        <p id="notificationContent">Notifications will appear here...</p>
+                    </div>
+                </div>
                     <%
                             System.out.println("test for session");
                             session = request.getSession(false); // 세션 존재 확인
@@ -37,7 +49,7 @@
                                 // 로그인 상태: 마이페이지와 알림 버튼 표시
                                 out.println("<button type=\"button\" onclick=\"location.href = 'mypage.jsp'\" style=\"border: 0; background-color: transparent;\">\n" );
                                 out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\"></button>");
-                                out.println("<button type=\"button\" onclick=\"alert('클릭!')\" style=\"border: 0; background-color: transparent;\">");
+                                out.println("<button type=\"button\" style=\"border: 0; background-color: transparent;\">");
                                 out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\"></button>");
                                 out.println("<button type=\"button\" onclick=\"location.href = '/processing/LoginoutProcessing.jsp'\" style=\"border: 0; background-color: transparent;\">");
                                 out.println("<input type=\"image\" id=\"logout\" src=\"./Icon/logout.png\" alt=\"로그아웃\" width=\"45\" height=\"40\"></button>");
@@ -49,6 +61,9 @@
                                 out.println("</form>");
                             }
                         %>
+                <script src="./js/script.js"></script>
+
+
 </div>
             </td>
         </tr>
