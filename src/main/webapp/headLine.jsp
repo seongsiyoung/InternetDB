@@ -2,7 +2,6 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page pageEncoding="UTF-8"%>
-<%@ include file="connection.jsp"%>
 
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
