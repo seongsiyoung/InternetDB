@@ -4,7 +4,7 @@
 <%@ include file="connection.jsp"%>
 <html>
     <head>
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
     <title>분실물 등록 상세</title>
     </head>
     <body>

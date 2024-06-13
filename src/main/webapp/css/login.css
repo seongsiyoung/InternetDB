@@ -96,7 +96,7 @@ input[type="submit"] {
 }
 
 .login input[type="submit"] {
-    background-color: #4cbdea;
+    background-color: #000000;
     color: #eeeeee;
     font-weight: 700;
     text-transform: uppercase;
