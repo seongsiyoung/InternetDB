@@ -34,8 +34,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
-    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
+    <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css?after">
     <title>분실물 신고</title>
 </head>
 <body>
@@ -117,7 +117,7 @@
 %>
     <div class="memberBox">
         <fieldset>
-            <legend style="width: fit-content; font-size: 1.5rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
+            <legend style="width: fit-content; font-size: 1.35rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
             <div class="memberInfo">아이디 : <%= user.getUserId()%> </div>
             <div class="memberInfo">이름 :  <%= user.getName()%></div>
             <div class="memberInfo">닉네임 :  <%= user.getNickname()%></div>

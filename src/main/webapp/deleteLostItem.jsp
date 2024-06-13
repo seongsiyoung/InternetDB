@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+    <link type="text/css" rel="stylesheet" href="css/lostitems.css">
     <title>게시물 삭제</title>
 </head>
 <body>

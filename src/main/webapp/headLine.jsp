@@ -3,7 +3,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page pageEncoding="UTF-8"%>
 
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+<link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
 <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
