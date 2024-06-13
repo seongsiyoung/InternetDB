@@ -1,4 +1,9 @@
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page pageEncoding="UTF-8"%>
+<%@ include file="connection.jsp"%>
+
 <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
 <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
 
@@ -34,6 +39,26 @@
                             session = request.getSession(false); // 세션 존재 확인
 
                             if (session.getAttribute("id") != null) {
+                                PreparedStatement pstmt = null;
+                                ResultSet rs = null;
+                                try {
+                                    String sql = "SELECT r.lost_id, r.content from reply r join lostitem li on r.lost_id = li.lost_id where li.user_id = ?";
+
+                                    pstmt = connection.prepareStatement(sql);
+                                    pstmt.setString(1, session.getId());
+                                    rs = pstmt.executeQuery();
+
+                                    while (rs.next()) {
+                                        Long lost_id = rs.getLong("lost_id");
+                                        String content = rs.getString("content");
+                                    }
+
+                                } catch (SQLException e){
+                                    e.printStackTrace();
+                                } finally {
+                                    if (rs != null) {rs.close();}
+                                    if (pstmt != null) {pstmt.close();}
+                                }
                                 // 로그인 상태: 마이페이지와 알림 버튼 표시
                                 out.println("<button type=\"button\" onclick=\"location.href = 'mypage.jsp'\" style=\"border: 0; background-color: transparent;\">\n" );
                                 out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\"></button>");
