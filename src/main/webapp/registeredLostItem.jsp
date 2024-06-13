@@ -82,7 +82,7 @@
 </head>
 <body>
 <%
-    String sql = "SELECT path, title, lost_id FROM LostItem WHERE type = 'lost' ORDER BY createdat desc limit ?, ?";
+    String sql = "SELECT path, title, lost_id, image FROM LostItem WHERE type = 'lost' ORDER BY createdat desc limit ?, ?";
     PreparedStatement pstmt = null;
     PreparedStatement pstmt2 = null;
     ResultSet rs = null;
@@ -101,6 +101,7 @@
             briefItem.setLostId(rs.getLong(3));
             briefItem.setTitle(rs.getString(2));
             briefItem.setPath(rs.getString(1));
+            
             items.add(briefItem);
         }
 
