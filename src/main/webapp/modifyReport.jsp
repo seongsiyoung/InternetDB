@@ -28,7 +28,7 @@
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "SELECT l.*, u.phone FROM lostitem l JOIN user u ON l.user_id = u.user_id WHERE l.lost_id = ?";
+        String sql = "SELECT * FROM lostitem where lost_id = ?";
 
         try {
             pstmt = connection.prepareStatement(sql);
@@ -49,7 +49,6 @@
                 lostItem.setImage(rs.getString("image"));
                 lostItem.setPath(rs.getString("path"));
                 lostItem.setUserId(rs.getString("user_id"));
-                String phone = rs.getString("phone");
 
 %>
 <%@ include file="headLine.jsp" %>
@@ -64,6 +63,7 @@
                 <td><div class="imgSec"><img id="lostImage" src= <%= lostItem.getPath() + lostItem.getImage() %> width="350px" height="300px" /></div></td>
 
                 <td><div class="lostInfoSec">
+                    <input type="hidden" name="lost_id" value="<%=rs.getString("lost_id")%>">
                     분실물명 : <input type="text" value = <%=lostItem.getTitle()%> name="title"id="lostInfo"><br>
                     습득장소 : <input type="text" value = <%=lostItem.getLocation()%>  id="lostInfo" name="location"><br>
                     습득일 : <input type="date" value = <%=lostItem.getTime()%> id="lostInfo" name="time"><br>
@@ -78,8 +78,8 @@
                     분실상태 : <select name="status" id="lostInfo">
                     <option value="none" <%= "none".equals(lostItem.getStatus()) ? "selected" : "" %>>===선택===</option>
                     <option value="keep" <%= "keep".equals(lostItem.getStatus()) ? "selected" : "" %>>보관중</option>
-                    <option value="end" <%= "end".equals(lostItem.getStatus()) ? "selected" : "" %>>소유자 수령</option></select><br>
-                    연락처 : <input type="tel" id="lostInfo" value="<%=phone%>" name="phone"></div></td>
+                    <option value="end" <%= "end".equals(lostItem.getStatus()) ? "selected" : "" %>>물품 주인 수령</option></select><br>
+                    </div></td>
 
             </tr>
             <tr>
