@@ -67,7 +67,7 @@
                             연락처 : <%= phone %></div></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><br> &emsp;내용 </td>
+                        <td colspan="2"><br> &nbsp;내용 </td>
                     </tr>
                     <tr>
                         <td colspan="2"><br> <div class="contentSec"> <%= content %> </div></td>
@@ -98,10 +98,15 @@
               <%
                   /*pstmt와 rs는 각각 SQL 쿼리 실행과 쿼리 결과를 다루는데 사용*/
                   PreparedStatement pstmt2 = null; // pstmt 초기화
+                  PreparedStatement pstmt3 = null;
+
                   ResultSet rs2 = null;
+                  ResultSet rs3 = null;
+
                   try {
 
                       String sql2 = "SELECT user_id, content, createdat FROM reply where lost_id = ?";
+                      String sql3 = "SELECT nickname from user where user_id = ?";
 
                       pstmt2 = connection.prepareStatement(sql2); // 쿼리 준비
                       pstmt2.setLong(1, lost_id);
@@ -111,14 +116,20 @@
                           String user_id2 = rs2.getString("user_id");
                           String content2 = rs2.getString("content");
                           String createdat = rs2.getString("createdat");
-                          // 조회된 댓글출력
-                          out.println("<table class=\"savedCommentTable\">\n");
-                          out.println("<tr><td align=\"left\">" +  user_id2  + "</td></tr>");
-                          out.println("<tr><td>" + content2 +" </td></tr>");
-                          out.println("<tr><td align=\"left\"><div class='commentTime'>" +  createdat  + "</div></td></tr>");
-                          out.println("</table>");
-                          out.println("<br>");
 
+                          pstmt3 = connection.prepareStatement(sql3);
+                          pstmt3.setString(1, user_id2);
+                          rs3 = pstmt3.executeQuery();
+
+                          while (rs3.next()) {
+                              // 조회된 댓글출력
+                              out.println("<table class=\"savedCommentTable\">\n");
+                              out.println("<tr><td align=\"left\">" + rs3.getString("nickname") + "</td></tr>");
+                              out.println("<tr><td>" + content2 + " </td></tr>");
+                              out.println("<tr><td align=\"left\"><div class='commentTime'>" + createdat + "</div></td></tr>");
+                              out.println("</table>");
+                              out.println("<br>");
+                          }
 
                       }
                   } catch (SQLException e) {

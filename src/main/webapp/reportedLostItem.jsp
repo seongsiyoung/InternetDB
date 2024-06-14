@@ -141,6 +141,7 @@
             <li><a href="registeredLostItem.jsp" class="menu-link">등록된 분실물</a></li>
         </ul>
     </div>
+    <br>
     <div class="gallery-title">
         <h3>신고된 분실물</h3>
         <button type="button" onclick="location.href='ReportLost.jsp'" style="border: none; background-color: #FFF;">
@@ -148,6 +149,7 @@
         </button>
     </div>
     <hr>
+    <br><br>
     <div class="lost-item-gallery">
         <%
             for (BriefItem item : items) {

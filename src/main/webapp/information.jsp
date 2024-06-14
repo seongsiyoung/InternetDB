@@ -82,8 +82,10 @@
             <li><a href="registeredLostItem.jsp" class="menu-link">등록된 분실물</a></li>
         </ul>
     </div>
+    <br>
     <h3>종합 안내</h3>
     <hr>
+    <br><br>
 </div>
 </body>
 </html>

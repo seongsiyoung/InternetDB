@@ -37,7 +37,7 @@
 <head>
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
-    <link type="text/css" rel="stylesheet" href="./css/mypage.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
     <title>분실물 신고</title>
 </head>
 <body>
