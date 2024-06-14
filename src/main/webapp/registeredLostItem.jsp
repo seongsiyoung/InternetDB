@@ -28,7 +28,7 @@
 %>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
+    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css?after">
     <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
     <link type="text/css" rel="stylesheet" href="./css/mypage.css">
     <style>
@@ -142,7 +142,9 @@
     </div>
     <div class="gallery-title">
         <h3>등록된 분실물</h3>
-        <button class="register-button" onclick="location.href='UploadLost.jsp'">분실물 등록하기</button>
+        <button type="button" onclick="location.href='UploadLost.jsp'" style="border: none; background-color: #FFF;">
+        <input type="image" id="UploadLost" src="./Icon/UploadLost.png" alt="분실물 등록" width="130" height="28">
+        </button>
     </div>
 
     <hr>

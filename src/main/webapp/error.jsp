@@ -5,6 +5,7 @@
     <style>
     .errorProcessing {
         padding:50px;
+        margin-top:100px;
     }
 
     a {
@@ -24,9 +25,9 @@
     </head>
     <body>
         <div class="errorProcessing" align="center">
-            <img src="./Icon/error.png" width="850px" height="600px">
+            <img src="./Icon/ErrorRobot.png" width="700px" height="450px">
             <div class="errormsg" align="center">
-            &emsp;&emsp;&emsp;에러가 발생했습니다.<br><br>
+            &emsp;&emsp;&emsp;잘못된 접근이거나 요청하신 페이지를 찾을 수 없습니다.<br><br>
             &emsp;&emsp;&emsp;<a href="index.jsp">메인화면으로 돌아가기</a>
             </div>
         </div>
