@@ -63,8 +63,6 @@
                         %>
                 <script src="./js/script.js"></script>
 
-
-</div>
             </td>
         </tr>
     </table>

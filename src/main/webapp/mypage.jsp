@@ -136,9 +136,13 @@
 
             <%
                 for (BriefItem item : items) {
+                    String type = item.getType();
                     out.println("<div class=\"post\" style = \" margin: 0.5rem\">");
                     out.println("<button type=\"button\" class=\"postImageButton\">\n");
-                    out.println("<img src=\""+ item.getPath()+item.getImage() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='temp/temploginsuccess.jsp'\" class=\"postImage\" >");
+                    if(item.getType().equals("found"))
+                        out.println("<img src=\""+ item.getPath()+item.getImage() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='modifyReport.jsp?lost_id=" + item.getLostId() + "'\" class=\"postImage\" >");
+                    else
+                        out.println("<img src=\""+ item.getPath()+item.getImage() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='modifyLost.jsp?lost_id=" + item.getLostId() + "'\" class=\"postImage\" >");
                     out.println("</button>\n");
                     out.println("<div class=\"postName\">"+item.getTitle()+"</div>\n");
                     out.println("</div>\n");
