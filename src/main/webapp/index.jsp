@@ -68,9 +68,10 @@
                 <li><a href="registeredLostItem.jsp" class="menu-link">등록된 분실물</a></li>
             </ul>
         </div>
-
+        <br>
         <h3>최근 등록된 분실물</h3>
         <hr>
+        <br><br>
         <!--여기에 분실물 이미지 표시를 위한 HTML-->
         <div class="lost-item-gallery">
             <%
