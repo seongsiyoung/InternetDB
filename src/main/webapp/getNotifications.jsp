@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: ljm20
   Date: 2024-06-13
@@ -10,15 +10,19 @@
 <%
     String result="";
     PreparedStatement pstmt = null;
+    PreparedStatement pstmt2 = null;
     ResultSet rs = null;
+    ArrayList<Long> list = new ArrayList<Long>();
+
     try{
-        String sql = "SELECT r.lost_id, r.content from reply r join lostitem li on r.lost_id = li.lost_id where li.user_id = ?";
+        String sql = "SELECT r.reply_id, r.lost_id, r.content from reply r join lostitem li on r.lost_id = li.lost_id where li.user_id = ?";
 
         pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, (String) session.getAttribute("id"));
         rs = pstmt.executeQuery();
         while (rs.next()) {
             result += "<div><a href='DetailReport.jsp?lost_id="+ rs.getLong("lost_id")+"'>" + rs.getString("content")+"</a></div><hr>";
+            list.add(rs.getLong("reply_id"));
         }
     } catch (SQLException e){
         e.printStackTrace();

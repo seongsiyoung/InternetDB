@@ -34,8 +34,8 @@
             <div class="my">
             </div>
             <td>
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
+                <div id="myModal" class="alarm-modal">
+                    <div class="alarm-modal-content">
                         <span class="close">&times;</span>
                         <h2>내 게시물에 달린 댓글</h2>
                         <p id="notificationContent">Notifications will appear here...</p>
