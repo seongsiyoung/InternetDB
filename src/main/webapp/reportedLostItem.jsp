@@ -30,7 +30,7 @@
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
-    <link type="text/css" rel="stylesheet" href="./css/mypage.css"?after>
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css?after">
     <link type="text/css" rel="stylesheet" href="./css/itemGallery.css?after">
     <style>
         .menu-bar {

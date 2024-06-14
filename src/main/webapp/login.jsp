@@ -10,7 +10,7 @@
 <html>
 <head>
 
-    <link type="text/css" rel="stylesheet" href="./css/login.css">
+    <link type="text/css" rel="stylesheet" href="./css/login.css?after">
 
     <title>Login</title>
 </head>
@@ -38,7 +38,7 @@
     </form>
 
     <p class="text--center">아직 회원이 아니신가요?<br>
-        <a href="signUp.jsp">회원 가입 하기</a></p>
+        <a href="signUp.jsp">회원가입 하기</a></p>
 </div>
 </body>
 </html>

@@ -69,7 +69,9 @@ input[type="submit"], button {
     width: 40%;
     height: 3rem;
     padding: 10px;
-    background-color: #000000;
+    background-color: #a4dad8;
+    font-weight: bold;
+    box-shadow: 0px 0px 2px 2px rgb(169,227,225);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -80,7 +82,7 @@ input[type="submit"], button {
 
 /* 가입하기 버튼 클릭 시의 스타일 */
 input[type="submit"]:hover {
-    background-color: #71b1f1;
+    background-color: #8dbdbc;
 }
 
 /* 제목의 스타일 */
