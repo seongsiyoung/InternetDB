@@ -4,7 +4,7 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
-<link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
+<link type="text/css" rel="stylesheet" href="./css/itemGallery.css?after">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <div align="center">
@@ -48,7 +48,7 @@
                             if (session.getAttribute("id") != null) {
                                 // 로그인 상태: 마이페이지와 알림 버튼 표시
                                 out.println("<button type=\"button\" onclick=\"location.href = 'mypage.jsp'\" style=\"border: 0; background-color: transparent;\">\n" );
-                                out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypage.png\" alt=\"마이페이지\" width=\"40\" height=\"40\"></button>");
+                                out.println("<input type=\"image\" id=\"mypageIcon\" src=\"./Icon/mypageIcon.png\" alt=\"마이페이지\" width=\"55\" height=\"40\"></button>");
                                 out.println("<button type=\"button\" style=\"border: 0; background-color: transparent;\">");
                                 out.println("<input type=\"image\" id=\"alarm\" src=\"./Icon/alarm.png\" alt=\"알림\" width=\"45\" height=\"40\"></button>");
                                 out.println("<button type=\"button\" onclick=\"location.href = '/processing/LoginoutProcessing.jsp'\" style=\"border: 0; background-color: transparent;\">");
@@ -56,9 +56,8 @@
 
                             } else {
                                 // 비로그인 상태: 로그인 버튼 표시
-                                out.println("<form action='login.jsp' method='post'>");
-                                out.println("<input class='register-button' type='submit' value='로그인' style=\"margin-bottom: -16px\">");
-                                out.println("</form>");
+                                out.println("<button type=\"button\" onclick=\"location.href = 'login.jsp'\" style=\"border: 0; background-color: transparent;\">\n" );
+                                out.println("<input type=\"image\" id=\"login\" src=\"./Icon/login.png\" alt=\"로그인\" width=\"95\" height=\"40\"></button>");
                             }
                         %>
                 <script src="./js/script.js"></script>

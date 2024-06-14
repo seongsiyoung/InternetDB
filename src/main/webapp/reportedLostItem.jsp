@@ -30,8 +30,8 @@
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
-    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
-    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css"?after>
+    <link type="text/css" rel="stylesheet" href="./css/itemGallery.css?after">
     <style>
         .menu-bar {
             width: 100%;
@@ -143,7 +143,9 @@
     </div>
     <div class="gallery-title">
         <h3>신고된 분실물</h3>
-        <button class="register-button" onclick="location.href='ReportLost.jsp'">분실물 신고하기</button>
+        <button type="button" onclick="location.href='ReportLost.jsp'" style="border: none; background-color: #FFF;">
+            <input type="image" id="UploadLost" src="./Icon/Report.png" alt="분실물 신고" width="130" height="28">
+        </button>
     </div>
     <hr>
     <div class="lost-item-gallery">
