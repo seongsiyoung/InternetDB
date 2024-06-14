@@ -14,6 +14,7 @@
     request.setCharacterEncoding("UTF-8");
 
     String id = (String) session.getAttribute("id");
+
     if(id == null){
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
@@ -48,8 +49,6 @@
 
     String sql = "SELECT * from User where user_id = ?";
     PreparedStatement statement = null;
-    PreparedStatement statement2 = null;
-    PreparedStatement statement3 = null;
     ResultSet rs = null;
     PageResult pageResult = null;
 
@@ -72,13 +71,13 @@
          * 여기 수정 게시물 조회시 찾은 거랑 잃어버린 거 둘 다 조회????????????
          */
         sql = "select lost_id, title, type, image, path from LOSTITEM where user_id = ? order by createdAt desc limit ?, ?";
-        statement2 = connection.prepareStatement(sql);
-        statement2.setString(1, id);
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
         int offset = (currentPage-1) * currentSize;
-        statement2.setInt(2, offset);
-        statement2.setInt(3, currentSize);
+        statement.setInt(2, offset);
+        statement.setInt(3, currentSize);
 
-        rs = statement2.executeQuery();
+        rs = statement.executeQuery();
 
         while (rs.next()){
             BriefItem briefItem = new BriefItem();
@@ -91,10 +90,9 @@
         }
 
         sql = "select count(*) from LOSTITEM where user_id = ?";
-        statement3 = connection.prepareStatement(sql);
-        statement3.setString(1, id);
-
-        rs = statement3.executeQuery();
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, id);
+        rs = statement.executeQuery();
         rs.next();
         int total = rs.getInt(1);
 
@@ -102,17 +100,15 @@
 
     } catch (SQLException e){
         e.printStackTrace();
-        request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
+        request.getRequestDispatcher("/servererror.jsp").forward(request, response);
     } finally {
 
         if(statement != null)
             statement.close();
-        if(statement2 != null)
-            statement2.close();
-        if(statement3 != null)
-            statement3.close();
+
         if(rs != null)
             rs.close();
+
         if(connection != null)
             connection.close();
     }
@@ -120,10 +116,10 @@
     <div class="memberBox">
         <fieldset>
             <legend style="width: fit-content; font-size: 1.35rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
-            <div class="memberInfo">아이디 : <%= user.getUserId()%> </div>
-            <div class="memberInfo">이름 :  <%= user.getName()%></div>
-            <div class="memberInfo">닉네임 :  <%= user.getNickname()%></div>
-            <div class="memberInfo">연락처 :  <%= user.getPhone()%></div>
+            <div class="memberInfo" style="margin-left: 2rem; margin-right: 2rem">아이디 : <%= user.getUserId()%> </div>
+            <div class="memberInfo" style="margin-left: 2rem; margin-right: 2rem">이름 :  <%= user.getName()%></div>
+            <div class="memberInfo" style="margin-left: 2rem; margin-right: 2rem">닉네임 :  <%= user.getNickname()%></div>
+            <div class="memberInfo" style="margin-left: 2rem; margin-right: 2rem">연락처 :  <%= user.getPhone()%></div>
             <button class="modifyBtn" type = "button" onclick= "location.href='modifyMember.jsp'">수정하기</button>
             </fieldset>
     </div>
@@ -136,8 +132,7 @@
 
             <%
                 for (BriefItem item : items) {
-                    String type = item.getType();
-                    out.println("<div class=\"post\" style = \" margin: 0.5rem\">");
+                    out.println("<div class=\"post\" style = \" margin: 0.5rem\"> ");
                     out.println("<button type=\"button\" class=\"postImageButton\">\n");
                     if(item.getType().equals("found"))
                         out.println("<img src=\""+ item.getPath()+item.getImage() +"\" alt=\"사진을 찾을 수 없습니다.\" onclick=\"location.href='modifyReport.jsp?lost_id=" + item.getLostId() + "'\" class=\"postImage\" >");
@@ -148,9 +143,8 @@
                     out.println("</div>\n");
                 }
             %>
-
-
         </div>
+
         <div class="pageBox">
             <div class="page">
                 <ul class="pagination modal">
@@ -158,13 +152,14 @@
 
                         if(pageResult.isPrev())
                             out.println("<li> <a href=\"mypage.jsp?page="+ (pageResult.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
+
                         for(int i = pageResult.getStart(); i <= pageResult.getEnd(); i++){
                             if(i == currentPage){
                                 out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
                                 continue;
                             }
-                            out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");
-                        }
+                            out.println("<li> <a href=\"mypage.jsp?page="+ i +"&size="+currentSize+"\" class=\"num\">"+ i +"</a></li>");}
+
                         if(pageResult.isNext())
                             out.println("<li> <a href=\"mypage.jsp?page=" + (pageResult.getEnd()+1) + "&size=" + currentSize+"\" class=\"arrow right\">>></a></li>\n");
                     %>
@@ -172,6 +167,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

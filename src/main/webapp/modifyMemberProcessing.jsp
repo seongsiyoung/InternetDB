@@ -5,7 +5,6 @@
 <%
     request.setCharacterEncoding("UTF-8");
     String sessionPassword = (String) session.getAttribute("password");
-
     String password = request.getParameter("oldPassword");
 
 %>
@@ -55,29 +54,22 @@
 
     } else {
 
-        String sql3 = "SELECT salt FROM User WHERE user_id = ?";
-
-
-
         PreparedStatement statement = null;
-        PreparedStatement statement2 = null;
-        PreparedStatement statement3 = null;
         ResultSet rs = null;
         String salt = null;
 
 
-        String sql2 = "SELECT user_id FROM User WHERE nickname = ?";
 
-
-        String sql = "UPDATE  User SET password = ?, name = ?, nickname = ?, phone = ? WHERE user_id = ?";
 
         try {
 
-            statement3 = connection.prepareStatement(sql3);
+            String sql = "SELECT salt FROM User WHERE user_id = ?";
 
-            statement3.setString(1, user.getUserId());
+            statement = connection.prepareStatement(sql);
 
-            rs = statement3.executeQuery();
+            statement.setString(1, user.getUserId());
+
+            rs = statement.executeQuery();
 
             if(rs.next()){
                 salt = rs.getString(1);
@@ -89,17 +81,22 @@
                 }
             }
 
-            statement2 = connection.prepareStatement(sql2);
+            sql = "SELECT user_id FROM User WHERE nickname = ?";
 
-            statement2.setString(1, user.getNickname());
+            statement = connection.prepareStatement(sql);
 
-            rs = statement2.executeQuery();
+            statement.setString(1, user.getNickname());
+
+            rs = statement.executeQuery();
 
             if(rs.next()){
                 String test = rs.getString(1);
                 if ( !test.equals((String) session.getAttribute("id")))
                     Alert.alertAndBack(response, "닉네임이 중복되어 수정할 수 없습니다.");
             }
+
+            sql = "UPDATE  User SET password = ?, name = ?, nickname = ?, phone = ? WHERE user_id = ?";
+
 
             statement = connection.prepareStatement(sql);
             statement.setString(1, Encrytor.encryptPassword(user.getPassword(),salt));
@@ -116,6 +113,8 @@
             request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
         } finally {
 
+            if (rs != null)
+                rs.close();
             if (statement != null)
                 statement.close();
             if (connection != null)

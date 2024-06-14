@@ -8,6 +8,8 @@
 <jsp:setProperty name="user" property="*"/>
 
 <%!
+
+    //사용자 정보 형식 검증 메서드
     boolean validateUserId(String userId){
         return userId.matches("^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}$");
     }
@@ -55,35 +57,30 @@
 
     } else {
 
+        //비밀번호 암호화
         user.setPassword(Encrytor.encryptPassword(user.getPassword(),user.getSalt()));
-
-        String sql2 = "SELECT user_id FROM User WHERE user_id = ?";
-
-        String sql3 = "SELECT nickname FROM User WHERE nickname = ?";
 
         String sql = "INSERT INTO User (user_id, password, salt, name, nickname, phone, createdAt) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement statement = null;
-        PreparedStatement statement2 = null;
-        PreparedStatement statement3 = null;
         ResultSet rs = null;
 
 
         try {
-            statement2 = connection.prepareStatement(sql2);
+            //아이디 중복체크
+            sql = "SELECT user_id FROM User WHERE user_id = ?";
 
-            statement2.setString(1, user.getUserId());
-
-            rs = statement2.executeQuery();
-
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUserId());
+            rs = statement.executeQuery();
             if(rs.next())
                 Alert.alertAndMove(response,"중복된 아이디입니다.","signUp.jsp");
 
-            statement3 = connection.prepareStatement(sql3);
+            //닉네임 중복체크
+            sql = "SELECT nickname FROM User WHERE nickname = ?";
 
-            statement3.setString(1, user.getNickname());
-
-            rs = statement3.executeQuery();
-
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getNickname());
+            rs = statement.executeQuery();
             if(rs.next())
                 Alert.alertAndMove(response, "중복된 닉네임입니다.", "signUp.jsp");
 
@@ -95,22 +92,24 @@
             statement.setString(5, user.getNickname());
             statement.setString(6, user.getPhone());
             statement.setString(7, user.getCreatedAt());
-
-            int result = statement.executeUpdate();
+            statement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
-        } finally {
 
+            e.printStackTrace();
+            request.getRequestDispatcher("/servererror.jsp").forward(request, response);
+
+        } finally {
+            if (rs != null)
+                rs.close();
             if (statement != null)
                 statement.close();
             if (connection != null)
                 connection.close();
         }
+
         response.sendRedirect("login.jsp");
     }
-
 %>
 
 </body>

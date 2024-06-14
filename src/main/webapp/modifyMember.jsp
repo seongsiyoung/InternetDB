@@ -3,6 +3,7 @@
 <%@ page import="com.InternetDB.UserBean" %>
 
 
+<jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>
 
 <%
 
@@ -10,8 +11,6 @@
     if(id == null){
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
-
-    UserBean user = new UserBean();
 
 %>
 
