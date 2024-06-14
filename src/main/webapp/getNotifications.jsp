@@ -9,7 +9,7 @@
     ArrayList<BriefReply> list = new ArrayList<>();
 
     try{
-        String sql = "SELECT li.type, li.lost_id, a.content AS alarm_content, a.status FROM lostitem li JOIN reply r ON li.lost_id = r.lost_id JOIN alarm a ON r.reply_id = a.reply_id WHERE li.user_id = ?";
+        String sql = "SELECT li.type, li.lost_id, a.content AS alarm_content, a.status FROM lostitem li JOIN reply r ON li.lost_id = r.lost_id JOIN alarm a ON r.reply_id = a.reply_id WHERE li.user_id = ? ORDER BY a.createdat DESC";
 
         pstmt = connection.prepareStatement(sql);
         pstmt.setString(1, (String) session.getAttribute("id"));
