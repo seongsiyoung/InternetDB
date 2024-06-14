@@ -67,7 +67,7 @@
                             연락처 : <%= phone %></div></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><br> &nbsp;내용 </td>
+                        <td colspan="2"><br> <p>내용 </p></td>
                     </tr>
                     <tr>
                         <td colspan="2"><br> <div class="contentSec"> <%= content %> </div></td>
