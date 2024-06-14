@@ -74,7 +74,7 @@
 
                        </tr>
                        <tr>
-                       <td colspan="2"> <br> &emsp;내용 </td>
+                       <td colspan="2"> <br> <p style="font-weight: bold; font-size:17px;"> &nbsp;내용 </p> </td>
                        </tr>
                        <tr>
                        <td colspan="2"> <br> <div class ="contentSec"> <%= content %> </div></td>
