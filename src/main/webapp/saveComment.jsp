@@ -33,7 +33,7 @@
         int rows = pstmt.executeUpdate();
         if(rows > 0){
             pstmt2 = connection.prepareStatement(sql2);
-
+            
             pstmt2.setLong(1, reply.getLostId());
 
             rs = pstmt2.executeQuery();
