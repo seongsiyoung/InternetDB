@@ -14,7 +14,7 @@
 
 <%
     int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
-    int currentSize = 15; //한번에 가져올 데이터 양 기본값 설정 15
+    int currentSize = 9; //한번에 가져올 데이터 양 기본값 설정 15
     List<BriefItem> items = new ArrayList<>();
 
     String askedPage = request.getParameter("page");
