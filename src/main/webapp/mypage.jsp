@@ -7,6 +7,9 @@
 <%@ page import="com.InternetDB.page.PageResult" %>
 <%@ page import="com.InternetDB.page.PageResult" %>
 
+<jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>
+
+
 <%
     request.setCharacterEncoding("UTF-8");
 
@@ -15,7 +18,6 @@
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
 
-    UserBean user = new UserBean();
     int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
     int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
     List<BriefItem> items = new ArrayList<>();
