@@ -7,6 +7,9 @@
 <%@ page import="com.InternetDB.page.PageResult" %>
 <%@ page import="com.InternetDB.page.PageResult" %>
 
+<jsp:useBean id="user" class="com.InternetDB.UserBean" scope="page"/>
+
+
 <%
     request.setCharacterEncoding("UTF-8");
 
@@ -15,7 +18,6 @@
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
 
-    UserBean user = new UserBean();
     int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
     int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
     List<BriefItem> items = new ArrayList<>();
@@ -34,8 +36,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
-    <link type="text/css" rel="stylesheet" href="./css/mypage.css">
+    <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
+    <link type="text/css" rel="stylesheet" href="./css/mypage.css?after">
     <title>분실물 신고</title>
 </head>
 <body>
@@ -117,7 +119,7 @@
 %>
     <div class="memberBox">
         <fieldset>
-            <legend style="width: fit-content; font-size: 1.5rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
+            <legend style="width: fit-content; font-size: 1.35rem; font-family: Open Sans, sans-serif;">사용자 정보</legend>
             <div class="memberInfo">아이디 : <%= user.getUserId()%> </div>
             <div class="memberInfo">이름 :  <%= user.getName()%></div>
             <div class="memberInfo">닉네임 :  <%= user.getNickname()%></div>

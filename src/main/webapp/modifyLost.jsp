@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+    <link type="text/css" rel="stylesheet" href="css/lostitems.css">
     <title>분실물 등록 수정</title>
 </head>
 <body>

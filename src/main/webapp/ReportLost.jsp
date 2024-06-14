@@ -11,7 +11,7 @@
 %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+<link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
 <title>분실물 신고</title>
 </head>
 <body>

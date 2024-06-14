@@ -3,7 +3,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page pageEncoding="UTF-8"%>
 
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+<link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
 <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -17,14 +17,14 @@
             <td>&emsp;&emsp;&emsp;</td>
 
             <td>
-                <form method="post" action="" style="margin-bottom: -16px">
+                <form method="post" action="search.jsp" style="margin-bottom: -16px">
                 <div class="search">
                     <select name="type" id="lang" style="float: left; display: inline-block; margin-top: 15px; margin-left: 5px; border: none; border-radius: 0px">
-                        <option value="found">신고된</option>
+                        <option value="found" selected>신고된</option>
                         <option value="lost">등록된</option>
                     </select>
-                    <input type="text" id="searchbar" name="search" placeholder="분실물 검색">
-                    <button type="submit" onclick="alert('클릭!')" style="border: 0; background-color: transparent;float: right;">
+                    <input type="text" id="searchbar" name="search" placeholder="분실물 검색" required>
+                    <button type="submit" style="border: 0; background-color: transparent;float: right;">
                         <input type="image" id="searchIcon" src="./Icon/search.png" alt="검색 버튼" width="30" height="30">
                     </button>
                 </div>

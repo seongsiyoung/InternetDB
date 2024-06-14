@@ -4,7 +4,7 @@
 <%@ include file="connection.jsp" %>
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="./css/mystyle.css">
+<link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
 <title>분실물 신고 상세</title>
 </head>
 <body>
@@ -101,7 +101,7 @@
                   ResultSet rs2 = null;
                   try {
 
-                      String sql2 = "SELECT user_id, content FROM reply where lost_id = ?";
+                      String sql2 = "SELECT user_id, content, createdat FROM reply where lost_id = ?";
 
                       pstmt2 = connection.prepareStatement(sql2); // 쿼리 준비
                       pstmt2.setLong(1, lost_id);
@@ -110,10 +110,12 @@
                       while (rs2.next()) {
                           String user_id2 = rs2.getString("user_id");
                           String content2 = rs2.getString("content");
+                          String createdat = rs2.getString("createdat");
                           // 조회된 댓글출력
-                          out.println("<table class=\"commentTable\" style=\"text-align: center;\">\n");
+                          out.println("<table class=\"savedCommentTable\">\n");
                           out.println("<tr><td align=\"left\">" +  user_id2  + "</td></tr>");
-                          out.println("<tr><td><div class=\"comment\">" + content2 +"</td></tr>");
+                          out.println("<tr><td>" + content2 +" </td></tr>");
+                          out.println("<tr><td align=\"left\"><div class='commentTime'>" +  createdat  + "</div></td></tr>");
                           out.println("</table>");
                           out.println("<br>");
 

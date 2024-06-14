@@ -2,7 +2,7 @@
 <%@ include file="connection.jsp" %>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="./css/mystyle.css?after">
+    <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
     <link type="text/css" rel="stylesheet" href="./css/itemGallery.css">
 
     <title>분실물 센터</title>
