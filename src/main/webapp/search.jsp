@@ -1,12 +1,11 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.time.LocalDate" %>
 <%@ page import="com.InternetDB.VO.BriefItem" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.InternetDB.page.PageResult" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ include file="connection.jsp" %>
@@ -74,21 +73,42 @@
   <div class = detailSearchBar>
     <form action="search.jsp" method="post" class="detailSearchForm">
       <select name="type" id="lang" style="display: inline-block; height: 30px; border: none; border-radius: 0px">
-        <option value="found" selected>신고된</option>
-        <option value="lost">등록된</option>
+        <%
+          if (lostItem.getType().equals("found")){
+            out.println("<option value=\"found\" selected>신고된</option>\n");
+            out.println("<option value=\"lost\">등록된</option>\n");
+          } else {
+            out.println("<option value=\"found\" >신고된</option>\n");
+            out.println("<option value=\"lost\" selected>등록된</option>\n");
+          }
+        %>
       </select>
-      <input type="hidden" name="search" value= <%=search%> >
-      <input type="text" name="requestedLocation" placeholder="장소 검색" style="height: 30px; margin-left: 10px">
-      <select name="requestedCategory" style="display: inline-block; height: 30px; margin-left: 10px; border: none; border-radius: 0px">
-        <option value=""> 카테고리 선택 </option>
-        <option value="accessory"> 악세사리 </option>
-        <option value="clothing"> 옷 </option>
-        <option value="electronics"> 전자기기 </option>
-        <option value="wallet"> 지갑 </option>
-        <option value="card"> 카드 </option>
-        <option value="others"> 기타 </option>
-      </select>
-      <input type="date" id="requestedTime" name="requestedTime" placeholder="시간 검색" style="height: 30px; margin-left: 10px;">
+      <input type="text" name="search" style="height: 30px; margin-left: 10px" required value= <%=search%> >
+      <%
+        if (requestedLocation == null)
+          out.println("<input type=\"text\" name=\"requestedLocation\" placeholder=\"장소 검색\" style=\"height: 30px; margin-left: 10px\">\n");
+        else {
+          out.println("<input type=\"text\" name=\"requestedLocation\" placeholder=\"장소 검색\" style=\"height: 30px; margin-left: 10px\" value=" + requestedLocation + ">\n");
+        }
+      %>
+      <%
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("","카테고리 선택");
+        map.put("accessory","악세사리");
+        map.put("electronics","전자기기");
+        map.put("wallet","지갑");
+        map.put("card","카드");
+        map.put("others","기타");
+        out.println("      <select name=\"requestedCategory\" style=\"display: inline-block; height: 30px; margin-left: 10px; border: none; border-radius: 0px\">\n");
+        for (String key : map.keySet()) {
+          if(key.equals(requestedCategory))
+            out.println("<option value=\""+ key +"\" selected> "+ map.get(key) +" </option>\n");
+          else
+            out.println("<option value=\""+ key +"\"> "+ map.get(key) +" </option>\n");
+        }
+        out.println("</select>");
+      %>
+      <input type="date" id="requestedTime" name="requestedTime" placeholder="시간 검색" style="height: 30px; margin-left: 10px;" value=<%=requestedTime%>>
       <button type="submit" style="border: 0; background-color: transparent;">
         <input type="image" id="searchIcon" src="./Icon/search.png" alt="검색 버튼" width="30" height="30">
       </button>
@@ -114,7 +134,7 @@
         if(!(requestedLocation == null) && !requestedLocation.isEmpty())
           stringBuilder.append("and location like ? ");
         if(!(requestedTime == null) && !requestedTime.isEmpty())
-          stringBuilder.append("and date(time) < date(?) ");
+          stringBuilder.append("and date(time) > date(?) ");
 
         stringBuilder.append("ORDER BY createdat desc limit ?, ?");
         String sql = stringBuilder.toString();
@@ -159,7 +179,7 @@
         if(!(requestedLocation == null) && !requestedLocation.isEmpty())
           stringBuilder.append("and location like ? ");
         if(!(requestedTime == null) && !requestedTime.isEmpty())
-          stringBuilder.append("and date(time) < date(?) ");
+          stringBuilder.append("and date(time) > date(?) ");
 
         sql = stringBuilder.toString();
 
@@ -227,10 +247,12 @@
             out.println("<li> <a href=\"search.jsp?page="+ (pageResult.getStart()-1)+"&size="+ currentSize+"\" class=\"arrow left\"><<</a></li>\n");
 
           for(int i = pageResult.getStart(); i <= pageResult.getEnd(); i++){
+
             if(i == currentPage){
               out.println("<li> <a class=\"active num\">"+ i +"</a></li>");
               continue;
             }
+
             out.println("<li> <a href=\"search.jsp?page="+ i +"&size="+currentSize+ "&type="+lostItem.getType() +"&search="+search +"&requestedCategory="+requestedCategory +"&requestedLocation="+requestedLocation +"&requestedTime="+requestedTime +"\" class=\"num\">"+ i +"</a></li>");
           }
 
