@@ -23,11 +23,11 @@
             list.add(briefReply);
         }
 
-        for(BriefReply item : list){
-            if(item.getLostIdType().equals("found") && item.getAlarmStatus().equals("unread")){
-                result += "<div><a href='DetailReport.jsp?lost_id="+ item.getLostId()+"'>" + item.getAlarmContent()+"</a></div><hr>";
-            } else if(item.getLostIdType().equals("lost") && item.getAlarmStatus().equals("unread")){
-                result += "<div><a href='DetailLost.jsp?lost_id="+ item.getLostId()+"'>" + item.getAlarmContent()+"</a></div><hr>";
+        for (BriefReply item : list) {
+            if (item.getLostIdType().equals("found") && item.getAlarmStatus().equals("unread")) {
+                result += "<div class='custom-div'><a href='DetailReport.jsp?lost_id=" + item.getLostId() + "' class='custom-link'>" + item.getAlarmContent() + "</a></div><hr class='custom-hr'>";
+            } else if (item.getLostIdType().equals("lost") && item.getAlarmStatus().equals("unread")) {
+                result += "<div class='custom-div'><a href='DetailLost.jsp?lost_id=" + item.getLostId() + "' class='custom-link'>" + item.getAlarmContent() + "</a></div><hr class='custom-hr'>";
             }
         }
 
