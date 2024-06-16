@@ -19,17 +19,19 @@
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
 
-    int currentPage = 1; //page번호로 데이터를 처리할 때는 -1 기본값 설정 1
-    int currentSize = 4; //한번에 가져올 데이터 양 기본값 설정 4
+    int currentPage = 1; //page번호로 기본값을 1로 설정
+    int currentSize = 4; //한번에 가져올 데이터 양으로 기본값을 4로 설정
     List<BriefItem> items = new ArrayList<>();
 
     //query String 파라미터 가져오기
     String askedPage = request.getParameter("page");
     String askedSize = request.getParameter("size");
 
+    //페이지 요청이 달라질 경우 해당 페이지로 설정
     if ( !(askedPage == null) && !askedPage.isEmpty())
         currentPage = Integer.parseInt(askedPage);
 
+    //사이즈 요청이 달라질 경우 해당 페이지로 설정
     if ( !(askedSize == null) && !askedSize.isEmpty())
         currentSize = Integer.parseInt(askedSize);
 %>
@@ -67,13 +69,14 @@
         user.setPhone(rs.getString(6));
         user.setCreatedAt(rs.getString(7));
 
-        /**
-         * 여기 수정 게시물 조회시 찾은 거랑 잃어버린 거 둘 다 조회????????????
-         */
+
+
+        int offset = (currentPage-1) * currentSize;
+
+        //분실물 목록 조회에 필요한 값을 최신 순으로 조회
         sql = "select lost_id, title, type, image, path from LOSTITEM where user_id = ? order by createdAt desc limit ?, ?";
         statement = connection.prepareStatement(sql);
         statement.setString(1, id);
-        int offset = (currentPage-1) * currentSize;
         statement.setInt(2, offset);
         statement.setInt(3, currentSize);
 
@@ -89,6 +92,7 @@
             items.add(briefItem);
         }
 
+        //페이지 객체를 생성하기 위해 필요한 total값(조건에 부합하는 게시물 전체의 개수)을 조회하기 위한 sql문
         sql = "select count(*) from LOSTITEM where user_id = ?";
         statement = connection.prepareStatement(sql);
         statement.setString(1, id);

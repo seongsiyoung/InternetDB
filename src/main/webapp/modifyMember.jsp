@@ -7,6 +7,7 @@
 
 <%
 
+    //로그인 여부 검사
     String id = (String) session.getAttribute("id");
     if(id == null){
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");

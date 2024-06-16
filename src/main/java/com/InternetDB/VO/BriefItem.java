@@ -1,11 +1,12 @@
 package com.InternetDB.VO;
 
+/**
+ * 아이템 목록을 조회할 때 필요한 정보만 불러오도록 설정
+ */
 public class BriefItem {
 
     private Long lostId;
-
     private String title;
-
     private String type;
     private String image;
     private String path;

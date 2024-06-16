@@ -74,6 +74,7 @@
     <form action="search.jsp" method="post" class="detailSearchForm">
       <select name="type" id="lang" style="display: inline-block; height: 30px; border: none; border-radius: 0px">
         <%
+          //이전의 검색 값을 유지하기 위해 아래와 같이 작성
           if (lostItem.getType().equals("found")){
             out.println("<option value=\"found\" selected>신고된</option>\n");
             out.println("<option value=\"lost\">등록된</option>\n");
@@ -92,6 +93,7 @@
         }
       %>
       <%
+        //데이터베이스에 저장된 값을 변환해서 보여주기 위해서 Map객체 사용
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("","카테고리 선택");
         map.put("accessory","악세사리");
@@ -125,6 +127,7 @@
 
       try {
 
+        //사용자가 입력한 항목들만 검색 조건에 추가하기 위해 StringBuilder를 통해 sql문 작성
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("SELECT lost_id, image, path, title, type FROM LostItem WHERE type = ? and title like ? ");
@@ -169,8 +172,7 @@
           items.add(briefItem);
         }
 
-        //page 처리
-
+        //page 처리를 위해서 필요한 총합 값을 구하는 과정
         stringBuilder.setLength(0);
         stringBuilder.append("SELECT count(*) FROM LostItem WHERE type = ? and title like ? ");
 

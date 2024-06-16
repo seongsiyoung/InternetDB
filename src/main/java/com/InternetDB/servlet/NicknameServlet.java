@@ -21,6 +21,7 @@ public class NicknameServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        String userId = (String)request.getSession().getAttribute("id");
         String nickname = request.getParameter("nickname");
         PrintWriter out = response.getWriter();
 
@@ -28,12 +29,14 @@ public class NicknameServlet extends HttpServlet {
 
         int nicknameCheck = 0;
         try {
-            nicknameCheck = dao.checkNickname(nickname);
+            nicknameCheck = dao.checkNickname(userId, nickname);//dao의 메소드를 통해 중복 검사
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         out.write(nicknameCheck + "");
+        out.flush();
+        out.close();
 
         }
     }
