@@ -84,6 +84,7 @@
             if(rs.next())
                 Alert.alertAndMove(response, "중복된 닉네임입니다.", "signUp.jsp");
 
+            sql = "INSERT INTO User (user_id, password, salt, name, nickname, phone, createdAt) VALUES (?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, user.getUserId());
             statement.setString(2, user.getPassword());
