@@ -60,7 +60,7 @@
         //비밀번호 암호화
         user.setPassword(Encrytor.encryptPassword(user.getPassword(),user.getSalt()));
 
-        String sql = "INSERT INTO User (user_id, password, salt, name, nickname, phone, createdAt) VALUES (?,?,?,?,?,?,?)";
+        String sql = null;
         PreparedStatement statement = null;
         ResultSet rs = null;
 
