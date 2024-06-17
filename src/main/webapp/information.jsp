@@ -68,6 +68,8 @@
     <!--로고 검색창 마이페이지 알림-->
     <%@ include file="headLine.jsp" %>
     <br>
+
+    <%--  각 페이지 이동바 (종합안내, 신고된 분실물, 등록된 분실물)  --%>
     <div class="menu-bar">
         <ul class="menu">
             <li><a href="information.jsp" class="menu-link">종합 안내</a></li>
@@ -79,6 +81,7 @@
     <h3>종합 안내</h3>
     <hr>
     <br>
+    <%--  종합 안내 사항 작성 부분  --%>
     <div align="left" style="padding-left: 15%; padding-right: 15%">
         <h3>1. 홈페이지 소개</h3>
         <ul>
