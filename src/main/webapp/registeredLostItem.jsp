@@ -31,56 +31,10 @@
     <link type="text/css" rel="stylesheet" href="./css/itemGallery.css?after">
     <link type="text/css" rel="stylesheet" href="css/lostitems.css?after">
     <link type="text/css" rel="stylesheet" href="./css/mypage.css?after">
-    <style>
-        .menu-bar {
-            width: 100%;
-        }
-
-        .menu {
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly; /* 각 항목 간 동일한 간격 유지 */
-            list-style-type: none;
-            margin: 0;
-            overflow: hidden;
-            padding: 0;
-        }
-
-        .menu li {
-            flex: 1 1 0px; /* 각 항목이 유효한 공간을 균등하게 차지하도록 함 */
-            text-align: center; /* 항목의 텍스트를 중앙 정렬 */
-            padding: 10px 20px; /* 패딩을 조정하여 내용에 여유 공간 제공 */
-            margin: 0 5px; /* 양 옆 마진을 조금 주어 간격을 미세 조정 */
-            box-sizing: border-box; /* 패딩과 보더가 width와 height에 포함되도록 설정 */
-        }
-
-        .menu-bar .menu form {
-            width: 100%; /* form을 메뉴 항목과 같은 너비로 설정 */
-            margin: 0; /* form의 마진 제거 */
-        }
-
-
-        .menu-link {
-            display: block;
-            width: 100%;
-            padding: 10px 0;
-            text-decoration: none;
-            color: inherit;
-            font-weight: bold;
-            text-align: center;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .menu-link:hover, .menu-link:focus {
-            background-color: #f0f0f0;
-        }
-
-    </style>
     <title>등록된 분실물</title>
 </head>
 <body>
+<%-- 등록된 분실물을 불러오고, 페이지네이션을 하기 위한 스크립틀릿 --%>
 <%
     String sql = "SELECT path, title, lost_id, type, image FROM LostItem WHERE type = 'lost' ORDER BY createdat desc limit ?, ?";
     PreparedStatement pstmt = null;
@@ -89,6 +43,7 @@
     PageResult pageResult = null;
 
     try {
+        // 페이지네이션에 필요한 변수 정의
         pstmt = connection.prepareStatement(sql);
         int offset = (currentPage-1) * currentSize;
         pstmt.setInt(1, offset);
@@ -96,6 +51,7 @@
 
         rs = pstmt.executeQuery();
 
+        // 결과 처리
         while (rs.next()){
             BriefItem briefItem = new BriefItem();
             briefItem.setTitle(rs.getString("title"));
@@ -105,7 +61,7 @@
             briefItem.setPath(rs.getString("path")+briefItem.getImage());
             items.add(briefItem);
         }
-
+        // 불러올 신고된 분실물의 총량
         sql = "select count(*) from LostItem where type = 'lost'";
         pstmt2 = connection.prepareStatement(sql);
 
@@ -113,6 +69,7 @@
         rs.next();
         int total = rs.getInt(1);
 
+        // 나중에 페이지네이션에 필요한 객체
         pageResult = new PageResult(currentPage, currentSize, total);
     } catch (SQLException e){
         e.printStackTrace();
@@ -158,6 +115,7 @@
             }
         %>
     </div>
+    <%--  페이지네이션  --%>
     <div class="pageBox">
         <div class="page">
             <ul class="pagination modal">

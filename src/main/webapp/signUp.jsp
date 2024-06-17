@@ -1,30 +1,8 @@
 <%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %>
-<%@ page import="java.util.Base64" %>
-<%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.security.MessageDigest" %>
-<%@ page import="java.math.BigInteger" %>
 <%@ page import="com.InternetDB.util.Encrytor" %>
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%!
 
-
-    public String encryptPassword(String password, String salt) {
-        String saltedPassword = salt + password;
-        String result = null;
-        try {
-            MessageDigest msg = MessageDigest.getInstance("SHA-512");
-            msg.update(saltedPassword.getBytes());
-
-            result = String.format("%128x", new BigInteger(1, msg.digest()));
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-%>
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="./css/signUp.css">
@@ -109,7 +87,6 @@
                 alert("서버 요청 실패");
             }
         })
-
     })
 
     $('.nickname').focusout(function(){
@@ -189,6 +166,7 @@
             $checkphone.css('color','red');
         }
     })
+
 </script>
 </body>
 </html>

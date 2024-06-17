@@ -5,7 +5,6 @@
 <%
     request.setCharacterEncoding("UTF-8");
     String sessionPassword = (String) session.getAttribute("password");
-
     String password = request.getParameter("oldPassword");
 
 %>
@@ -14,6 +13,7 @@
 <jsp:setProperty name="user" property="*"/>
 
 <%!
+    //사용자가 입력한 값을 검증하는 메소드
     boolean validatePassword(String password){
         return password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,14}$");
     }
@@ -40,7 +40,8 @@
 <%@ include file="connection.jsp" %>
 
 <%
-
+    //사용자 입력값의 형식을 검사하는 메소드를 활용해 올바른 값을 입력했는지 검사하고 문제가 없다면 회원 정보 수정
+    //새로운 비밀번호는 필수 입력사항이 아니므로 null인지 추가로 체크한 다음 형식 검사
     if (user.getPassword() != null && !user.getPassword().isEmpty() && !validatePassword(user.getPassword())) {
         Alert.alertAndBack(response, "비밀번호 형식 올바르지 않습니다.");
 
@@ -55,29 +56,23 @@
 
     } else {
 
-        String sql3 = "SELECT salt FROM User WHERE user_id = ?";
-
-
-
         PreparedStatement statement = null;
-        PreparedStatement statement2 = null;
-        PreparedStatement statement3 = null;
         ResultSet rs = null;
         String salt = null;
 
 
-        String sql2 = "SELECT user_id FROM User WHERE nickname = ?";
 
-
-        String sql = "UPDATE  User SET password = ?, name = ?, nickname = ?, phone = ? WHERE user_id = ?";
 
         try {
 
-            statement3 = connection.prepareStatement(sql3);
+            //올바른 비밀번호를 입력했는지 검사
+            String sql = "SELECT salt FROM User WHERE user_id = ?";
 
-            statement3.setString(1, user.getUserId());
+            statement = connection.prepareStatement(sql);
 
-            rs = statement3.executeQuery();
+            statement.setString(1, user.getUserId());
+
+            rs = statement.executeQuery();
 
             if(rs.next()){
                 salt = rs.getString(1);
@@ -89,17 +84,23 @@
                 }
             }
 
-            statement2 = connection.prepareStatement(sql2);
+            //닉네임의 중복 검사
+            sql = "SELECT user_id FROM User WHERE nickname = ?";
 
-            statement2.setString(1, user.getNickname());
+            statement = connection.prepareStatement(sql);
 
-            rs = statement2.executeQuery();
+            statement.setString(1, user.getNickname());
+
+            rs = statement.executeQuery();
 
             if(rs.next()){
                 String test = rs.getString(1);
                 if ( !test.equals((String) session.getAttribute("id")))
                     Alert.alertAndBack(response, "닉네임이 중복되어 수정할 수 없습니다.");
             }
+
+            sql = "UPDATE  User SET password = ?, name = ?, nickname = ?, phone = ? WHERE user_id = ?";
+
 
             statement = connection.prepareStatement(sql);
             statement.setString(1, Encrytor.encryptPassword(user.getPassword(),salt));
@@ -116,11 +117,15 @@
             request.getRequestDispatcher("/temp/temperror.jsp").forward(request, response);
         } finally {
 
+            if (rs != null)
+                rs.close();
             if (statement != null)
                 statement.close();
             if (connection != null)
                 connection.close();
         }
+
+        //세션의 비밀번호 갱신
         session.setAttribute("password", Encrytor.encryptPassword( user.getPassword(),salt));
         Alert.alertAndMove(response, "회원 정보 수정이 완료되었습니다.", "mypage.jsp");
     }

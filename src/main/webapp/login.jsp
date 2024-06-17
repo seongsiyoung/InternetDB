@@ -2,7 +2,7 @@
 <%@ page language ="java" contentType = "text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
-    if(session.getAttribute("id") != null){
+    if(session.getAttribute("id") != null){ //이미 로그인한 유저는 로그아웃 후 로그인이 가능하도록 설정
         Alert.alertAndBack(response, "이미 로그인 중입니다. 로그아웃 후 다시 시도해주십시오.");
     }
 %>

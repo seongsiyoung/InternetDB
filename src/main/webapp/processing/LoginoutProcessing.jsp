@@ -6,7 +6,7 @@
 </head>
 <body>
 <%
-    session.invalidate();
+    session.invalidate();     //세션 초기화
     Alert.alertAndMove(response, "로그아웃 되었습니다", "/index.jsp");
 %>
 </body>

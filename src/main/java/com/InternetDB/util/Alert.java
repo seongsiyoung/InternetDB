@@ -16,7 +16,6 @@ public class Alert {
             w.close();
         } catch(Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/temp/temperror.jsp");
         }
     }
 
@@ -30,8 +29,6 @@ public class Alert {
             w.close();
         } catch(Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/temp/temperror.jsp");
-
         }
     }
 
@@ -45,8 +42,6 @@ public class Alert {
             w.close();
         } catch(Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/temp/temperror.jsp");
-
         }
     }
 
@@ -60,7 +55,6 @@ public class Alert {
             w.close();
         } catch(Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/temp/temperror.jsp");
         }
     }
 }

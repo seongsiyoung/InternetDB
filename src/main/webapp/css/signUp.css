@@ -67,7 +67,7 @@ input[type="submit"] {
     height: 3rem;
     padding: 10px;
     margin-top: 10px;
-    background-color: #4cbdea;
+    background-color: #a4dad8;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -77,7 +77,7 @@ input[type="submit"] {
 
 /* 가입하기 버튼 클릭 시의 스타일 */
 input[type="submit"]:hover {
-    background-color: #3aa9e0;
+    background-color: #8dbdbc;
 }
 
 /* 제목의 스타일 */
