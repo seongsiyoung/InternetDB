@@ -46,7 +46,7 @@
                 File newFile = new File(saveFolder + "/" + newFileName);
 
                 oldFile.renameTo(newFile);
-
+                // 수정된 모든 데이터들을 데이터베이스에 반영
                 String sql = "update lostitem set category = ?, time = ?, location =?, content = ?, title = ?, status = ?, image = ? where lost_id = ?";
 
                 pstmt = connection.prepareStatement(sql);
@@ -63,7 +63,7 @@
                 int rows = pstmt.executeUpdate();
 
                 if (rows > 0) {
-
+                    // 수정된 데이터를 조회해서 상세 페이지를 출력하기 위한 redirect.
                     response.sendRedirect("DetailLost.jsp?lost_id=" + lost_id);
 
                     out.println("Data has been inserted successfully");
@@ -71,6 +71,7 @@
                     out.println("No data was inserted.");
                 }
             } else { //이미지 파일은 수정하지 않았을 경우
+                // 수정된 모든 데이터를 데이터베이스에 반영
                 String sql = "update lostitem set category = ?, time = ?, location =?, content = ?, title = ?, status = ? where lost_id = ?";
 
                 pstmt = connection.prepareStatement(sql);
@@ -86,7 +87,7 @@
                 int rows = pstmt.executeUpdate();
 
                 if (rows > 0) {
-
+                    // 수정된 데이터를 조회해서 상세 페이지를 출력하기 위한 redirect.
                     response.sendRedirect("DetailLost.jsp?lost_id=" + lost_id);
 
                     out.println("Data has been inserted successfully");

@@ -44,7 +44,7 @@
             oldFile.renameTo(newFile);
 
             String filePath = "./lostPhoto/";
-
+            // 작성된 분실물 신고 게시글의 데이터들을 데이터베이스에 저장하기 위한 코드
             String sql = "INSERT INTO LOSTITEM (type, category, time, location, content, title, status, currentloc, image, path, user_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             String sql2 = "select lost_id from lostitem where image = ?";
 
@@ -70,7 +70,8 @@
                         pstmt2 = connection.prepareStatement(sql2);
                         pstmt2.setString(1, newFileName);
                         rs = pstmt2.executeQuery();
-
+                        // 데이터베이스에 저장이 완료되면
+                        // 조회한 분실물 id를 파라미터로 하여 상세 페이지를 출력하기 위한 리다이렉션 코드
                         if (rs.next()) {
                             response.sendRedirect("DetailReport.jsp?lost_id=" + rs.getString("lost_id"));
                         }
@@ -91,3 +92,4 @@
             }
     %>
 </body>
+</html>

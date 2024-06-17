@@ -15,14 +15,19 @@
       <br>
       <div class="postSection" align="center">
                 <%
+                    // 분실물 id를 받아와 해당 id를 가진 분실물의 상세정보를 데이터베이스에서 조회해 출력하는 코드
                     String lostIdStr = request.getParameter("lost_id");
+                    // 현재 로그인된 계정의 사용자 id
                     String userId =(String) session.getAttribute("id");
+
                     if (lostIdStr != null && !lostIdStr.isEmpty()) {
                         Long lost_id = Long.parseLong(lostIdStr);
+                        // user 테이블과 lostitem 테이블을 조인해서 분실물 정보와 사용자의 연락처를 조회하는 sql문
                         String sql = "SELECT l.*, u.phone FROM lostitem l JOIN user u ON l.user_id = u.user_id WHERE l.lost_id = ?";
                         PreparedStatement pstmt = null;
                         ResultSet rs = null;
 
+                        // 데이터베이스에 영문으로 저장된 데이터를 한글로 변환해 출력하는 용도
                         Map<String, String> categoryMap = new HashMap<>();
                         categoryMap.put("none","===선택===");
                         categoryMap.put("accessory","악세사리");
@@ -57,6 +62,7 @@
                 <table>
                     <tr>
                         <td><div class="imgSec"><img id="lostImage" src="<%= imagePath %>" width="350px" height="300px" /></div></td>
+                        // 조회한 데이터들을 화면에 출력
                         <td><div class="lostInfoSec">
                             분실물명 : <%= title %><br>
                             습득장소 : <%= location %><br>
@@ -73,6 +79,8 @@
                         <td colspan="2"><br> <div class="contentSec"> <%= content %> </div></td>
                     </tr>
                     <%
+                        // 게시글을 작성한 사용자의 id와 현재 로그인한 사용자의 id가 동일하면
+                        // 수정 및 삭제 버튼이 보이도록 하는 코드
                         if(session.getAttribute("id") != null) {
                             if(session.getAttribute("id").equals(user_id)) {
                                 out.println("<td colspan='2'><br><div class='ModifyAndDelete'><button id='mdBtn' onclick=\"location.href='modifyReport.jsp?lost_id=" + lost_id + "'\">수정</button><button id='mdBtn' onclick=\"location.href='deleteLostItem.jsp?lost_id=" + lost_id + "'\">삭제</button></div></td></tr>");
@@ -84,19 +92,16 @@
       </div>
       <br>
       <hr>
-
-
+      // 댓글 처리란
       <div class="commentSec" align="center">
-
                 <div class="commentBtnSec" align="center">
                 <img id="commentIcon" src="./Icon/comment.png">
                 <button id ="commentBtn">댓글 </button>
-                </div>
-
+      </div>
         <br>
           <div class="savedCommentSec">
               <%
-                  /*pstmt와 rs는 각각 SQL 쿼리 실행과 쿼리 결과를 다루는데 사용*/
+                  /*해당 게시글에 작성된 댓글이 있다면 조회해서 화면에 출력하기위한 코드*/
                   PreparedStatement pstmt2 = null; // pstmt 초기화
                   PreparedStatement pstmt3 = null;
 
@@ -104,8 +109,9 @@
                   ResultSet rs3 = null;
 
                   try {
-
+                      // reply 테이블에서 해당 게시글의 분실물 id를 사용해 저장된 댓글을 조회
                       String sql2 = "SELECT user_id, content, createdat FROM reply where lost_id = ?";
+                      // 댓글을 작성한 사용자의 닉네임을 조회
                       String sql3 = "SELECT nickname from user where user_id = ?";
 
                       pstmt2 = connection.prepareStatement(sql2); // 쿼리 준비
@@ -145,6 +151,8 @@
        <div class="commentWrite" align="center">
         <form method="post" action="saveComment.jsp" class="commentForm">
             <%
+                // 현재 로그인한 사용자의 id로 댓글을 작성할 수 있도록 댓글 작성란을 출력
+                // 로그인 되지 않은 상태이면 댓글 작성란이 보이지 않도록 코딩
                 if(session.getAttribute("id") != null) {
                     out.println("<table class=\"commentTable\" style=\"text-align: center;\" borer=\"1\">");
                     out.println("<tr><td align=\"left\">" + session.getAttribute("id") + "</td></tr>");
@@ -153,10 +161,6 @@
                     "><td><input type=\"submit\" id=\"commentWriteBtn\" value=\"등록\"></td></tr>");
                 }
             %>
-
-
-
-
                  <%
                              } else {
                                  out.println("해당 분실물 정보를 찾을 수 없습니다.");

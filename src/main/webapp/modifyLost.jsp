@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
 <%@ page import="com.InternetDB.LostItemBean" %>
 
+// 로그인하지 않은 사용자는 게시글을 작성할 수 없도록 함
 <%
     request.setCharacterEncoding("UTF-8");
 
@@ -21,6 +22,7 @@
 <body>
 <%@ include file="connection.jsp" %>
 <%
+    // 수정되기 전 기존에 저장된 데이터들을 조회하여 출력하는 코드
     String lostIdStr = request.getParameter("lost_id");
 
     if (lostIdStr != null && !lostIdStr.isEmpty()) {
@@ -60,7 +62,7 @@
         <table>
             <tr>
                 <td><div class="imgSec"><img id="lostImage" src= <%= lostItem.getPath() + lostItem.getImage() %> width="350px" height="300px" /></div></td>
-
+                // 기존 데이터를 value로 하여 보여주고, 각각 수정이 가능하도록 form으로 작성
                 <td><div class="lostInfoSec">
                     <input type="hidden" name="lost_id" value="<%=rs.getString("lost_id")%>">
                     분실물명 : <input type="text" value = <%=lostItem.getTitle()%> name="title" id="lostInfo"><br>
@@ -107,6 +109,7 @@
             }
             %>
             <tr>
+                // 수정 완료 후 처리를 위한 submit 버튼
                 <td colspan="2"><br><input id="UploadWriting" type="submit" value="글쓰기"></td>
             </tr>
         </table>
