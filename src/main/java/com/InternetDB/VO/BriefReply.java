@@ -1,5 +1,9 @@
 package com.InternetDB.VO;
 
+
+/**
+ *  안읽은 댓글에 대한 알람 목록을 조회할때 필요한 정보를 불러오고, 설정(수정)하기 위한 빈
+ */
 public class BriefReply {
     private Long lostId;
     private Long replyId;
@@ -43,7 +47,7 @@ public class BriefReply {
         return alarmStatus;
     }
 
-    public void setAlaramStatus(String alaramStatus) {
-        this.alarmStatus = alaramStatus;
+    public void setAlarmStatus(String alarmStatus) {
+        this.alarmStatus = alarmStatus;
     }
 }

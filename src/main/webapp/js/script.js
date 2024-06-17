@@ -1,28 +1,33 @@
 // Axios 라이브러리를 불러옵니다.
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+// DOM 요소들을 가져옵니다.
 var modal = document.getElementById('myModal');
 var btn = document.getElementById('alarm');
 var span = document.getElementsByClassName('close')[0];
 var notificationArea = document.getElementById('notificationContent');
 var divs = notificationArea.querySelectorAll('div');
 
+// 알림 버튼 클릭 시 모달을 열고 알림 데이터를 로드합니다.
 btn.onclick = function() {
     console.log('click')
     modal.style.display = 'block';
     loadNotifications();
 }
 
+// 모달의 닫기 버튼 클릭 시 모달을 닫습니다.
 span.onclick = function() {
     modal.style.display = 'none';
 }
 
+// 모달 외부 클릭 시 모달을 닫습니다.
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = 'none';
     }
 }
 
+// 알림 데이터를 로드하는 하뭇입니다.
 function loadNotifications() {
     axios.get('getNotifications.jsp')
         .then(function (response) {
@@ -46,6 +51,7 @@ function loadNotifications() {
         });
 }
 
+// 알림 상태를 업데이트하는 함수입니다.
 function updateAlarmStatus(lostId) {
     axios.post('modifyAlarmstatus.jsp', {
         lostId : lostId

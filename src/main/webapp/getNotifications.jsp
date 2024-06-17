@@ -19,7 +19,7 @@
             briefReply.setAlarmContent(rs.getString("alarm_content"));
             briefReply.setLostId(rs.getLong("lost_id"));
             briefReply.setLostIdType(rs.getString("type"));
-            briefReply.setAlaramStatus(rs.getString("status"));
+            briefReply.setAlarmStatus(rs.getString("status"));
             list.add(briefReply);
         }
 
