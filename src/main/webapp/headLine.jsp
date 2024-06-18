@@ -42,7 +42,6 @@
                     </div>
                 </div>
                     <%
-                            System.out.println("test for session");
                             session = request.getSession(false); // 세션 존재 확인
 
                             if (session.getAttribute("id") != null) {

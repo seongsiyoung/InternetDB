@@ -27,7 +27,7 @@ window.onclick = function(event) {
     }
 }
 
-// 알림 데이터를 로드하는 하뭇입니다.
+// 알림 데이터를 로드하는 함수입니다.
 function loadNotifications() {
     axios.get('getNotifications.jsp')
         .then(function (response) {

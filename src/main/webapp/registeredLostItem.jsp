@@ -61,7 +61,7 @@
             briefItem.setPath(rs.getString("path")+briefItem.getImage());
             items.add(briefItem);
         }
-        // 불러올 신고된 분실물의 총량
+        // 불러올 등록된 분실물의 총량
         sql = "select count(*) from LostItem where type = 'lost'";
         pstmt2 = connection.prepareStatement(sql);
 
