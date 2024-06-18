@@ -19,13 +19,14 @@
     PreparedStatement pstmt3 = null;
 
     ResultSet rs = null;
-
+    // 등록된 댓글을 reply 테이블에 insert하기 위한 sql문
     String sql = "INSERT INTO reply(content, lost_id, user_id) VALUES(?,?,?)";
+    // 댓글이 등록된 분실물 게시글의 type과 title 데이터를 조회하기 위한 sql문
     String sql2 = "SELECT type, title FROM lostitem where lost_id = ?";
+    // 댓글이 등록되었음을 알림으로 표시하기 위해 alarm 테이블에 inset하는 sql문
     String sql3 = "INSERT INTO alarm(status, content, reply_id, user_id) values (?,?,?,?)";
 
     try {
-
         pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.setString(1, reply.getContent());
@@ -55,6 +56,7 @@
                     pstmt3.setString(4, reply.getUserId());
                     pstmt3.executeUpdate();
 
+                    // 댓글이 작성된 분실물의 type에 따라 리다이렉션하는 코드
                     if (type.equals("lost"))
                         response.sendRedirect("DetailLost.jsp?lost_id="+reply.getLostId() );
                     else
