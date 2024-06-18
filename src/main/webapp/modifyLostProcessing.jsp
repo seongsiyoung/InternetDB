@@ -16,10 +16,7 @@
     String encType="utf-8";
     int maxSize=5*1024*1024;
 
-
     PreparedStatement pstmt = null;
-
-    ServletContext context = this.getServletContext();
 
     try {
 

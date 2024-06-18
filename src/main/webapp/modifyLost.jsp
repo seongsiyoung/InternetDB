@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="UTF-8"%>
 <%@ page import="com.InternetDB.LostItemBean" %>
 
-// 로그인하지 않은 사용자는 게시글을 작성할 수 없도록 함
 <%
+    // 로그인하지 않은 사용자는 게시글을 작성할 수 없도록 함
     request.setCharacterEncoding("UTF-8");
 
     String id = (String) session.getAttribute("id");
@@ -62,12 +62,12 @@
         <table>
             <tr>
                 <td><div class="imgSec"><img id="lostImage" src= <%= lostItem.getPath() + lostItem.getImage() %> width="350px" height="300px" /></div></td>
-                // 기존 데이터를 value로 하여 보여주고, 각각 수정이 가능하도록 form으로 작성
+                <!-- 기존 데이터를 value로 하여 보여주고, 각각 수정이 가능하도록 form으로 작성-->
                 <td><div class="lostInfoSec">
                     <input type="hidden" name="lost_id" value="<%=rs.getString("lost_id")%>">
-                    분실물명 : <input type="text" value = <%=lostItem.getTitle()%> name="title" id="lostInfo"><br>
-                    분실일 : <input type="date" value = <%=lostItem.getTime()%> id="lostInfo" name="time"><br>
-                    분실예상장소 : <input type="text" value = <%=lostItem.getLocation()%> id="lostInfo" name="location"><br>
+                    분실물명 : <input type="text" value = "<%=lostItem.getTitle()%>" name="title" id="lostInfo"><br>
+                    분실일 : <input type="date" value = "<%=lostItem.getTime()%>" id="lostInfo" name="time"><br>
+                    분실예상장소 : <input type="text" value = "<%=lostItem.getLocation()%>" id="lostInfo" name="location"><br>
                     물품분류 : <select name="category" id="lostInfo">
                     <option value="none" <%= "none".equals(lostItem.getCategory()) ? "selected" : "" %>>===선택===</option>
                     <option value="accessory" <%= "accessory".equals(lostItem.getCategory()) ? "selected" : "" %>>악세사리</option>
@@ -109,7 +109,7 @@
             }
             %>
             <tr>
-                // 수정 완료 후 처리를 위한 submit 버튼
+                <!-- 수정 완료 후 처리를 위한 submit 버튼 -->
                 <td colspan="2"><br><input id="UploadWriting" type="submit" value="글쓰기"></td>
             </tr>
         </table>

@@ -16,15 +16,12 @@
         String sql = "delete from lostitem WHERE lost_id = ?";
 
         PreparedStatement pstmt = null;
-        PreparedStatement pstmt2 = null;
         ResultSet rs = null;
 
         try {
             pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, lost_id);
             pstmt.executeUpdate();
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

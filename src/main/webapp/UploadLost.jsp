@@ -28,7 +28,7 @@
         <table>
                    <tr>
                    <td><div class="imgSec"><img id="lostImage" src="./Icon/upload.png" width="350px" height="300px" /></div></td>
-                   // 분실물에 대한 상세 정보 작성
+                   <!--분실물에 대한 상세 정보 작성-->
                    <td><div class="lostInfoSec">
                        분실물명 : <input type="text" name="title" id="lostInfo"><br>
                        분실일 : <input type="date" id="lostInfo" name="time"><br>
@@ -54,14 +54,14 @@
                    <td></td>
                    </tr>
                    <tr>
-                   // 사용자가 추가로 작성하고 싶은 말을 쓰기 위한 textarea
+                   <!--사용자가 추가로 작성하고 싶은 말을 쓰기 위한 textarea-->
                    <td colspan="2"> <br> &emsp;내용 </td>
                    </tr>
                    <tr>
                    <td colspan="2"> <br><textarea rows="10" cols="105" name="content" placeholder=" 추가로 작성하고싶은 말이 있으시면 여기에 적어주세요."></textarea> </td>
                    </tr>
                    <tr>
-                   // 작성된 form을 전송하기 위한 버튼
+                   <!--작성된 form을 전송하기 위한 버튼-->
                    <td colspan="2"><br><input id="UploadWriting" type="submit" value="글쓰기"></td>
                    </tr>
         </table>

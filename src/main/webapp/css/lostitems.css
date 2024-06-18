@@ -35,17 +35,6 @@
 .postSection {
 }
 
-#uploadBtn {
-    margin:10px;
-    width:120px;
-    height:30px;
-    border:none;
-    background-color:#0a0a23;
-    border-radius:15px;
-    color:#fff;
-    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
-}
-
 #lostInfo {
     border:none;
     margin:5px;
@@ -149,24 +138,26 @@ textarea {
 
 #mdBtn {
     margin:5px;
-    border:none;
     width:75px;
     height:23px;
-    background-color:#0a0a23;
-    color:#fff;
-    box-shadow: 2px 2px 3px #ccc;
-    border-radius:5px;
+    background-color: #a4dad8;
+    box-shadow: 0px 0px 2px 2px rgb(169,227,225);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #UploadWriting {
     float:right;
-    background-color:#0a0a23;
-    color:#fff;
     width:75px;
     height:23px;
-    box-shadow: 2px 2px 3px #ccc;
-    border-radius:5px;
-    border:none;
+    background-color: #a4dad8;
+    box-shadow: 0px 0px 2px 2px rgb(169,227,225);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .savedCommentTable{

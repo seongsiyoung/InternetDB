@@ -16,10 +16,7 @@
     String encType="utf-8";
     int maxSize=5*1024*1024;
 
-
     PreparedStatement pstmt = null;
-
-    ServletContext context = this.getServletContext();
 
     try {
 
@@ -91,17 +88,12 @@
             int rows = pstmt.executeUpdate();
 
             if (rows > 0) {
-
                 response.sendRedirect("DetailLost.jsp?lost_id=" + lost_id);
-
                 out.println("Data has been inserted successfully");
             } else {
                 out.println("No data was inserted.");
             }
         }
-
-
-
     }catch(Exception e) {
         e.printStackTrace();
 
@@ -113,6 +105,5 @@
             connection.close();
     }
 %>
-
 </body>
 </html>
