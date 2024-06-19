@@ -11,8 +11,8 @@
         Alert.alertAndMove(response, "로그인이 필요한 서비스입니다.", "login.jsp");
     }
 
-    LostItemBean lostItem = new LostItemBean();
 %>
+<jsp:useBean id="lostItem" class="com.InternetDB.LostItemBean" scope="page"/>
 <html>
 <head>
     <meta charset="UTF-8">
